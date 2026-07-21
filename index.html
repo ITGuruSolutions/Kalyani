@@ -2227,7 +2227,7 @@
         const sourceItems = Array.from(document.querySelectorAll('#pageSources > .stf__item'));
         const totalPages = sourceItems.length;
 
-        let spreadStart = -1;
+        let spreadStart = 0;
         let activeLeaf = null;
         let isAnimating = false;
         let dragState = null;
@@ -2238,15 +2238,32 @@
         }
 
         function normalizeSpread(index) {
-            const safe = clamp(index, -1, totalPages);
-            return safe % 2 === 1 ? safe : safe - 1;
+            const maxStart = totalPages % 2 === 0 ? totalPages - 2 : totalPages - 1;
+            const safe = clamp(index, 0, maxStart);
+            return safe % 2 === 0 ? safe : safe - 1;
         }
 
         function pageHTML(index) {
-            if (index < 0 || index >= totalPages) {
-                return `<div class="page-render empty-page"><div class="page" style="background:transparent;box-shadow:none;border:none;"></div></div>`;
-            }
             const src = sourceItems[index];
+            if (!src) {
+                const num = index + 1;
+                return `
+                    <div class="page-render" style="--page-bg:url('background-scenery.jpg')">
+                        <div class="page catalog-page">
+                            <div class="page-bg"></div>
+                            <div class="page-inner-border"></div>
+                            <div class="page-content">
+                                <div class="page-number">${String(num).padStart(2, '0')}</div>
+                                <div class="kicker">Blank Page</div>
+                                <h2>Coming Soon</h2>
+                                <p class="tagline">Add your catalog content here.</p>
+                                <p class="body-copy">This placeholder keeps the vertical spread balanced.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
             return `<div class="page-render" style="${src.getAttribute('style') || ''}">${src.innerHTML}</div>`;
         }
 
@@ -2258,21 +2275,9 @@
         }
 
         function updateUI() {
-            let text = "";
-            let bottomNum = 0;
-            if (spreadStart === -1) {
-                text = "1 / " + totalPages;
-                bottomNum = 1;
-            } else if (spreadStart === totalPages - 1) {
-                text = totalPages + " / " + totalPages;
-                bottomNum = totalPages;
-            } else {
-                const topNum = spreadStart + 1;
-                const bottomNumVal = Math.min(spreadStart + 2, totalPages);
-                text = `${topNum}-${bottomNumVal} / ${totalPages}`;
-                bottomNum = bottomNumVal;
-            }
-            indicator.textContent = text;
+            const topNum = spreadStart + 1;
+            const bottomNum = Math.min(spreadStart + 2, totalPages);
+            indicator.textContent = `${topNum}-${bottomNum} / ${totalPages}`;
             progressFill.style.width = `${(bottomNum / totalPages) * 100}%`;
 
             document.querySelectorAll('.thumb').forEach((thumb, i) => {
@@ -2285,7 +2290,7 @@
         }
 
         function hasPrev() {
-            return spreadStart - 2 >= -1;
+            return spreadStart - 2 >= 0;
         }
 
         function removeLeaf() {
@@ -2520,8 +2525,8 @@
         document.getElementById('nextBtn').addEventListener('click', () => flip('next'));
         document.getElementById('mPrev').addEventListener('click', () => flip('prev'));
         document.getElementById('mNext').addEventListener('click', () => flip('next'));
-        document.getElementById('firstBtn').addEventListener('click', () => flipToSpread(-1));
-        document.getElementById('lastBtn').addEventListener('click', () => flipToSpread(totalPages - 1));
+        document.getElementById('firstBtn').addEventListener('click', () => flipToSpread(0));
+        document.getElementById('lastBtn').addEventListener('click', () => flipToSpread(totalPages - 2));
 
         document.getElementById('topZone').addEventListener('click', e => {
             e.stopPropagation();
@@ -2586,25 +2591,18 @@
                 e.preventDefault();
                 flip('prev');
             }
-            if (e.key === 'Home') flipToSpread(-1);
-            if (e.key === 'End') flipToSpread(totalPages - 1);
+            if (e.key === 'Home') flipToSpread(0);
+            if (e.key === 'End') flipToSpread(totalPages - 2);
         });
 
         sourceItems.forEach((page, i) => {
             const thumb = document.createElement('div');
-            thumb.className = 'thumb' + (i === 0 ? ' active' : '');
+            thumb.className = 'thumb' + (i === 0 || i === 1 ? ' active' : '');
             const mini = document.createElement('div');
             mini.className = 'thumb-mini';
             mini.textContent = i + 1;
             thumb.appendChild(mini);
-            
-            function thumbTargetSpread(idx) {
-                if (idx === 0) return -1;
-                if (idx === totalPages - 1) return totalPages - 1;
-                return Math.floor((idx - 1) / 2) * 2 + 1;
-            }
-            
-            thumb.addEventListener('click', () => flipToSpread(thumbTargetSpread(i)));
+            thumb.addEventListener('click', () => flipToSpread(Math.floor(i / 2) * 2));
             thumbStrip.appendChild(thumb);
         });
 
@@ -2652,7 +2650,7 @@
             el.addEventListener('pointerleave', () => document.body.classList.remove('hovering-control'));
         });
 
-        renderSpread(-1);
+        renderSpread(0);
     </script>
 </body>
 </html>
