@@ -18,7 +18,6 @@
   --c-gold-lt: #E8C97A;
   --c-sand:    #D9C9B0;
   --c-ink:     #1E130C;
-  --c-ink-60:  rgba(30,19,12,0.60);
   --c-ink-80:  rgba(30,19,12,0.82);
   --c-border:  rgba(201,150,58,0.22);
   --c-brust:   rgba(184,74,38,0.18);
@@ -125,19 +124,16 @@ body {
   filter: blur(6px);
 }
 .book-frame { position: relative; padding: 6px; border-radius: 4px; }
-.book-frame::before, .book-frame::after {
+.book-frame::before, .book-frame::after,
+.book-container::before, .book-container::after {
   content: ''; position: absolute;
   width: 18px; height: 18px;
-  border-color: var(--c-gold); border-style: solid; opacity: 0.45;
+  border-color: var(--c-gold); border-style: solid; opacity: 0.45; z-index: 30;
 }
 .book-frame::before { top: 0; left: 0; border-width: 1.5px 0 0 1.5px; border-radius: 2px 0 0 0; }
 .book-frame::after  { bottom: 0; right: 0; border-width: 0 1.5px 1.5px 0; border-radius: 0 0 2px 2px; }
-.corner-tr, .corner-bl {
-  position: absolute; width: 18px; height: 18px;
-  border-color: var(--c-gold); border-style: solid; opacity: 0.45; z-index: 30;
-}
-.corner-tr { top: 0; right: 0; border-width: 1.5px 1.5px 0 0; border-radius: 0 2px 0 0; }
-.corner-bl { bottom: 0; left: 0; border-width: 0 0 1.5px 1.5px; border-radius: 0 0 0 2px; }
+.book-container::before { top: -6px; right: -6px; border-width: 1.5px 1.5px 0 0; border-radius: 0 2px 0 0; }
+.book-container::after  { bottom: -6px; left: -6px; border-width: 0 0 1.5px 1.5px; border-radius: 0 0 0 2px; }
 
 /* ================================================================
    BOOK CONTAINER
@@ -203,7 +199,7 @@ body {
 ================================================================ */
 .click-zone {
   position: absolute; left: 0; width: 100%; height: 18%;
-  z-index: 70; cursor: pointer;
+  z-index: 70;
 }
 .click-zone.top-zone    { top: 0;    cursor: n-resize; }
 .click-zone.bottom-zone { bottom: 0; cursor: s-resize; }
@@ -224,7 +220,7 @@ body {
 /* ================================================================
    PAGE RENDER & STF
 ================================================================ */
-.page-render, .page-render .stf__item { width: 100%; height: 100%; }
+.page-render { width: 100%; height: 100%; }
 .stf__item { width: 100%; height: 100%; overflow: hidden; }
 
 /* ================================================================
@@ -464,10 +460,10 @@ body {
   min-height: clamp(55px,11vh,85px);
 }
 .img-slot-fill {
-  background-size: cover; background-position: center; background-color: #e8e0d6;
+  background-size: cover; background-color: #e8e0d6;
 }
 .img-slot-hero {
-  background-size: contain; background-position: center 25%;
+  background-position: center 25%;
   background-color: transparent; border: none;
   min-height: clamp(80px,16vh,120px);
 }
@@ -547,15 +543,19 @@ body {
   gap: clamp(10px,2vw,24px); z-index: 10;
   animation: fadeUp 0.8s 0.3s ease both;
 }
-.btn {
+.btn, .tool-btn, .swipe-arrow {
   display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--c-border); color: var(--c-sand); cursor: pointer;
+  touch-action: manipulation; user-select: none;
+}
+
+.btn {
   width: clamp(34px,5vw,42px); height: clamp(34px,5vw,42px);
-  background: rgba(255,255,255,0.06); border: 1px solid var(--c-border);
-  border-radius: 50%; color: var(--c-sand); cursor: pointer;
+  background: rgba(255,255,255,0.06);
+  border-radius: 50%;
   transition: all 0.22s ease;
   font-size: clamp(13px,2vw,16px);
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  touch-action: manipulation; user-select: none;
 }
 .btn:hover {
   background: rgba(184,74,38,0.20); border-color: var(--c-rust);
@@ -614,7 +614,7 @@ body {
 
 /* ================================================================
    TOOLBAR
-================================================================ */
+ ================================================================ */
 .toolbar {
   position: fixed; right: clamp(8px,2vw,20px); top: 50%;
   transform: translateY(-50%);
@@ -622,13 +622,12 @@ body {
 }
 .tool-btn {
   width: clamp(28px,3.5vw,34px); height: clamp(28px,3.5vw,34px);
-  background: rgba(14,11,9,0.70); border: 1px solid var(--c-border);
-  border-radius: 6px; color: var(--c-sand); cursor: pointer;
+  background: rgba(14,11,9,0.70);
+  border-radius: 6px;
   font-size: clamp(11px,1.5vw,14px);
-  display: flex; align-items: center; justify-content: center;
   transition: all 0.2s;
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  position: relative; touch-action: manipulation; user-select: none;
+  position: relative;
 }
 .tool-btn:hover {
   background: rgba(184,74,38,0.30); border-color: var(--c-rust);
@@ -647,15 +646,14 @@ body {
 
 /* ================================================================
    SWIPE ARROWS (MOBILE ONLY)
-================================================================ */
+ ================================================================ */
 .swipe-arrow {
   position: fixed; left: 50%; transform: translateX(-50%); z-index: 15;
   width: clamp(80px,22vw,130px); height: clamp(28px,5vh,42px);
-  background: rgba(14,11,9,0.50); border: 1px solid var(--c-border);
-  color: var(--c-sand); display: flex; align-items: center; justify-content: center;
-  cursor: pointer; font-size: clamp(14px,2.5vw,20px); opacity: 0.45;
+  background: rgba(14,11,9,0.50);
+  font-size: clamp(14px,2.5vw,20px); opacity: 0.45;
   transition: opacity 0.2s, background 0.2s;
-  backdrop-filter: blur(6px); touch-action: manipulation; user-select: none;
+  backdrop-filter: blur(6px);
 }
 .swipe-arrow:hover { opacity: 0.85; background: rgba(184,74,38,0.25); }
 .swipe-arrow.top    { top: 0;    border-radius: 0 0 8px 8px; border-top: none; }
@@ -906,6 +904,25 @@ body {
   .contact-dd   { font-size: clamp(7px,1.4vh,9px); }
   .thank-bar p  { font-size: clamp(9px,1.9vh,11.5px); }
 }
+
+/* ================================================================
+   UTILITIES & OPTIMIZATIONS
+================================================================ */
+#fullscreenBtn { font-size: 12px; }
+#firstBtn, #lastBtn { font-size: 10px; }
+.img-grid-1 .img-slot { min-height: 100%; }
+.mt-6 { margin-top: 6px; }
+.mt-8 { margin-top: 8px; }
+.mt-12 { margin-top: 12px; }
+.pt-0 { padding-top: 0; }
+.mt-0-pt-0 { margin-top: 0; padding-top: 0; }
+.justify-start { justify-content: flex-start; }
+.gap-6-8 { gap: 6px 8px; }
+.w-100-max-none { width: 100%; max-width: none; }
+.mt-auto { margin-top: auto; }
+.gap-4 { gap: 4px; }
+.my-6 { margin: 6px 0; }
+.my-8 { margin: 8px 0; }
 </style>
 </head>
 <body>
@@ -925,10 +942,10 @@ body {
   <button class="tool-btn" id="zoomIn"       data-tip="Zoom In"    aria-label="Zoom In">+</button>
   <button class="tool-btn" id="zoomOut"      data-tip="Zoom Out"   aria-label="Zoom Out">&minus;</button>
   <div class="toolbar-divider" aria-hidden="true"></div>
-  <button class="tool-btn" id="fullscreenBtn" data-tip="Fullscreen" aria-label="Fullscreen" style="font-size:12px">&#9974;</button>
+  <button class="tool-btn" id="fullscreenBtn" data-tip="Fullscreen" aria-label="Fullscreen">&#9974;</button>
   <div class="toolbar-divider" aria-hidden="true"></div>
-  <button class="tool-btn" id="firstBtn" data-tip="First Page" aria-label="First Page" style="font-size:10px">&#9198;</button>
-  <button class="tool-btn" id="lastBtn"  data-tip="Last Page"  aria-label="Last Page"  style="font-size:10px">&#9197;</button>
+  <button class="tool-btn" id="firstBtn" data-tip="First Page" aria-label="First Page">&#9198;</button>
+  <button class="tool-btn" id="lastBtn"  data-tip="Last Page"  aria-label="Last Page">&#9197;</button>
 </aside>
 
 <!-- Main Scene -->
@@ -941,8 +958,6 @@ body {
 
   <div class="book-platform" id="bookPlatform">
     <div class="book-frame">
-      <div class="corner-tr" aria-hidden="true"></div>
-      <div class="corner-bl" aria-hidden="true"></div>
       <div class="book-container">
         <div class="vertical-book" id="book" role="document" aria-label="Kalyaani Organic Product Catalog">
           <div class="spread-page top"    id="topPage"></div>
@@ -975,24 +990,16 @@ body {
 
 <!-- ═══ PAGE 1 — PREMIUM COVER ═══ -->
 <div class="stf__item" style="--page-bg:url('front.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
 <div class="cover-hero">
   <img class="cover-logo" src="logo.jpeg" alt="Kalyaani Organic Productions">
   <div class="gold-rule"></div>
   <p class="cover-brand">KALYAANI<span class="cover-brand-sub">ORGANIC PRODUCTIONS</span></p>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('front.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('front.png')">
 <div class="cover-sub">
   <p class="cover-tagline">From Nature&#39;s Goodness to Every Indian Home</p>
   <p class="cover-subtitle">Astha ki Satvik Duniya</p>
-  <div class="chips-row" style="margin-top:12px">
+  <div class="chips-row mt-12">
     <span class="chip">100% Natural</span>
     <span class="chip">No Preservatives</span>
     <span class="chip">Handcrafted</span>
@@ -1000,54 +1007,32 @@ body {
   </div>
 </div>
 <div class="pg-num">01</div>
-</div></div></div>
-
-<!-- ═══ PAGE 2 — BRAND INTRODUCTION ═══ -->
-<div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
-<div class="img-grid img-grid-1" style="flex:1">
-  <div class="img-slot img-slot-fill" style="background-image:url('Happy Indian family sitting together enjoying a meal.png');min-height:100%">
+</div><div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
+<div class="img-grid img-grid-1">
+  <div class="img-slot img-slot-fill" style="background-image:url('Happy Indian family sitting together enjoying a meal.png')">
     <div class="slot-cap">Nourishing Every Indian Home Since 2020</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
 <div class="text-panel">
   <p class="kicker">Brand Introduction</p>
   <h2 class="display-h">Welcome to Kalyaani Organic</h2>
   <p class="tagline">Where tradition meets purity in every product we craft.</p>
   <p class="body-copy">Kalyaani Organic Productions brings together the finest natural ingredients from local farms and the dedication of skilled women artisans to create a premium range of organic foods and wellness products &#8212; each crafted with care, love, and deep respect for tradition.</p>
-  <div class="chips-row" style="margin-top:8px;justify-content:flex-start">
+  <div class="chips-row mt-8 justify-start">
     <span class="chip">Pure Ghee</span><span class="chip">Masalas</span>
     <span class="chip">Flours</span><span class="chip">Rice</span>
     <span class="chip">Pulses</span><span class="chip">Soaps</span>
   </div>
 </div>
 <div class="pg-num">02</div>
-</div></div></div>
-
-<!-- ═══ PAGE 3 — FOUNDER&#39;S STORY ═══ -->
-<div class="stf__item" style="--page-bg:url('gir cow bg.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
-<div class="img-grid img-grid-1" style="flex:1">
-  <div class="img-slot img-slot-fill" style="background-image:url('gir cow bg.png');min-height:100%">
+</div><div class="stf__item" style="--page-bg:url('gir cow bg.png')">
+<div class="img-grid img-grid-1">
+  <div class="img-slot img-slot-fill" style="background-image:url('gir cow bg.png')">
     <div class="slot-cap">Rooted in Nature &middot; Crafted with Devotion</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('gir cow bg.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('gir cow bg.png')">
 <div class="text-panel">
   <p class="kicker">Founder&#39;s Story</p>
   <h2 class="display-h">From Our Hands to Your Home</h2>
@@ -1055,14 +1040,8 @@ body {
   <p class="body-copy">Our story is driven by a passion for purity and healthy living. Founded by women who believe in the satvik way, Kalyaani Organic Productions was born to bring authentic, handcrafted organic products to every Indian household. Every product carries the warmth of tradition, the integrity of pure ingredients, and the love of skilled women artisans who pour their heart into every batch.</p>
 </div>
 <div class="pg-num">03</div>
-</div></div></div>
-
-<!-- ═══ PAGE 4 — MISSION · VISION · VALUES ═══ -->
-<div class="stf__item" style="--page-bg:url('Buffalo.jpg')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
-<div class="text-panel" style="margin-top:0;padding-top:0">
+</div><div class="stf__item" style="--page-bg:url('Buffalo.jpg')">
+<div class="text-panel mt-0-pt-0">
   <p class="kicker">Our Promise</p>
   <h2 class="display-h">Mission &amp; Vision</h2>
 </div>
@@ -1076,35 +1055,24 @@ body {
     <div class="card-text">Empower women, enrich lives, and build a trusted satvik brand rooted in tradition.</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('Buffalo.jpg')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Buffalo.jpg')">
 <div class="text-panel">
   <p class="kicker">Core Values</p>
   <h2 class="section-h">What We Stand For</h2>
-  <div class="chips-row" style="justify-content:flex-start;gap:6px 8px;margin-top:6px">
+  <div class="chips-row justify-start gap-6-8 mt-6">
     <span class="chip">100% Natural</span><span class="chip">No Preservatives</span>
     <span class="chip">Handcrafted</span><span class="chip">Women&#8209;Led</span>
     <span class="chip">Satvik Living</span><span class="chip">Zero Chemicals</span>
     <span class="chip">Farm to Home</span><span class="chip">Trusted Quality</span>
   </div>
-  <p class="body-copy" style="margin-top:8px">Every ingredient we source, every product we craft, and every promise we make is rooted in authenticity, transparency, and the belief that pure food is the foundation of a healthy life.</p>
+  <p class="body-copy mt-8">Every ingredient we source, every product we craft, and every promise we make is rooted in authenticity, transparency, and the belief that pure food is the foundation of a healthy life.</p>
 </div>
 <div class="pg-num">04</div>
-</div></div></div>
-
-<!-- ═══ PAGE 5 — VISUAL TABLE OF CONTENTS (Part 1) ═══ -->
-<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
-<div class="text-panel" style="margin-top:0;padding-top:0;gap:4px">
+</div><div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')">
+<div class="text-panel mt-0-pt-0 gap-4">
   <p class="kicker">Visual Index</p>
   <h2 class="display-h">Table of Contents</h2>
-  <div class="gold-rule" style="margin:6px 0;width:100%;max-width:none"></div>
+  <div class="gold-rule w-100-max-none my-6"></div>
 </div>
 <div class="toc-grid" style="flex:1">
   <div class="toc-item">
@@ -1124,12 +1092,7 @@ body {
     <div class="toc-label">Organic Turmeric</div><div class="toc-page">P. 13</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')">
 <div class="toc-grid" style="flex:1">
   <div class="toc-item">
     <div class="toc-thumb" style="background-image:url('downloaded_images/W8cTO3U1SqK1vd3LDLjAvIMiazSVwKwiu1pVhwX4.png')"></div>
@@ -1149,13 +1112,7 @@ body {
   </div>
 </div>
 <div class="pg-num">05</div>
-</div></div></div>
-
-<!-- ═══ PAGE 6 — VISUAL TABLE OF CONTENTS (Part 2) ═══ -->
-<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')">
 <div class="toc-grid" style="flex:1">
   <div class="toc-item">
     <div class="toc-thumb" style="background-image:url('downloaded_images/DJwdnnoWDuieghcV9YM8AN2DGJn4WV83y8dDZGiD.png')"></div>
@@ -1174,28 +1131,17 @@ body {
     <div class="toc-label">Contact Us</div><div class="toc-page">P. 28</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')">
 <div class="text-panel">
   <p class="kicker">Product Range Overview</p>
   <h2 class="section-h">8 Premium Categories</h2>
   <p class="body-copy">Gir Cow Ghee &middot; Buffalo Ghee &middot; Masala Collection &middot; Organic Turmeric &middot; Stone-Ground Flours &middot; Aromatic Rice &middot; Wholesome Pulses &middot; Natural Handmade Soaps</p>
-  <p class="body-copy" style="margin-top:6px">Each category is crafted with the same dedication &#8212; sourced from trusted organic farms, processed naturally, and delivered fresh to your door.</p>
+  <p class="body-copy mt-6">Each category is crafted with the same dedication &#8212; sourced from trusted organic farms, processed naturally, and delivered fresh to your door.</p>
 </div>
 <div class="pg-num">06</div>
-</div></div></div>
-
-<!-- ═══ PAGE 7 — GIR COW GHEE ═══ -->
-<div class="stf__item" style="--page-bg:url('gir cow bg.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('gir cow bg.png')">
 <div class="pg-num">07</div>
-<div class="img-grid img-grid-2" style="flex:1">
+<div class="img-grid img-grid-2">
   <div class="img-slot img-slot-hero" style="background-image:url('cow ghee.png')">
     <div class="slot-cap">Pure Gir Cow A2 Ghee</div>
   </div>
@@ -1203,51 +1149,29 @@ body {
     <div class="slot-cap">Bilona Method &middot; Premium Pack</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('gir cow bg.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('gir cow bg.png')">
 <div class="text-panel">
   <p class="kicker">Premium Dairy</p>
   <h2 class="display-h">Gir Cow A2 Ghee</h2>
   <p class="tagline">Bilona-churned, pure golden goodness from sacred Gir cows.</p>
   <p class="body-copy">Our Gir Cow Ghee is prepared using the traditional bilona method &#8212; hand-churned from cultured curd under hygienic conditions. Rich in A2 protein, CLA, fat-soluble vitamins, and gut-healing butyric acid. Ideal for cooking, ayurvedic rituals, and daily satvik nourishment.</p>
 </div>
-</div></div></div>
-
-<!-- ═══ PAGE 8 — GIR COW GHEE DETAILS ═══ -->
-<div class="stf__item" style="--page-bg:url('gir cow bg.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
-<div class="img-grid img-grid-1" style="flex:1">
-  <div class="img-slot img-slot-fill" style="background-image:url('gir cow bg.png');min-height:100%">
+</div><div class="stf__item" style="--page-bg:url('gir cow bg.png')">
+<div class="img-grid img-grid-1">
+  <div class="img-slot img-slot-fill" style="background-image:url('gir cow bg.png')">
     <div class="slot-cap">Pure Gir Cows &middot; Free-Grazing Pastures</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('gir cow bg.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('gir cow bg.png')">
 <div class="product-quote">
   <blockquote>Purity of mind begins with the purity of food. Our bilona ghee carries satvik energy in every golden drop.</blockquote>
   <div class="gold-rule"></div>
   <cite>Kalyaani Organic &mdash; Gir Cow A2 Ghee</cite>
 </div>
 <div class="pg-num">08</div>
-</div></div></div>
-
-<!-- ═══ PAGE 9 — MASALA COLLECTION ═══ -->
-<div class="stf__item" style="--page-bg:url('kitchen.jpg')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('kitchen.jpg')">
 <div class="pg-num">09</div>
-<div class="img-grid img-grid-3" style="flex:1">
+<div class="img-grid img-grid-3">
   <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/2SHHM5BY9ED3yne2XoU4ozpkY1zM6eGxyNBI39l6.png')">
     <div class="slot-cap">Goda Masala</div>
   </div>
@@ -1258,58 +1182,36 @@ body {
     <div class="slot-cap">Kitchen Masala</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('kitchen.jpg')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('kitchen.jpg')">
 <div class="text-panel">
   <p class="kicker">Kitchen Essentials</p>
   <h2 class="display-h">Authentic Masala Collection</h2>
   <p class="tagline">Fresh aroma, balanced taste, and traditional Indian flavour.</p>
   <p class="body-copy">Hand-pounded using recipes passed down through generations. Our masalas contain no artificial colors, preservatives, or additives &#8212; only pure, sun-dried spices ground fresh to retain maximum aroma and potency.</p>
 </div>
-</div></div></div>
-
-<!-- ═══ PAGE 10 — MASALA DETAILS ═══ -->
-<div class="stf__item" style="--page-bg:url('kitchen.jpg')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
-<div class="img-grid img-grid-2" style="flex:1">
-  <div class="img-slot img-slot-fill" style="background-image:url('kitchen.jpg');min-height:100%">
+</div><div class="stf__item" style="--page-bg:url('kitchen.jpg')">
+<div class="img-grid img-grid-2">
+  <div class="img-slot img-slot-fill" style="background-image:url('kitchen.jpg')">
     <div class="slot-cap">Traditional Kitchen &middot; Authentic Flavours</div>
   </div>
   <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/PIExlPe7UID0BSLGibdDj9MAolhqCRsM4ZZzql7a.jpeg')">
     <div class="slot-cap">Premium Masala Range</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('kitchen.jpg')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('kitchen.jpg')">
 <div class="product-quote">
   <blockquote>Hand-pounded spices from traditional methods &#8212; flavour and goodness in every spoonful.</blockquote>
   <div class="gold-rule"></div>
   <cite>Kalyaani Organic &mdash; Masala Collection</cite>
 </div>
-<div class="text-panel" style="padding-top:0">
+<div class="text-panel pt-0">
   <p class="kicker">No Preservatives &middot; No Artificial Colour</p>
   <p class="body-copy">Goda Masala for festive dishes &middot; Kanda Lasoon for everyday cooking &middot; Kitchen Masala for universal versatility.</p>
 </div>
 <div class="pg-num">10</div>
-</div></div></div>
-
-<!-- ═══ PAGE 11 — ORGANIC TURMERIC ═══ -->
-<div class="stf__item" style="--page-bg:url('kitchen.jpg')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('kitchen.jpg')">
 <div class="pg-num">11</div>
-<div class="img-grid img-grid-2" style="flex:1">
+<div class="img-grid img-grid-2">
   <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/CDWF4DEOyR0oXhcYGqFc4HvHtXThMunZUygKhdO2.png')">
     <div class="slot-cap">Organic Turmeric</div>
   </div>
@@ -1317,12 +1219,7 @@ body {
     <div class="slot-cap">Golden Immunity &middot; Natural Health</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('kitchen.jpg')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('kitchen.jpg')">
 <div class="text-panel">
   <p class="kicker">Spice Collection</p>
   <h2 class="display-h">Organic Turmeric</h2>
@@ -1330,15 +1227,9 @@ body {
   <p class="body-copy">Rich yellow colour, earthy aroma, and strong immunity-boosting properties. Our organic turmeric is sourced from premium farms, sun-dried naturally, and ground fresh &#8212; free from any additives, coloring agents, or impurities.</p>
 </div>
 <div class="pg-num">11</div>
-</div></div></div>
-
-<!-- ═══ PAGE 12 — BUFFALO GHEE ═══ -->
-<div class="stf__item" style="--page-bg:url('Buffalo.jpg')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Buffalo.jpg')">
 <div class="pg-num">12</div>
-<div class="img-grid img-grid-2" style="flex:1">
+<div class="img-grid img-grid-2">
   <div class="img-slot img-slot-fill" style="background-image:url('downloaded_images/u1N2eCu6FGRSBkxloEGiIbvSiig49bY69qELtBFv.png')">
     <div class="slot-cap">Desi Buffalo Ghee</div>
   </div>
@@ -1346,12 +1237,7 @@ body {
     <div class="slot-cap">Free-Grazing Buffalo Herd</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('Buffalo.jpg')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Buffalo.jpg')">
 <div class="text-panel">
   <p class="kicker">Traditional Churning</p>
   <h2 class="display-h">Desi Buffalo Ghee</h2>
@@ -1359,15 +1245,9 @@ body {
   <p class="body-copy">Rich in healthy fats, vitamin A, and antioxidants, our premium Buffalo Ghee is ideal for daily cooking and wholesome recipes. Churned from pure buffalo milk using traditional methods for authentic taste and superior nutrition.</p>
 </div>
 <div class="pg-num">12</div>
-</div></div></div>
-
-<!-- ═══ PAGE 13 — FLOUR COLLECTION ═══ -->
-<div class="stf__item" style="--page-bg:url('atta bg.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('atta bg.png')">
 <div class="pg-num">13</div>
-<div class="img-grid img-grid-2" style="flex:1">
+<div class="img-grid img-grid-2">
   <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/W8cTO3U1SqK1vd3LDLjAvIMiazSVwKwiu1pVhwX4.png')">
     <div class="slot-cap">Thalipeeth Bhajni</div>
   </div>
@@ -1375,12 +1255,7 @@ body {
     <div class="slot-cap">Traditional Stone-Ground Flour</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('atta bg.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('atta bg.png')">
 <div class="text-panel">
   <p class="kicker">Traditional Flour Range</p>
   <h2 class="display-h">Flour Collection</h2>
@@ -1388,15 +1263,9 @@ body {
   <p class="body-copy">Stone-ground tradition meets modern nutrition. Our Thalipeeth Bhajni is crafted for crisp, flavourful thalipith &#8212; made from multigrain goodness to bring authentic Maharashtrian taste to your home.</p>
 </div>
 <div class="pg-num">13</div>
-</div></div></div>
-
-<!-- ═══ PAGE 14 — FLOUR PRODUCTS ═══ -->
-<div class="stf__item" style="--page-bg:url('atta bg.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('atta bg.png')">
 <div class="pg-num">14</div>
-<div class="img-grid img-grid-3" style="flex:1">
+<div class="img-grid img-grid-3">
   <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/W8cTO3U1SqK1vd3LDLjAvIMiazSVwKwiu1pVhwX4.png')">
     <div class="slot-cap">Thalipeeth Bhajni</div>
   </div>
@@ -1407,12 +1276,7 @@ body {
     <div class="slot-cap">Organic Daliya</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('atta bg.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('atta bg.png')">
 <div class="text-panel">
   <p class="kicker">Daily Staple Range</p>
   <h2 class="section-h">Three Atta &amp; Flour Products</h2>
@@ -1420,44 +1284,27 @@ body {
   <p class="body-copy">Thalipeeth Bhajni for regional favourites &middot; Organic Raaghi for wholesome rotis &middot; Organic Daliya for nourishing breakfast bowls. Stone-ground to retain fiber, natural vitamins, and authentic taste.</p>
 </div>
 <div class="pg-num">14</div>
-</div></div></div>
-
-<!-- ═══ PAGE 15 — FLOUR DETAILS ═══ -->
-<div class="stf__item" style="--page-bg:url('atta bg.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
-<div class="img-grid img-grid-1" style="flex:1">
-  <div class="img-slot img-slot-fill" style="background-image:url('atta bg.png');min-height:100%">
+</div><div class="stf__item" style="--page-bg:url('atta bg.png')">
+<div class="img-grid img-grid-1">
+  <div class="img-slot img-slot-fill" style="background-image:url('atta bg.png')">
     <div class="slot-cap">Stone-Ground Perfection &middot; Ancient Grain Wisdom</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('atta bg.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('atta bg.png')">
 <div class="product-quote">
   <blockquote>Wheat, Ragi, and Daliya prepared with ultimate care &#8212; nourish your family with wholesome ancient grains.</blockquote>
   <div class="gold-rule"></div>
   <cite>Kalyaani Organic &mdash; Flour Collection</cite>
 </div>
-<div class="text-panel" style="padding-top:0">
-  <div class="chips-row" style="justify-content:flex-start">
+<div class="text-panel pt-0">
+  <div class="chips-row justify-start">
     <span class="chip">High Fiber</span><span class="chip">No Maida</span>
     <span class="chip">Stone-Ground</span><span class="chip">100% Organic</span>
   </div>
 </div>
 <div class="pg-num">15</div>
-</div></div></div>
-
-<!-- ═══ PAGE 16 — FLOUR CLOSING ═══ -->
-<div class="stf__item" style="--page-bg:url('atta bg.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
-<div class="img-grid img-grid-2" style="flex:1">
+</div><div class="stf__item" style="--page-bg:url('atta bg.png')">
+<div class="img-grid img-grid-2">
   <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/iVQm17Tc80ToUDNvnfbagk9O8OfCQYaf6OTJdk3y.png')">
     <div class="slot-cap">Premium Packaging</div>
   </div>
@@ -1465,27 +1312,16 @@ body {
     <div class="slot-cap">Locally Sourced &middot; Organically Grown</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('atta bg.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('atta bg.png')">
 <div class="text-panel">
   <p class="kicker">Stone-Ground Goodness</p>
   <h2 class="section-h">Pure Flour &mdash; Pure Nutrition</h2>
   <p class="body-copy">Slow-ground to retain fiber, natural vitamins, minerals, and healthy nutritional values. Our flour range supports digestion, provides sustained energy, and brings authentic taste to every meal you make for your family.</p>
 </div>
 <div class="pg-num">16</div>
-</div></div></div>
-
-<!-- ═══ PAGE 17 — RICE COLLECTION ═══ -->
-<div class="stf__item" style="--page-bg:url('Rice farming process.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Rice farming process.png')">
 <div class="pg-num">17</div>
-<div class="img-grid img-grid-2" style="flex:1">
+<div class="img-grid img-grid-2">
   <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/AdwoHzSnDvULw5vYZp9V11p0SENCKutAeaYEALA2.jpeg')">
     <div class="slot-cap">Organic Grain Range</div>
   </div>
@@ -1493,27 +1329,16 @@ body {
     <div class="slot-cap">Farm-to-Home Journey</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('Rice farming process.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Rice farming process.png')">
 <div class="text-panel">
   <p class="kicker">Rice Collection</p>
   <h2 class="display-h">Fragrant Organic Rice</h2>
   <p class="tagline">Aromatic Indrayani and Brown Ambemohar from mineral-rich farms.</p>
   <p class="body-copy">Grown using traditional eco-farming methods in Maharashtra&#39;s fertile fields, our organic rice maintains excellent stickiness, rich scent, and superior nutritional value. Perfect for everyday meals, biryani, and traditional rice dishes.</p>
 </div>
-</div></div></div>
-
-<!-- ═══ PAGE 18 — RICE PRODUCTS ═══ -->
-<div class="stf__item" style="--page-bg:url('Rice farming process.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Rice farming process.png')">
 <div class="pg-num">18</div>
-<div class="img-grid img-grid-3" style="flex:1">
+<div class="img-grid img-grid-3">
   <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/MW5w9Wnn9CStXg7wnrPsNIPPVe1c20HBez1MSNqp.png')">
     <div class="slot-cap">Brown Ambemohar</div>
   </div>
@@ -1524,79 +1349,46 @@ body {
     <div class="slot-cap">Indrayani Tukda Rice</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('Rice farming process.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Rice farming process.png')">
 <div class="text-panel">
   <p class="kicker">Three Premium Varieties</p>
   <h2 class="section-h">Brown &middot; Ambemohar &middot; Indrayani</h2>
   <p class="body-copy">Brown Ambemohar &#8212; nutrient-rich, fiber-packed, mild sweet scent. Organic Ambemohar &#8212; the beloved fragrant Maharashtrian variety. Indrayani Tukda &#8212; soft, aromatic, ideal for everyday family cooking.</p>
 </div>
 <div class="pg-num">18</div>
-</div></div></div>
-
-<!-- ═══ PAGE 19 — RICE CLOSING ═══ -->
-<div class="stf__item" style="--page-bg:url('Rice farming process.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
-<div class="img-grid img-grid-1" style="flex:1">
-  <div class="img-slot img-slot-fill" style="background-image:url('Rice farming process.png');min-height:100%">
+</div><div class="stf__item" style="--page-bg:url('Rice farming process.png')">
+<div class="img-grid img-grid-1">
+  <div class="img-slot img-slot-fill" style="background-image:url('Rice farming process.png')">
     <div class="slot-cap">Eco-Farmed &middot; Maharashtra&#39;s Finest Fields</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('Rice farming process.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Rice farming process.png')">
 <div class="product-quote">
   <blockquote>Aromatic Indrayani and Brown Ambemohar &#8212; grown in mineral-rich soil, naturally perfumed, and sustainably harvested.</blockquote>
   <div class="gold-rule"></div>
   <cite>Kalyaani Organic &mdash; Rice Collection</cite>
 </div>
 <div class="pg-num">19</div>
-</div></div></div>
-
-<!-- ═══ PAGE 20 — PULSE COLLECTION ═══ -->
-<div class="stf__item" style="--page-bg:url('Pulses harvesting.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Pulses harvesting.png')">
 <div class="pg-num">20</div>
-<div class="img-grid img-grid-2" style="flex:1">
-  <div class="img-slot img-slot-fill" style="background-image:url('Pulses harvesting.png');min-height:100%">
+<div class="img-grid img-grid-2">
+  <div class="img-slot img-slot-fill" style="background-image:url('Pulses harvesting.png')">
     <div class="slot-cap">Sun-Dried &middot; Harvest-Fresh Pulses</div>
   </div>
   <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/kgtbqB66qApf5LVJEDK7duXmhgst93SCixuZCrXm.jpeg')">
     <div class="slot-cap">Organic Pulse Range</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('Pulses harvesting.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Pulses harvesting.png')">
 <div class="text-panel">
   <p class="kicker">Pulse Collection</p>
   <h2 class="display-h">Wholesome Organic Pulses</h2>
   <p class="tagline">Protein-rich, naturally grown, and full of earthy goodness.</p>
   <p class="body-copy">Our pulse range is sourced from organic farms across Maharashtra &#8212; hand-cleaned, sun-dried, and packed fresh. High in plant protein, fiber, and essential minerals for a balanced and healthy diet.</p>
 </div>
-</div></div></div>
-
-<!-- ═══ PAGE 21 — PULSE PRODUCTS ═══ -->
-<div class="stf__item" style="--page-bg:url('Pulses harvesting.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Pulses harvesting.png')">
 <div class="pg-num">21</div>
-<div class="img-grid img-grid-4" style="flex:1">
+<div class="img-grid img-grid-4">
   <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/DNpwEWVEyT2ABpggStrZf9gzwJpR5R4IASYzQPWP.png')">
     <div class="slot-cap">Black Urad Dal</div>
   </div>
@@ -1610,51 +1402,29 @@ body {
     <div class="slot-cap">Red Rajma</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('Pulses harvesting.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Pulses harvesting.png')">
 <div class="text-panel">
   <p class="kicker">Four Core Varieties</p>
   <h2 class="section-h">Urad &middot; Moong &middot; Chana &middot; Rajma</h2>
   <p class="body-copy">Black Urad &#8212; rich in calcium and iron, essential for bone health. Green Moong &#8212; light, easily digestible, and cooling. Organic Chana &#8212; high protein, excellent for curries. Red Rajma &#8212; slow-cooked classics packed with fiber and nutrients.</p>
 </div>
 <div class="pg-num">21</div>
-</div></div></div>
-
-<!-- ═══ PAGE 22 — PULSE CLOSING ═══ -->
-<div class="stf__item" style="--page-bg:url('Pulses harvesting.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
-<div class="img-grid img-grid-1" style="flex:1">
-  <div class="img-slot img-slot-fill" style="background-image:url('Pulses harvesting.png');min-height:100%">
+</div><div class="stf__item" style="--page-bg:url('Pulses harvesting.png')">
+<div class="img-grid img-grid-1">
+  <div class="img-slot img-slot-fill" style="background-image:url('Pulses harvesting.png')">
     <div class="slot-cap">Harvest-to-Home &middot; Zero Pesticides</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('Pulses harvesting.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Pulses harvesting.png')">
 <div class="product-quote">
   <blockquote>Every pulse we offer is grown without pesticides, hand-cleaned, and packed with the protein your family deserves.</blockquote>
   <div class="gold-rule"></div>
   <cite>Kalyaani Organic &mdash; Pulse Collection</cite>
 </div>
 <div class="pg-num">22</div>
-</div></div></div>
-
-<!-- ═══ PAGE 23 — SATVIK RANGE ═══ -->
-<div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
 <div class="pg-num">23</div>
-<div class="img-grid img-grid-2" style="flex:1">
+<div class="img-grid img-grid-2">
   <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/GN3n6zl9pwUzmWjn4qtOF5Brrc1IgwlgAkDZlTcT.png')">
     <div class="slot-cap">Organic Product Basket</div>
   </div>
@@ -1662,27 +1432,16 @@ body {
     <div class="slot-cap">Satvik Living Essentials</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
 <div class="text-panel">
   <p class="kicker">Satvik Range</p>
   <h2 class="display-h">Pure Living Essentials</h2>
   <p class="tagline">A holistic range for mindful, satvik living.</p>
   <p class="body-copy">Beyond our core categories, Kalyaani Organic offers a growing range of specialty products &#8212; each crafted to support healthy, mindful living through pure, natural, and organically sourced ingredients.</p>
 </div>
-</div></div></div>
-
-<!-- ═══ PAGE 24 — SPECIAL PRODUCTS ═══ -->
-<div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
 <div class="pg-num">24</div>
-<div class="img-grid img-grid-4" style="flex:1">
+<div class="img-grid img-grid-4">
   <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/4NGwjM6CSio4q4NO9BKLipaEFv95T3xjPmKocSoi.png')">
     <div class="slot-cap">Special Product</div>
   </div>
@@ -1696,51 +1455,29 @@ body {
     <div class="slot-cap">Natural Essential</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
 <div class="text-panel">
   <p class="kicker">Expanding Range</p>
   <h2 class="section-h">Special Organic Products</h2>
   <p class="body-copy">Our product portfolio continues to grow &#8212; driven by customer needs and our commitment to introducing more pure, organic alternatives for everyday Indian kitchens and wellness routines.</p>
 </div>
 <div class="pg-num">24</div>
-</div></div></div>
-
-<!-- ═══ PAGE 25 — FAMILY / BRAND QUOTE ═══ -->
-<div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
-<div class="img-grid img-grid-1" style="flex:1">
-  <div class="img-slot img-slot-fill" style="background-image:url('Happy Indian family sitting together enjoying a meal.png');min-height:100%">
+</div><div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
+<div class="img-grid img-grid-1">
+  <div class="img-slot img-slot-fill" style="background-image:url('Happy Indian family sitting together enjoying a meal.png')">
     <div class="slot-cap">Pure Food &middot; Healthy Families &middot; Happier Lives</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
 <div class="product-quote">
   <blockquote>When families eat pure, natural food &#8212; they nourish not just their bodies, but their roots, their traditions, and their future.</blockquote>
   <div class="gold-rule"></div>
   <cite>Kalyaani Organic &mdash; Brand Philosophy</cite>
 </div>
 <div class="pg-num">25</div>
-</div></div></div>
-
-<!-- ═══ PAGE 26 — SOAP COLLECTION ═══ -->
-<div class="stf__item" style="--page-bg:url('Crystal-clear flowing river with greenery.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Crystal-clear flowing river with greenery.png')">
 <div class="pg-num">26</div>
-<div class="img-grid img-grid-3" style="flex:1">
+<div class="img-grid img-grid-3">
   <div class="img-slot img-slot-hero" style="background-image:url('Organic Neem Tulsi Soap.png')">
     <div class="slot-cap">Neem Tulsi Soap</div>
   </div>
@@ -1751,27 +1488,16 @@ body {
     <div class="slot-cap">Natural Handmade Soap</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('Crystal-clear flowing river with greenery.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Crystal-clear flowing river with greenery.png')">
 <div class="text-panel">
   <p class="kicker">Natural Soap Collection</p>
   <h2 class="display-h">Handmade Organic Soaps</h2>
   <p class="tagline">Pure botanical ingredients, gentle on skin, kind to nature.</p>
   <p class="body-copy">Our handmade soaps are crafted from natural botanical ingredients &#8212; Neem, Tulsi, Multani Mitti, Activated Charcoal, and Aloe Vera. Cold-processed to retain all natural properties for a luxurious, healing bath experience.</p>
 </div>
-</div></div></div>
-
-<!-- ═══ PAGE 27 — SOAP VARIETIES ═══ -->
-<div class="stf__item" style="--page-bg:url('Crystal-clear flowing river with greenery.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
+</div><div class="stf__item" style="--page-bg:url('Crystal-clear flowing river with greenery.png')">
 <div class="pg-num">27</div>
-<div class="img-grid img-grid-3" style="flex:1">
+<div class="img-grid img-grid-3">
   <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/tZzrpRoUgTqzbUK7qgjyyvY0v5XqV8lwKdcYgVdc.jpeg')">
     <div class="slot-cap">Multani Mitti Soap</div>
   </div>
@@ -1782,35 +1508,29 @@ body {
     <div class="slot-cap">Aloe Vera Soap</div>
   </div>
 </div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('Crystal-clear flowing river with greenery.png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
-<div class="text-panel">
-  <p class="kicker">Six Premium Varieties</p>
-  <h2 class="section-h">Neem &middot; Tulsi &middot; Multani &middot; Charcoal &middot; Aloe</h2>
-  <p class="body-copy">Each soap is cold-processed to preserve the healing properties of its botanical ingredients. Free from SLS, parabens, and synthetic fragrances &#8212; safe for all skin types, including sensitive skin.</p>
+</div><div class="stf__item" style="--page-bg:url('Crystal-clear flowing river with greenery.png')">
+  <p class="body-copy">Cold-processed in small batches to preserve natural glycerin. Enriched with Neem, Tulsi, Multani Mitti, Aloe Vera, and Activated Charcoal. Completely free of parabens, SLS, and synthetic scents.</p>
 </div>
-<div class="pg-num">27</div>
-</div></div></div>
+<div class="chips-row justify-start mt-6">
+  <span class="chip">Neem Tulsi</span>
+  <span class="chip">Multani Mitti</span>
+  <span class="chip">Charcoal</span>
+  <span class="chip">Aloe Vera</span>
+</div>
+<div class="pg-num">14</div>
+</div>
 
-<!-- ═══ PAGE 28 — CONTACT + THANK YOU ═══ -->
+<!-- ═══ PAGE 15 — CONTACT ═══ -->
 <div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
-<div class="pg-num">28</div>
-<div class="contact-block" style="flex:1">
-  <div class="contact-logo-row">
-    <img src="logo.jpeg" alt="Kalyaani Organic Logo">
-    <div>
-      <p class="kicker">Let&#39;s Connect</p>
-      <h2 class="section-h" style="margin-top:2px">Contact Us</h2>
-    </div>
-  </div>
-  <div class="gold-rule" style="margin:8px 0;width:100%;max-width:none"></div>
+<div class="cover-hero">
+  <img class="cover-logo" src="logo.jpeg" alt="Kalyaani Organic Logo">
+  <div class="gold-rule"></div>
+  <p class="kicker">Let&#39;s Connect</p>
+  <h2 class="display-h">Get In Touch</h2>
+</div>
+</div>
+<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')">
+<div class="contact-block">
   <div class="contact-dl">
     <div class="contact-dt">Phone &amp; WhatsApp</div><div class="contact-dd">+91 98765 43210</div>
     <div class="contact-dt">Email</div><div class="contact-dd">info@kalyaaniorganic.com</div>
@@ -1819,13 +1539,19 @@ body {
     <div class="contact-dt">Address</div><div class="contact-dd">Maharashtra, India</div>
   </div>
 </div>
-</div></div></div>
+<div class="pg-num">15</div>
+</div>
 
+<!-- ═══ PAGE 16 — THANK YOU ═══ -->
 <div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')">
-<div class="page catalog-page">
-<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
-<div class="page-content">
-<div class="product-quote" style="margin-top:auto">
+<div class="cover-sub">
+  <p class="cover-tagline">Astha ki Satvik Duniya</p>
+  <p class="cover-subtitle">Thank You</p>
+  <div class="gold-rule w-100-max-none my-8"></div>
+</div>
+</div>
+<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')">
+<div class="product-quote mt-auto">
   <blockquote>Thank you for choosing Kalyaani Organic &#8212; where every product carries the promise of purity, the warmth of tradition, and the love of nature.</blockquote>
   <div class="gold-rule"></div>
   <cite>Astha ki Satvik Duniya</cite>
@@ -1834,7 +1560,8 @@ body {
   <p>Thank You for Choosing Kalyaani Organic</p>
   <span>Pure &middot; Natural &middot; Authentic &middot; Handcrafted with Love</span>
 </div>
-</div></div></div>
+<div class="pg-num">16</div>
+</div>
 
 </div><!-- /#pageSources -->
 
@@ -1858,6 +1585,7 @@ let dragState   = null;
 let zoom        = 1;
 
 function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+function eoc(t) { return 1 - Math.pow(1 - t, 3); }
 
 function normalizeSpread(index) {
   const maxStart = totalPages % 2 === 0 ? totalPages - 2 : totalPages - 1;
@@ -1868,7 +1596,13 @@ function normalizeSpread(index) {
 function pageHTML(index) {
   const src = sourceItems[index];
   if (!src) return '<div class="page-render"><div class="page catalog-page"><div class="page-inner-border"></div></div></div>';
-  return '<div class="page-render" style="' + (src.getAttribute('style') || '') + '">' + src.innerHTML + '</div>';
+  return '<div class="page-render" style="' + (src.getAttribute('style') || '') + '">' +
+           '<div class="page catalog-page">' +
+             '<div class="page-bg page-bg-split"></div>' +
+             '<div class="page-inner-border"></div>' +
+             '<div class="page-content">' + src.innerHTML + '</div>' +
+           '</div>' +
+         '</div>';
 }
 
 function renderSpread(start) {
@@ -1999,7 +1733,6 @@ function animateFlip(direction, complete, startProgress) {
   activeLeaf.classList.add('animating');
   activeLeaf.style.transition = 'none';
 
-  function eoc(t) { return 1 - Math.pow(1 - t, 3); }
   function step(now) {
     var raw     = clamp((now - startTime) / duration, 0, 1);
     var current = start + (target - start) * eoc(raw);
@@ -2027,7 +1760,6 @@ function flipToSpread(targetStart) {
   isAnimating = true;
   var duration  = 880;
   var startTime = performance.now();
-  var eoc = function(t) { return 1 - Math.pow(1-t,3); };
   function step(now) {
     var raw = clamp((now - startTime) / duration, 0, 1);
     setLeafProgress(direction, eoc(raw));
