@@ -1,0 +1,2157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Kalyaani Organic — Premium Digital Catalog 2025</title>
+<meta name="description" content="Kalyaani Organic Productions — Premium organic food catalog featuring pure ghee, masalas, flours, rice, pulses, and natural handmade soaps. Astha ki Satvik Duniya.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ================================================================
+   DESIGN TOKENS
+================================================================ */
+:root {
+  --c-cream:   #FBF7F2;
+  --c-dark:    #0E0B09;
+  --c-rust:    #B84A26;
+  --c-gold:    #C9963A;
+  --c-gold-lt: #E8C97A;
+  --c-sand:    #D9C9B0;
+  --c-ink:     #1E130C;
+  --c-ink-60:  rgba(30,19,12,0.60);
+  --c-ink-80:  rgba(30,19,12,0.82);
+  --c-border:  rgba(201,150,58,0.22);
+  --c-brust:   rgba(184,74,38,0.18);
+  --flip-time: 940ms;
+}
+
+/* ================================================================
+   RESET & BASE
+================================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Outfit', sans-serif;
+  background: var(--c-dark);
+  position: relative;
+}
+
+/* ================================================================
+   AMBIENT BACKGROUND
+================================================================ */
+.bg-layer {
+  position: fixed; inset: 0;
+  background: url('Minimal luxury corporate background (cream, gold, subtle texture).png') center/cover no-repeat, var(--c-dark);
+  z-index: 0;
+}
+.bg-layer::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(14,11,9,0.25) 0%, rgba(14,11,9,0.70) 100%),
+    linear-gradient(180deg, rgba(14,11,9,0.40) 0%, transparent 26%, transparent 74%, rgba(14,11,9,0.50) 100%);
+}
+
+.grain {
+  position: fixed; inset: 0; z-index: 1;
+  pointer-events: none; opacity: 0.030;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+.glow { position: fixed; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 1; }
+.glow-tl {
+  width: clamp(200px,40vw,500px); height: clamp(200px,40vw,500px);
+  background: radial-gradient(circle, rgba(184,74,38,0.16) 0%, transparent 70%);
+  top: -80px; left: -80px;
+}
+.glow-br {
+  width: clamp(150px,35vw,400px); height: clamp(150px,35vw,400px);
+  background: radial-gradient(circle, rgba(201,150,58,0.12) 0%, transparent 70%);
+  bottom: -60px; right: -60px;
+}
+
+/* ================================================================
+   SCENE LAYOUT
+================================================================ */
+.scene {
+  position: relative; z-index: 10;
+  display: flex; flex-direction: column;
+  align-items: center; width: 100%;
+  padding: clamp(6px,1.8vh,18px) clamp(8px,2vw,20px);
+  gap: clamp(6px,1.2vh,14px);
+}
+
+/* ================================================================
+   HEADER
+================================================================ */
+.header {
+  display: flex; align-items: center; gap: 14px;
+  animation: fadeDown 0.7s ease both;
+}
+.header-line {
+  width: clamp(30px,6vw,70px); height: 1px;
+  background: linear-gradient(to right, transparent, var(--c-gold)); opacity: 0.5;
+}
+.header-line.right { background: linear-gradient(to left, transparent, var(--c-gold)); }
+.catalog-title {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--c-gold-lt);
+  font-size: clamp(10px,1.4vw,15px);
+  font-weight: 600;
+  letter-spacing: clamp(3px,0.6vw,6px);
+  text-transform: uppercase;
+}
+
+/* ================================================================
+   BOOK PLATFORM & FRAME
+================================================================ */
+.book-platform {
+  position: relative;
+  animation: fadeUp 0.8s 0.15s ease both;
+  transform-origin: center center;
+}
+.book-platform::after {
+  content: '';
+  position: absolute; bottom: -18px; left: 10%;
+  width: 80%; height: 22px;
+  background: radial-gradient(ellipse, rgba(0,0,0,0.52) 0%, transparent 70%);
+  filter: blur(6px);
+}
+.book-frame { position: relative; padding: 6px; border-radius: 4px; }
+.book-frame::before, .book-frame::after {
+  content: ''; position: absolute;
+  width: 18px; height: 18px;
+  border-color: var(--c-gold); border-style: solid; opacity: 0.45;
+}
+.book-frame::before { top: 0; left: 0; border-width: 1.5px 0 0 1.5px; border-radius: 2px 0 0 0; }
+.book-frame::after  { bottom: 0; right: 0; border-width: 0 1.5px 1.5px 0; border-radius: 0 0 2px 2px; }
+.corner-tr, .corner-bl {
+  position: absolute; width: 18px; height: 18px;
+  border-color: var(--c-gold); border-style: solid; opacity: 0.45; z-index: 30;
+}
+.corner-tr { top: 0; right: 0; border-width: 1.5px 1.5px 0 0; border-radius: 0 2px 0 0; }
+.corner-bl { bottom: 0; left: 0; border-width: 0 0 1.5px 1.5px; border-radius: 0 0 0 2px; }
+
+/* ================================================================
+   BOOK CONTAINER
+================================================================ */
+.book-container {
+  width: min(460px, 90vw, calc(78vh * 0.58));
+  height: min(810px, 78vh);
+  position: relative;
+  perspective: 2500px;
+  perspective-origin: center center;
+  transition: filter 0.2s ease;
+}
+.vertical-book {
+  width: 100%; height: 100%;
+  position: relative; overflow: hidden;
+  border-radius: 9px;
+  background: var(--c-cream);
+  transform-style: preserve-3d;
+  box-shadow: 0 28px 72px rgba(0,0,0,0.52), 0 0 0 1px var(--c-border);
+  isolation: isolate;
+  user-select: none; touch-action: none;
+}
+.vertical-book.is-flipping {
+  box-shadow: 0 34px 88px rgba(0,0,0,0.62), 0 0 0 1px rgba(201,150,58,0.32);
+}
+
+/* ================================================================
+   SPREAD PAGES
+================================================================ */
+.spread-page {
+  position: absolute; left: 0; width: 100%; height: 50%;
+  overflow: hidden; background: var(--c-cream); z-index: 1;
+  box-shadow: inset 0 0 0 1px var(--c-brust);
+}
+.spread-page.top    { top: 0;   border-radius: 8px 8px 3px 3px; }
+.spread-page.bottom { top: 50%; border-radius: 3px 3px 8px 8px; }
+
+/* ================================================================
+   CENTER FOLD
+================================================================ */
+.center-fold {
+  position: absolute; left: 0; top: 50%;
+  width: 100%; height: 12px;
+  transform: translateY(-50%); z-index: 30; pointer-events: none;
+  background: linear-gradient(180deg,
+    rgba(0,0,0,0.42) 0%,
+    rgba(255,255,255,0.05) 32%,
+    rgba(255,255,255,0.22) 50%,
+    rgba(255,255,255,0.05) 68%,
+    rgba(0,0,0,0.42) 100%);
+  opacity: 0.62;
+  box-shadow: 0 -10px 24px rgba(0,0,0,0.14), 0 10px 24px rgba(0,0,0,0.14);
+}
+.center-fold::after {
+  content: '';
+  position: absolute; left: 8%; right: 8%; top: 50%; height: 1px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, transparent, rgba(232,201,122,0.45), transparent);
+}
+
+/* ================================================================
+   CLICK ZONES
+================================================================ */
+.click-zone {
+  position: absolute; left: 0; width: 100%; height: 18%;
+  z-index: 70; cursor: pointer;
+}
+.click-zone.top-zone    { top: 0;    cursor: n-resize; }
+.click-zone.bottom-zone { bottom: 0; cursor: s-resize; }
+.click-zone::after {
+  content: attr(data-label);
+  position: absolute; left: 50%; transform: translateX(-50%);
+  padding: 5px 10px; border-radius: 999px;
+  background: rgba(14,11,9,0.55); color: rgba(232,201,122,0.82);
+  border: 1px solid var(--c-border);
+  font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+  opacity: 0; transition: opacity 0.18s ease;
+  backdrop-filter: blur(8px); pointer-events: none;
+}
+.top-zone::after    { top: 10px; }
+.bottom-zone::after { bottom: 10px; }
+.click-zone:hover::after { opacity: 1; }
+
+/* ================================================================
+   PAGE RENDER & STF
+================================================================ */
+.page-render, .page-render .stf__item { width: 100%; height: 100%; }
+.stf__item { width: 100%; height: 100%; overflow: hidden; }
+
+/* ================================================================
+   BASE PAGE
+================================================================ */
+.page {
+  width: 100%; height: 100%;
+  position: relative; overflow: hidden;
+  background: var(--c-cream);
+}
+
+/* ================================================================
+   PAGE BACKGROUND — SPLIT SYSTEM
+   (both spread halves share one seamless image)
+================================================================ */
+.page-bg {
+  position: absolute; inset: 0;
+  background-image: var(--page-bg);
+  background-size: cover; background-position: center; z-index: 0;
+}
+.page-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(14,11,9,0.04), rgba(14,11,9,0.12)),
+    radial-gradient(ellipse at center, rgba(255,255,255,0.03), rgba(0,0,0,0.06));
+}
+.page-bg-split { height: 200% !important; bottom: auto !important; }
+
+.spread-page.top .page-bg-split,
+.flip-leaf.next .page-face.back .page-bg-split,
+.flip-leaf.prev .page-face.front .page-bg-split { top: 0 !important; }
+
+.spread-page.bottom .page-bg-split,
+.flip-leaf.next .page-face.front .page-bg-split,
+.flip-leaf.prev .page-face.back .page-bg-split { top: -100% !important; }
+
+/* Paper texture overlay */
+.catalog-page::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(135deg, rgba(251,247,242,0.10), rgba(251,247,242,0.04) 48%, rgba(14,11,9,0.05)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.022'/%3E%3C/svg%3E");
+}
+.catalog-page::after {
+  content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.07), transparent 15%, transparent 85%, rgba(0,0,0,0.07)),
+    radial-gradient(ellipse at center, transparent 62%, rgba(0,0,0,0.05));
+  mix-blend-mode: multiply; opacity: 0.42;
+}
+
+/* ================================================================
+   INNER BORDER CORNERS
+================================================================ */
+.page-inner-border {
+  position: absolute; inset: 10px;
+  border: 1px solid rgba(184,74,38,0.12);
+  z-index: 4; pointer-events: none;
+}
+.page-inner-border::before {
+  content: ''; position: absolute; top: -1px; left: -1px;
+  width: 18px; height: 18px;
+  border-top: 2px solid rgba(184,74,38,0.26); border-left: 2px solid rgba(184,74,38,0.26);
+}
+.page-inner-border::after {
+  content: ''; position: absolute; bottom: -1px; right: -1px;
+  width: 18px; height: 18px;
+  border-bottom: 2px solid rgba(184,74,38,0.26); border-right: 2px solid rgba(184,74,38,0.26);
+}
+
+/* ================================================================
+   PAGE CONTENT WRAPPER
+================================================================ */
+.page-content {
+  position: relative; z-index: 5;
+  height: 100%; display: flex; flex-direction: column;
+  padding: clamp(12px,2.8vw,22px); gap: 5px;
+}
+
+/* ================================================================
+   PAGE NUMBER
+================================================================ */
+.pg-num {
+  align-self: flex-end;
+  font-family: 'Cormorant Garamond', serif;
+  color: rgba(184,74,38,0.42); font-size: 10px; letter-spacing: 3px;
+}
+
+/* ================================================================
+   TYPOGRAPHY
+================================================================ */
+.kicker {
+  font-family: 'Outfit', sans-serif;
+  color: var(--c-rust);
+  font-size: clamp(7.5px,1.5vh,9.5px); font-weight: 600;
+  letter-spacing: 4px; text-transform: uppercase;
+}
+.display-h {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--c-ink);
+  font-size: clamp(22px,4.8vh,32px); line-height: 1.02;
+  font-weight: 400; letter-spacing: -0.3px;
+}
+.section-h {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--c-ink);
+  font-size: clamp(17px,3.6vh,25px); line-height: 1.05; font-weight: 400;
+}
+.tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; color: #4e3221;
+  font-size: clamp(11px,2.2vh,14px); font-weight: 400; line-height: 1.3;
+}
+.body-copy {
+  font-family: 'Outfit', sans-serif;
+  color: var(--c-ink-80);
+  font-size: clamp(7.5px,1.5vh,10px); line-height: 1.48; font-weight: 300;
+}
+.gold-rule {
+  width: clamp(40px,10vw,70px); height: 1px;
+  background: linear-gradient(90deg, transparent, var(--c-gold-lt), transparent);
+  margin: 8px auto; opacity: 0.75;
+}
+
+/* ================================================================
+   COVER PAGE
+================================================================ */
+.cover-hero {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-end;
+  height: 100%; padding: clamp(16px,3vh,28px); text-align: center; gap: 6px;
+}
+.cover-logo {
+  width: clamp(70px,17vh,105px); height: auto;
+  display: block; margin: 0 auto 8px;
+  filter: drop-shadow(0 4px 14px rgba(0,0,0,0.40));
+}
+.cover-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px,5.2vh,38px); color: #fff;
+  font-weight: 700; letter-spacing: clamp(4px,1vw,9px); line-height: 1.0;
+  text-shadow: 0 2px 18px rgba(0,0,0,0.55);
+}
+.cover-brand-sub {
+  display: block; font-size: 0.50em;
+  color: var(--c-gold-lt); letter-spacing: clamp(3px,0.8vw,6px); margin-top: 5px;
+}
+.cover-sub {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-start;
+  height: 100%; padding: clamp(12px,2.5vh,22px); text-align: center; gap: 8px;
+}
+.cover-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; color: rgba(251,247,242,0.90);
+  font-size: clamp(12px,2.4vh,17px); line-height: 1.4; letter-spacing: 0.5px;
+}
+.cover-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--c-gold-lt); font-size: clamp(11px,2.2vh,15px);
+  font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+}
+
+/* ================================================================
+   VALUE CHIPS ROW
+================================================================ */
+.chips-row { display: flex; flex-wrap: wrap; gap: 4px 6px; justify-content: center; }
+.chip {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(7px,1.4vh,8.5px); font-weight: 500;
+  letter-spacing: 2px; padding: 3px 9px; text-transform: uppercase;
+  color: #4e3221; border-right: 1px solid rgba(201,150,58,0.30);
+}
+.chip:last-child { border-right: none; }
+
+/* ================================================================
+   MISSION / VISION CARDS
+================================================================ */
+.cards-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.glass-card {
+  padding: 10px 14px;
+  border-left: 1.5px solid rgba(184,74,38,0.28);
+  background: rgba(251,247,242,0.88);
+  border-radius: 0 6px 6px 0;
+}
+.glass-card .card-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(6.5px,1.3vh,8px); font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--c-rust); margin-bottom: 4px;
+}
+.glass-card .card-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(7px,1.4vh,9px); line-height: 1.38; color: var(--c-ink-80);
+}
+
+/* ================================================================
+   TABLE OF CONTENTS GRID
+================================================================ */
+.toc-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; }
+.toc-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.toc-thumb {
+  width: 100%; aspect-ratio: 3/4;
+  background-size: contain; background-position: center;
+  background-repeat: no-repeat; background-color: rgba(255,255,255,0.88);
+  border: 0.5px solid var(--c-border); border-radius: 3px;
+}
+.toc-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(6px,1.2vh,7.5px); font-weight: 500;
+  color: var(--c-ink-80); text-align: center; letter-spacing: 0.3px; line-height: 1.2;
+}
+.toc-page {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(7px,1.4vh,8.5px); color: var(--c-rust); font-weight: 600; letter-spacing: 1px;
+}
+
+/* ================================================================
+   IMAGE GRID
+================================================================ */
+.img-grid { display: grid; gap: 6px; flex: 1; min-height: 0; }
+.img-grid-1 { grid-template-columns: 1fr; }
+.img-grid-2 { grid-template-columns: 1fr 1fr; }
+.img-grid-3 { grid-template-columns: repeat(3,1fr); }
+.img-grid-4 { grid-template-columns: repeat(4,1fr); }
+
+/* ================================================================
+   IMAGE SLOT
+================================================================ */
+.img-slot {
+  position: relative; overflow: hidden; border-radius: 2px;
+  border: 0.5px solid var(--c-border);
+  background-size: contain; background-position: center;
+  background-repeat: no-repeat; background-color: rgba(255,255,255,0.90);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  transition: transform 0.20s ease;
+  min-height: clamp(55px,11vh,85px);
+}
+.img-slot-fill {
+  background-size: cover; background-position: center; background-color: #e8e0d6;
+}
+.img-slot-hero {
+  background-size: contain; background-position: center 25%;
+  background-color: transparent; border: none;
+  min-height: clamp(80px,16vh,120px);
+}
+.img-slot:hover { transform: translateY(-2px); }
+.slot-cap {
+  position: absolute; left: 0; bottom: 0; right: 0;
+  background: rgba(251,247,242,0.94);
+  border-top: 0.5px solid rgba(201,150,58,0.18);
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(7px,1.4vh,9px); font-weight: 500;
+  color: var(--c-ink); text-align: center;
+  padding: 4px; letter-spacing: 0.3px; text-transform: uppercase;
+}
+
+/* ================================================================
+   TEXT PANEL
+================================================================ */
+.text-panel {
+  margin-top: auto; display: flex; flex-direction: column;
+  gap: 5px; padding: clamp(10px,2.2vh,18px) 0;
+}
+
+/* ================================================================
+   PRODUCT QUOTE
+================================================================ */
+.product-quote { margin-top: auto; text-align: center; padding: clamp(10px,2.2vh,18px) 0; }
+.product-quote blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; color: #4e3221;
+  font-size: clamp(13px,2.6vh,17px); line-height: 1.35;
+  margin-bottom: 6px; quotes: "\201C""\201D";
+}
+.product-quote blockquote::before { content: open-quote; }
+.product-quote blockquote::after  { content: close-quote; }
+.product-quote cite {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(7px,1.4vh,9px); color: var(--c-rust);
+  font-style: normal; letter-spacing: 2px; text-transform: uppercase;
+}
+
+/* ================================================================
+   CONTACT PAGE
+================================================================ */
+.contact-block { display: flex; flex-direction: column; gap: clamp(6px,1.2vh,10px); }
+.contact-logo-row { display: flex; align-items: center; gap: 12px; }
+.contact-logo-row img { width: clamp(44px,11vh,66px); height: auto; }
+.contact-dl { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
+.contact-dt {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(6.5px,1.3vh,8px); font-weight: 600;
+  color: var(--c-rust); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1px;
+}
+.contact-dd {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(7.5px,1.5vh,9.5px); color: var(--c-ink-80); line-height: 1.35; margin-bottom: 5px;
+}
+.thank-bar {
+  margin-top: auto; text-align: center;
+  padding: clamp(8px,1.5vh,12px) 0;
+  border-top: 0.5px solid var(--c-border);
+}
+.thank-bar p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(11px,2.2vh,14px); color: var(--c-rust); font-weight: 600; letter-spacing: 1px;
+}
+.thank-bar span {
+  display: block; font-family: 'Outfit', sans-serif;
+  font-size: clamp(7px,1.3vh,8.5px); color: rgba(30,19,12,0.50);
+  margin-top: 3px; letter-spacing: 0.5px;
+}
+
+/* ================================================================
+   CONTROLS
+================================================================ */
+.controls {
+  display: flex; align-items: center;
+  gap: clamp(10px,2vw,24px); z-index: 10;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+.btn {
+  display: flex; align-items: center; justify-content: center;
+  width: clamp(34px,5vw,42px); height: clamp(34px,5vw,42px);
+  background: rgba(255,255,255,0.06); border: 1px solid var(--c-border);
+  border-radius: 50%; color: var(--c-sand); cursor: pointer;
+  transition: all 0.22s ease;
+  font-size: clamp(13px,2vw,16px);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  touch-action: manipulation; user-select: none;
+}
+.btn:hover {
+  background: rgba(184,74,38,0.20); border-color: var(--c-rust);
+  color: var(--c-gold-lt); transform: scale(1.10);
+  box-shadow: 0 0 16px rgba(184,74,38,0.25);
+}
+.btn:active { transform: scale(0.93); }
+
+.page-indicator {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(11px,1.6vw,14px); color: var(--c-sand);
+  opacity: 0.62; letter-spacing: 3px;
+  min-width: 70px; text-align: center; user-select: none;
+}
+
+.thumbnails {
+  display: flex; gap: 5px; align-items: center;
+  max-width: min(440px,44vw); overflow: hidden;
+}
+.thumb {
+  width: clamp(18px,2.8vw,25px); height: clamp(28px,4.4vw,38px);
+  border-radius: 3px; overflow: hidden; cursor: pointer;
+  opacity: 0.35; border: 1px solid transparent;
+  transition: all 0.2s ease;
+  background: var(--c-cream); flex-shrink: 0;
+  touch-action: manipulation; user-select: none; position: relative;
+}
+.thumb:hover { opacity: 0.70; transform: translateY(-1px); }
+.thumb.active {
+  opacity: 1; border-color: var(--c-gold);
+  box-shadow: 0 0 8px rgba(201,150,58,0.45), 0 2px 8px rgba(0,0,0,0.30);
+  transform: translateY(-1px);
+}
+/* Show only logical pages in thumbnail strip (hide even-index halves) */
+.thumb:nth-child(even) { display: none !important; }
+
+.thumb-mini {
+  width: 100%; height: 100%;
+  background:
+    linear-gradient(180deg, rgba(251,247,242,0.96), rgba(217,201,176,0.85)),
+    radial-gradient(circle at top, rgba(201,150,58,0.45), transparent 50%);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--c-rust); font-family: 'Cormorant Garamond', serif;
+  font-weight: 700; font-size: 10px;
+}
+
+.progress-track {
+  width: clamp(110px,18vw,190px); height: 2px;
+  background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--c-rust), var(--c-gold));
+  border-radius: 2px; transition: width 0.4s ease; width: 3.57%;
+}
+
+/* ================================================================
+   TOOLBAR
+================================================================ */
+.toolbar {
+  position: fixed; right: clamp(8px,2vw,20px); top: 50%;
+  transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 6px; z-index: 20;
+}
+.tool-btn {
+  width: clamp(28px,3.5vw,34px); height: clamp(28px,3.5vw,34px);
+  background: rgba(14,11,9,0.70); border: 1px solid var(--c-border);
+  border-radius: 6px; color: var(--c-sand); cursor: pointer;
+  font-size: clamp(11px,1.5vw,14px);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  position: relative; touch-action: manipulation; user-select: none;
+}
+.tool-btn:hover {
+  background: rgba(184,74,38,0.30); border-color: var(--c-rust);
+  color: var(--c-gold-lt); transform: scale(1.08);
+}
+.tool-btn[data-tip]:hover::after {
+  content: attr(data-tip);
+  position: absolute; right: calc(100% + 8px); top: 50%;
+  transform: translateY(-50%);
+  background: rgba(14,11,9,0.90); color: var(--c-sand);
+  font-size: 10px; letter-spacing: 1px; white-space: nowrap;
+  padding: 4px 8px; border-radius: 4px;
+  border: 1px solid var(--c-border); font-family: 'Outfit', sans-serif;
+}
+.toolbar-divider { width: 100%; height: 1px; background: var(--c-border); margin: 2px 0; }
+
+/* ================================================================
+   SWIPE ARROWS (MOBILE ONLY)
+================================================================ */
+.swipe-arrow {
+  position: fixed; left: 50%; transform: translateX(-50%); z-index: 15;
+  width: clamp(80px,22vw,130px); height: clamp(28px,5vh,42px);
+  background: rgba(14,11,9,0.50); border: 1px solid var(--c-border);
+  color: var(--c-sand); display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: clamp(14px,2.5vw,20px); opacity: 0.45;
+  transition: opacity 0.2s, background 0.2s;
+  backdrop-filter: blur(6px); touch-action: manipulation; user-select: none;
+}
+.swipe-arrow:hover { opacity: 0.85; background: rgba(184,74,38,0.25); }
+.swipe-arrow.top    { top: 0;    border-radius: 0 0 8px 8px; border-top: none; }
+.swipe-arrow.bottom { bottom: 0; border-radius: 8px 8px 0 0; border-bottom: none; }
+
+.hint {
+  font-size: clamp(8px,1vw,10px); color: var(--c-sand);
+  opacity: 0.22; letter-spacing: 2px; text-transform: uppercase;
+  animation: fadeUp 1s 0.5s ease both;
+}
+
+/* ================================================================
+   PAGE SOURCES (HIDDEN TEMPLATE CONTAINER)
+================================================================ */
+#pageSources { display: none !important; }
+
+/* ================================================================
+   FLIP ENGINE — DO NOT MODIFY BELOW THIS LINE
+================================================================ */
+.flip-leaf {
+  position: absolute; left: 0; width: 100%; height: 50%;
+  z-index: 60;
+  -webkit-transform-style: preserve-3d; transform-style: preserve-3d;
+  pointer-events: none; will-change: transform, filter;
+  --curl: 0; --shine: 0;
+  filter: drop-shadow(0 18px 28px rgba(0,0,0,0.24));
+}
+.flip-leaf.next { top: 50%; transform-origin: top center; }
+.flip-leaf.prev { top: 0;   transform-origin: bottom center; }
+.flip-leaf.animating {
+  transition: transform var(--flip-time) cubic-bezier(.16,.78,.16,1), filter var(--flip-time) ease;
+}
+.flip-leaf::before {
+  content: ''; position: absolute; inset: 0; z-index: 95; pointer-events: none;
+  opacity: calc(0.04 + var(--curl) * 0.18);
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(0,0,0,0.18));
+  mix-blend-mode: soft-light;
+}
+
+.page-face {
+  position: absolute; inset: 0; overflow: hidden; background: var(--c-cream);
+  -webkit-backface-visibility: hidden !important; backface-visibility: hidden !important;
+  -webkit-transform-style: preserve-3d; transform-style: preserve-3d;
+  will-change: transform, visibility;
+  box-shadow:
+    0 18px 42px rgba(0,0,0,calc(0.12 + var(--curl) * 0.28)),
+    inset 0 0 0 1px rgba(184,74,38,0.10);
+}
+.flip-leaf.next .page-face { border-radius: 3px 3px 8px 8px; }
+.flip-leaf.prev .page-face { border-radius: 8px 8px 3px 3px; }
+
+.page-face.front { -webkit-transform: translateZ(1.2px); transform: translateZ(1.2px); visibility: visible; }
+.page-face.back  { -webkit-transform: rotateX(180deg) translateZ(1.2px) !important; transform: rotateX(180deg) translateZ(1.2px) !important; visibility: hidden; }
+
+.flip-leaf.show-back .page-face.front { visibility: hidden; }
+.flip-leaf.show-back .page-face.back  { visibility: visible; }
+
+.page-face .page-render, .page-face .stf__item, .page-face .page, .page-face .catalog-page {
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+}
+
+.page-face::before {
+  content: ''; position: absolute; inset: 0; z-index: 82; pointer-events: none;
+  opacity: calc(0.08 + var(--curl) * 0.42); mix-blend-mode: multiply;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.22), rgba(255,255,255,0.10) 18%, transparent 43%, rgba(0,0,0,0.19)),
+    radial-gradient(ellipse at center, transparent 46%, rgba(0,0,0,0.13));
+}
+.page-face::after {
+  content: ''; position: absolute; inset: 0; z-index: 83; pointer-events: none;
+  opacity: var(--shine); mix-blend-mode: screen; filter: blur(1px);
+  background: linear-gradient(90deg,
+    transparent 0%, rgba(255,255,255,0.00) 18%,
+    rgba(255,255,255,0.20) 34%, rgba(255,240,220,0.32) 50%,
+    rgba(255,255,255,0.16) 66%, rgba(255,255,255,0.00) 82%, transparent 100%);
+}
+
+.leaf-edge {
+  position: absolute; left: 0; width: 100%; height: 10px; z-index: 84; pointer-events: none;
+  opacity: calc(0.22 + var(--curl) * 0.34);
+  background: linear-gradient(180deg, rgba(255,255,255,0.42), rgba(214,184,145,0.72) 45%, rgba(64,40,22,0.24));
+  filter: blur(0.25px);
+}
+.flip-leaf.next .leaf-edge { top: -5px; }
+.flip-leaf.prev .leaf-edge { bottom: -5px; }
+
+.flip-shadow {
+  position: absolute; left: 0; right: 0; height: 50%;
+  pointer-events: none; z-index: 55; opacity: 0;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.36), transparent 70%);
+  filter: blur(12px); transition: opacity 0.18s ease;
+}
+.flip-shadow.next { top: 0; }
+.flip-shadow.prev { bottom: 0; }
+.vertical-book.is-flipping .flip-shadow { opacity: 0.42; }
+
+/* STAGED LEAF — Core Two-Sided Flip System */
+.flip-leaf.staged-leaf {
+  top: 0 !important; left: 0 !important;
+  width: 100% !important; height: 100% !important;
+  z-index: 92 !important;
+  transform: none !important; -webkit-transform: none !important;
+  -webkit-transform-style: preserve-3d !important; transform-style: preserve-3d !important;
+  filter: none !important; pointer-events: none !important;
+}
+.flip-leaf.staged-leaf .page-face {
+  position: absolute !important; left: 0 !important;
+  width: 100% !important; height: 50% !important; overflow: hidden !important;
+  background: var(--c-cream) !important;
+  -webkit-backface-visibility: visible !important; backface-visibility: visible !important;
+  -webkit-transform-style: preserve-3d !important; transform-style: preserve-3d !important;
+  will-change: transform, opacity, filter !important;
+  box-shadow:
+    0 24px 46px rgba(0,0,0,calc(0.12 + var(--curl) * 0.26)),
+    inset 0 0 0 1px rgba(184,74,38,0.10) !important;
+}
+.flip-leaf.staged-leaf.next .page-face.front {
+  top: 50% !important; border-radius: 3px 3px 8px 8px !important;
+  -webkit-transform-origin: top center !important; transform-origin: top center !important;
+}
+.flip-leaf.staged-leaf.next .page-face.back {
+  top: 0 !important; border-radius: 8px 8px 3px 3px !important;
+  -webkit-transform-origin: bottom center !important; transform-origin: bottom center !important;
+}
+.flip-leaf.staged-leaf.prev .page-face.front {
+  top: 0 !important; border-radius: 8px 8px 3px 3px !important;
+  -webkit-transform-origin: bottom center !important; transform-origin: bottom center !important;
+}
+.flip-leaf.staged-leaf.prev .page-face.back {
+  top: 50% !important; border-radius: 3px 3px 8px 8px !important;
+  -webkit-transform-origin: top center !important; transform-origin: top center !important;
+}
+.flip-leaf.staged-leaf .leaf-edge { z-index: 94 !important; opacity: calc(0.24 + var(--curl) * 0.42) !important; }
+.flip-leaf.staged-leaf.next .leaf-edge { top: calc(50% - 5px) !important; bottom: auto !important; }
+.flip-leaf.staged-leaf.prev .leaf-edge { top: calc(50% - 5px) !important; bottom: auto !important; }
+.flip-leaf.staged-leaf::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 50%;
+  opacity: var(--leaf-shadow, 0); pointer-events: none; z-index: 90;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.34), transparent 72%);
+  filter: blur(14px); transform: translateY(-50%);
+}
+
+/* ================================================================
+   ANIMATIONS
+================================================================ */
+@keyframes fadeUp   { from { opacity:0; transform:translateY(14px); }  to { opacity:1; transform:translateY(0); } }
+@keyframes fadeDown { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+
+/* ================================================================
+   RESPONSIVE — BOOK SIZE
+================================================================ */
+@media (max-width: 768px) {
+  .thumbnails { display: none; }
+  .progress-track { width: 90px; }
+  .toolbar { right: 8px; }
+  .book-container { width: min(430px,94vw); height: min(800px,74vh); }
+}
+@media (max-width: 520px) {
+  .book-container { width: 88vw; height: min(calc(88vw * 1.78),74vh); }
+  .toolbar { right: 6px; }
+  .progress-track { display: none; }
+  .hint { display: none; }
+  .page-content { padding: 11px; gap: 4px; }
+  .display-h { font-size: clamp(13px,4.2vw,20px); }
+  .tagline    { font-size: clamp(8px,2vw,10px); }
+  .body-copy  { font-size: clamp(7px,1.9vw,9px); line-height: 1.32; }
+  .img-slot   { min-height: clamp(50px,9.5vh,72px); }
+  .slot-cap   { font-size: clamp(6.5px,1.8vw,8.5px); }
+  .cards-row  { gap: 5px; }
+  .contact-dl { grid-template-columns: 1fr; }
+  .toc-grid   { grid-template-columns: repeat(2,1fr); }
+  .img-grid-4 { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 375px) {
+  .book-container { width: 88vw; height: min(calc(88vw * 1.85),72vh); }
+  .page-content { padding: 9px; gap: 3px; }
+  .catalog-title { font-size: 9px; letter-spacing: 2px; }
+  .btn { width: 32px; height: 32px; font-size: 12px; }
+  .tool-btn { width: 26px; height: 26px; font-size: 10px; }
+}
+@media (max-width: 320px) {
+  .book-container { width: 88vw; height: min(calc(88vw * 1.9),70vh); }
+  .page-content { padding: 8px; gap: 2px; }
+  .page-inner-border { inset: 7px; }
+  .page-inner-border::before, .page-inner-border::after { width: 14px; height: 14px; }
+  .btn { width: 30px; height: 30px; font-size: 11px; }
+  .tool-btn { width: 24px; height: 24px; font-size: 9px; }
+  .controls { gap: 8px; }
+}
+@media (max-height: 650px) { .book-container { height: 72vh; width: calc(72vh * 0.56); } }
+@media (max-height: 550px) {
+  .header { display: none; } .hint { display: none; }
+  .scene { gap: 6px; }
+  .book-container { height: 70vh; width: calc(70vh * 0.57); }
+}
+@media (max-height: 450px) and (orientation:landscape) {
+  .header { display: none; } .hint { display: none; }
+  .scene { gap: 4px; padding: 4px; }
+  .book-container { height: 75vh; width: calc(75vh * 0.55); }
+  .toolbar { right: 4px; gap: 4px; } .controls { gap: 8px; }
+  .page-content { padding: 8px; }
+}
+@media (max-height: 400px) and (orientation:landscape) {
+  .header { display: none; } .hint { display: none; }
+  .scene { gap: 2px; padding: 2px; }
+  .book-container { height: 80vh; width: calc(80vh * 0.54); }
+  .toolbar { right: 2px; gap: 2px; }
+  .tool-btn { width: 22px; height: 22px; font-size: 9px; }
+  .controls { gap: 6px; }
+  .btn { width: 28px; height: 28px; font-size: 11px; }
+  .page-content { padding: 6px; } .page-inner-border { inset: 6px; }
+}
+@media (min-width: 1440px) {
+  .book-container { width: min(480px,90vw); height: min(860px,78vh); }
+  .catalog-title { font-size: 16px; }
+  .btn { width: 46px; height: 46px; font-size: 18px; }
+  .tool-btn { width: 38px; height: 38px; font-size: 16px; }
+  .page-indicator { font-size: 16px; }
+}
+@media (min-width: 700px) { .swipe-arrow { display: none; } }
+@media (hover:none),(pointer:coarse) { .click-zone::after { display: none; } }
+@media (prefers-reduced-motion:reduce) {
+  .img-slot,.btn,.tool-btn,.thumb { transition: none !important; }
+  .flip-leaf.animating { transition-duration: 1ms !important; }
+}
+
+/* Short viewport — content scaling without !important abuse */
+@media (max-height: 740px) {
+  .scene        { gap: clamp(4px,1vh,10px); padding: clamp(4px,1vh,12px); }
+  .page-content { padding: clamp(8px,1.8vh,16px); gap: clamp(2px,0.8vh,6px); }
+  .display-h    { font-size: clamp(14px,3vh,22px); line-height: 1.0; }
+  .section-h    { font-size: clamp(13px,2.8vh,18px); line-height: 1.0; }
+  .tagline      { font-size: clamp(8px,1.6vh,10.5px); line-height: 1.25; }
+  .body-copy    { font-size: clamp(7px,1.5vh,9px); line-height: 1.30; }
+  .img-slot     { min-height: clamp(38px,7.5vh,58px); }
+  .img-slot-hero{ min-height: clamp(55px,11vh,80px); }
+  .slot-cap     { font-size: clamp(6.5px,1.3vh,8px); padding: 3px 2px; }
+  .cover-logo   { width: clamp(55px,14vh,85px); }
+  .cover-brand  { font-size: clamp(18px,4vh,28px); }
+  .glass-card   { padding: 6px 10px; }
+  .glass-card .card-text { font-size: clamp(6.5px,1.35vh,8px); }
+  .chip         { font-size: clamp(6px,1.2vh,7.5px); padding: 2px 6px; }
+  .toc-thumb    { aspect-ratio: 1/1; }
+  .toc-label    { font-size: clamp(5.5px,1.1vh,7px); }
+  .text-panel   { padding: clamp(6px,1.4vh,12px) 0; }
+  .product-quote{ padding: clamp(6px,1.4vh,12px) 0; }
+  .product-quote blockquote { font-size: clamp(11px,2.3vh,15px); }
+  .contact-dd   { font-size: clamp(7px,1.4vh,9px); }
+  .thank-bar p  { font-size: clamp(9px,1.9vh,11.5px); }
+}
+</style>
+</head>
+<body>
+
+<!-- Ambient Background -->
+<div class="bg-layer" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="glow glow-tl" aria-hidden="true"></div>
+<div class="glow glow-br" aria-hidden="true"></div>
+
+<!-- Mobile Swipe Buttons -->
+<button class="swipe-arrow top"    id="mPrev" aria-label="Previous Page">&#8593;</button>
+<button class="swipe-arrow bottom" id="mNext" aria-label="Next Page">&#8595;</button>
+
+<!-- Toolbar -->
+<aside class="toolbar" role="toolbar" aria-label="Catalog controls">
+  <button class="tool-btn" id="zoomIn"       data-tip="Zoom In"    aria-label="Zoom In">+</button>
+  <button class="tool-btn" id="zoomOut"      data-tip="Zoom Out"   aria-label="Zoom Out">&minus;</button>
+  <div class="toolbar-divider" aria-hidden="true"></div>
+  <button class="tool-btn" id="fullscreenBtn" data-tip="Fullscreen" aria-label="Fullscreen" style="font-size:12px">&#9974;</button>
+  <div class="toolbar-divider" aria-hidden="true"></div>
+  <button class="tool-btn" id="firstBtn" data-tip="First Page" aria-label="First Page" style="font-size:10px">&#9198;</button>
+  <button class="tool-btn" id="lastBtn"  data-tip="Last Page"  aria-label="Last Page"  style="font-size:10px">&#9197;</button>
+</aside>
+
+<!-- Main Scene -->
+<div class="scene" id="scene">
+  <header class="header">
+    <div class="header-line" aria-hidden="true"></div>
+    <span class="catalog-title">Kalyaani Organic &mdash; Product Catalog 2025</span>
+    <div class="header-line right" aria-hidden="true"></div>
+  </header>
+
+  <div class="book-platform" id="bookPlatform">
+    <div class="book-frame">
+      <div class="corner-tr" aria-hidden="true"></div>
+      <div class="corner-bl" aria-hidden="true"></div>
+      <div class="book-container">
+        <div class="vertical-book" id="book" role="document" aria-label="Kalyaani Organic Product Catalog">
+          <div class="spread-page top"    id="topPage"></div>
+          <div class="spread-page bottom" id="bottomPage"></div>
+          <div class="flip-shadow next"   id="flipShadow" aria-hidden="true"></div>
+          <div class="center-fold" aria-hidden="true"></div>
+          <div class="click-zone top-zone"    id="topZone"    data-label="Previous" role="button" tabindex="0" aria-label="Previous page"></div>
+          <div class="click-zone bottom-zone" id="bottomZone" data-label="Next"     role="button" tabindex="0" aria-label="Next page"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="controls" aria-label="Page navigation">
+    <button class="btn" id="prevBtn" aria-label="Previous Page">&#8593;</button>
+    <div class="thumbnails" id="thumbStrip" role="list" aria-label="Page thumbnails"></div>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="page-indicator" id="pageIndicator" aria-live="polite">1 / 28</div>
+    <button class="btn" id="nextBtn" aria-label="Next Page">&#8595;</button>
+  </nav>
+
+  <p class="hint">Drag &middot; Swipe &middot; Scroll &middot; Arrow Keys</p>
+</div>
+
+<!-- ============================================================
+  PAGE SOURCES — 56 spread halves = 28 logical pages
+  Each logical page = 2 consecutive stf__item entries (top + bottom)
+============================================================ -->
+<div id="pageSources" aria-hidden="true">
+
+<!-- ═══ PAGE 1 — PREMIUM COVER ═══ -->
+<div class="stf__item" style="--page-bg:url('front.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="cover-hero">
+  <img class="cover-logo" src="logo.jpeg" alt="Kalyaani Organic Productions">
+  <div class="gold-rule"></div>
+  <p class="cover-brand">KALYAANI<span class="cover-brand-sub">ORGANIC PRODUCTIONS</span></p>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('front.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="cover-sub">
+  <p class="cover-tagline">From Nature&#39;s Goodness to Every Indian Home</p>
+  <p class="cover-subtitle">Astha ki Satvik Duniya</p>
+  <div class="chips-row" style="margin-top:12px">
+    <span class="chip">100% Natural</span>
+    <span class="chip">No Preservatives</span>
+    <span class="chip">Handcrafted</span>
+    <span class="chip">Women&#8209;Led</span>
+  </div>
+</div>
+<div class="pg-num">01</div>
+</div></div></div>
+
+<!-- ═══ PAGE 2 — BRAND INTRODUCTION ═══ -->
+<div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="img-grid img-grid-1" style="flex:1">
+  <div class="img-slot img-slot-fill" style="background-image:url('Happy Indian family sitting together enjoying a meal.png');min-height:100%">
+    <div class="slot-cap">Nourishing Every Indian Home Since 2020</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Brand Introduction</p>
+  <h2 class="display-h">Welcome to Kalyaani Organic</h2>
+  <p class="tagline">Where tradition meets purity in every product we craft.</p>
+  <p class="body-copy">Kalyaani Organic Productions brings together the finest natural ingredients from local farms and the dedication of skilled women artisans to create a premium range of organic foods and wellness products &#8212; each crafted with care, love, and deep respect for tradition.</p>
+  <div class="chips-row" style="margin-top:8px;justify-content:flex-start">
+    <span class="chip">Pure Ghee</span><span class="chip">Masalas</span>
+    <span class="chip">Flours</span><span class="chip">Rice</span>
+    <span class="chip">Pulses</span><span class="chip">Soaps</span>
+  </div>
+</div>
+<div class="pg-num">02</div>
+</div></div></div>
+
+<!-- ═══ PAGE 3 — FOUNDER&#39;S STORY ═══ -->
+<div class="stf__item" style="--page-bg:url('gir cow bg.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="img-grid img-grid-1" style="flex:1">
+  <div class="img-slot img-slot-fill" style="background-image:url('gir cow bg.png');min-height:100%">
+    <div class="slot-cap">Rooted in Nature &middot; Crafted with Devotion</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('gir cow bg.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Founder&#39;s Story</p>
+  <h2 class="display-h">From Our Hands to Your Home</h2>
+  <p class="tagline">Empowering women, preserving traditional values.</p>
+  <p class="body-copy">Our story is driven by a passion for purity and healthy living. Founded by women who believe in the satvik way, Kalyaani Organic Productions was born to bring authentic, handcrafted organic products to every Indian household. Every product carries the warmth of tradition, the integrity of pure ingredients, and the love of skilled women artisans who pour their heart into every batch.</p>
+</div>
+<div class="pg-num">03</div>
+</div></div></div>
+
+<!-- ═══ PAGE 4 — MISSION · VISION · VALUES ═══ -->
+<div class="stf__item" style="--page-bg:url('Buffalo.jpg')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel" style="margin-top:0;padding-top:0">
+  <p class="kicker">Our Promise</p>
+  <h2 class="display-h">Mission &amp; Vision</h2>
+</div>
+<div class="cards-row" style="flex:1">
+  <div class="glass-card">
+    <div class="card-label">Mission</div>
+    <div class="card-text">Deliver pure, organic food crafted with care &#8212; from farm and kitchen to every Indian home.</div>
+  </div>
+  <div class="glass-card">
+    <div class="card-label">Vision</div>
+    <div class="card-text">Empower women, enrich lives, and build a trusted satvik brand rooted in tradition.</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('Buffalo.jpg')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Core Values</p>
+  <h2 class="section-h">What We Stand For</h2>
+  <div class="chips-row" style="justify-content:flex-start;gap:6px 8px;margin-top:6px">
+    <span class="chip">100% Natural</span><span class="chip">No Preservatives</span>
+    <span class="chip">Handcrafted</span><span class="chip">Women&#8209;Led</span>
+    <span class="chip">Satvik Living</span><span class="chip">Zero Chemicals</span>
+    <span class="chip">Farm to Home</span><span class="chip">Trusted Quality</span>
+  </div>
+  <p class="body-copy" style="margin-top:8px">Every ingredient we source, every product we craft, and every promise we make is rooted in authenticity, transparency, and the belief that pure food is the foundation of a healthy life.</p>
+</div>
+<div class="pg-num">04</div>
+</div></div></div>
+
+<!-- ═══ PAGE 5 — VISUAL TABLE OF CONTENTS (Part 1) ═══ -->
+<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel" style="margin-top:0;padding-top:0;gap:4px">
+  <p class="kicker">Visual Index</p>
+  <h2 class="display-h">Table of Contents</h2>
+  <div class="gold-rule" style="margin:6px 0;width:100%;max-width:none"></div>
+</div>
+<div class="toc-grid" style="flex:1">
+  <div class="toc-item">
+    <div class="toc-thumb" style="background-image:url('cow ghee.png')"></div>
+    <div class="toc-label">Gir Cow Ghee</div><div class="toc-page">P. 07</div>
+  </div>
+  <div class="toc-item">
+    <div class="toc-thumb" style="background-image:url('downloaded_images/u1N2eCu6FGRSBkxloEGiIbvSiig49bY69qELtBFv.png')"></div>
+    <div class="toc-label">Buffalo Ghee</div><div class="toc-page">P. 09</div>
+  </div>
+  <div class="toc-item">
+    <div class="toc-thumb" style="background-image:url('downloaded_images/2SHHM5BY9ED3yne2XoU4ozpkY1zM6eGxyNBI39l6.png')"></div>
+    <div class="toc-label">Masala Collection</div><div class="toc-page">P. 11</div>
+  </div>
+  <div class="toc-item">
+    <div class="toc-thumb" style="background-image:url('downloaded_images/CDWF4DEOyR0oXhcYGqFc4HvHtXThMunZUygKhdO2.png')"></div>
+    <div class="toc-label">Organic Turmeric</div><div class="toc-page">P. 13</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="toc-grid" style="flex:1">
+  <div class="toc-item">
+    <div class="toc-thumb" style="background-image:url('downloaded_images/W8cTO3U1SqK1vd3LDLjAvIMiazSVwKwiu1pVhwX4.png')"></div>
+    <div class="toc-label">Flour Collection</div><div class="toc-page">P. 15</div>
+  </div>
+  <div class="toc-item">
+    <div class="toc-thumb" style="background-image:url('downloaded_images/AdwoHzSnDvULw5vYZp9V11p0SENCKutAeaYEALA2.jpeg')"></div>
+    <div class="toc-label">Rice Collection</div><div class="toc-page">P. 19</div>
+  </div>
+  <div class="toc-item">
+    <div class="toc-thumb" style="background-image:url('downloaded_images/kgtbqB66qApf5LVJEDK7duXmhgst93SCixuZCrXm.jpeg')"></div>
+    <div class="toc-label">Pulse Collection</div><div class="toc-page">P. 21</div>
+  </div>
+  <div class="toc-item">
+    <div class="toc-thumb" style="background-image:url('Organic Neem Tulsi Soap.png')"></div>
+    <div class="toc-label">Soap Collection</div><div class="toc-page">P. 27</div>
+  </div>
+</div>
+<div class="pg-num">05</div>
+</div></div></div>
+
+<!-- ═══ PAGE 6 — VISUAL TABLE OF CONTENTS (Part 2) ═══ -->
+<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="toc-grid" style="flex:1">
+  <div class="toc-item">
+    <div class="toc-thumb" style="background-image:url('downloaded_images/DJwdnnoWDuieghcV9YM8AN2DGJn4WV83y8dDZGiD.png')"></div>
+    <div class="toc-label">Satvik Range</div><div class="toc-page">P. 23</div>
+  </div>
+  <div class="toc-item">
+    <div class="toc-thumb" style="background-image:url('downloaded_images/pEDKxJHS8mujXZSbf7O3Yx06rALmw3EPhupyOT1c.png')"></div>
+    <div class="toc-label">Special Products</div><div class="toc-page">P. 25</div>
+  </div>
+  <div class="toc-item">
+    <div class="toc-thumb" style="background-image:url('Organic Neem Tulsi Soap.png')"></div>
+    <div class="toc-label">Natural Soaps</div><div class="toc-page">P. 27</div>
+  </div>
+  <div class="toc-item">
+    <div class="toc-thumb" style="background-image:url('logo.jpeg')"></div>
+    <div class="toc-label">Contact Us</div><div class="toc-page">P. 28</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Product Range Overview</p>
+  <h2 class="section-h">8 Premium Categories</h2>
+  <p class="body-copy">Gir Cow Ghee &middot; Buffalo Ghee &middot; Masala Collection &middot; Organic Turmeric &middot; Stone-Ground Flours &middot; Aromatic Rice &middot; Wholesome Pulses &middot; Natural Handmade Soaps</p>
+  <p class="body-copy" style="margin-top:6px">Each category is crafted with the same dedication &#8212; sourced from trusted organic farms, processed naturally, and delivered fresh to your door.</p>
+</div>
+<div class="pg-num">06</div>
+</div></div></div>
+
+<!-- ═══ PAGE 7 — GIR COW GHEE ═══ -->
+<div class="stf__item" style="--page-bg:url('gir cow bg.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="pg-num">07</div>
+<div class="img-grid img-grid-2" style="flex:1">
+  <div class="img-slot img-slot-hero" style="background-image:url('cow ghee.png')">
+    <div class="slot-cap">Pure Gir Cow A2 Ghee</div>
+  </div>
+  <div class="img-slot img-slot-fill" style="background-image:url('downloaded_images/KZlHlSkizxKlrMEWJ3FQUZvEzmUoo5rDEFGEDeG2.jpeg')">
+    <div class="slot-cap">Bilona Method &middot; Premium Pack</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('gir cow bg.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Premium Dairy</p>
+  <h2 class="display-h">Gir Cow A2 Ghee</h2>
+  <p class="tagline">Bilona-churned, pure golden goodness from sacred Gir cows.</p>
+  <p class="body-copy">Our Gir Cow Ghee is prepared using the traditional bilona method &#8212; hand-churned from cultured curd under hygienic conditions. Rich in A2 protein, CLA, fat-soluble vitamins, and gut-healing butyric acid. Ideal for cooking, ayurvedic rituals, and daily satvik nourishment.</p>
+</div>
+</div></div></div>
+
+<!-- ═══ PAGE 8 — GIR COW GHEE DETAILS ═══ -->
+<div class="stf__item" style="--page-bg:url('gir cow bg.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="img-grid img-grid-1" style="flex:1">
+  <div class="img-slot img-slot-fill" style="background-image:url('gir cow bg.png');min-height:100%">
+    <div class="slot-cap">Pure Gir Cows &middot; Free-Grazing Pastures</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('gir cow bg.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="product-quote">
+  <blockquote>Purity of mind begins with the purity of food. Our bilona ghee carries satvik energy in every golden drop.</blockquote>
+  <div class="gold-rule"></div>
+  <cite>Kalyaani Organic &mdash; Gir Cow A2 Ghee</cite>
+</div>
+<div class="pg-num">08</div>
+</div></div></div>
+
+<!-- ═══ PAGE 9 — MASALA COLLECTION ═══ -->
+<div class="stf__item" style="--page-bg:url('kitchen.jpg')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="pg-num">09</div>
+<div class="img-grid img-grid-3" style="flex:1">
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/2SHHM5BY9ED3yne2XoU4ozpkY1zM6eGxyNBI39l6.png')">
+    <div class="slot-cap">Goda Masala</div>
+  </div>
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/7yc1TgEeZFVa3BV0rOmDEmx3vKpeUDR09odtdoX8.png')">
+    <div class="slot-cap">Kanda Lasoon Masala</div>
+  </div>
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/1Pv5GqtjVmlUlZFFoh7hUPShHUFAEX6Jrx2ol0Eo.png')">
+    <div class="slot-cap">Kitchen Masala</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('kitchen.jpg')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Kitchen Essentials</p>
+  <h2 class="display-h">Authentic Masala Collection</h2>
+  <p class="tagline">Fresh aroma, balanced taste, and traditional Indian flavour.</p>
+  <p class="body-copy">Hand-pounded using recipes passed down through generations. Our masalas contain no artificial colors, preservatives, or additives &#8212; only pure, sun-dried spices ground fresh to retain maximum aroma and potency.</p>
+</div>
+</div></div></div>
+
+<!-- ═══ PAGE 10 — MASALA DETAILS ═══ -->
+<div class="stf__item" style="--page-bg:url('kitchen.jpg')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="img-grid img-grid-2" style="flex:1">
+  <div class="img-slot img-slot-fill" style="background-image:url('kitchen.jpg');min-height:100%">
+    <div class="slot-cap">Traditional Kitchen &middot; Authentic Flavours</div>
+  </div>
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/PIExlPe7UID0BSLGibdDj9MAolhqCRsM4ZZzql7a.jpeg')">
+    <div class="slot-cap">Premium Masala Range</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('kitchen.jpg')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="product-quote">
+  <blockquote>Hand-pounded spices from traditional methods &#8212; flavour and goodness in every spoonful.</blockquote>
+  <div class="gold-rule"></div>
+  <cite>Kalyaani Organic &mdash; Masala Collection</cite>
+</div>
+<div class="text-panel" style="padding-top:0">
+  <p class="kicker">No Preservatives &middot; No Artificial Colour</p>
+  <p class="body-copy">Goda Masala for festive dishes &middot; Kanda Lasoon for everyday cooking &middot; Kitchen Masala for universal versatility.</p>
+</div>
+<div class="pg-num">10</div>
+</div></div></div>
+
+<!-- ═══ PAGE 11 — ORGANIC TURMERIC ═══ -->
+<div class="stf__item" style="--page-bg:url('kitchen.jpg')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="pg-num">11</div>
+<div class="img-grid img-grid-2" style="flex:1">
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/CDWF4DEOyR0oXhcYGqFc4HvHtXThMunZUygKhdO2.png')">
+    <div class="slot-cap">Organic Turmeric</div>
+  </div>
+  <div class="img-slot img-slot-fill" style="background-image:url('kitchen.jpg')">
+    <div class="slot-cap">Golden Immunity &middot; Natural Health</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('kitchen.jpg')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Spice Collection</p>
+  <h2 class="display-h">Organic Turmeric</h2>
+  <p class="tagline">Pure golden health protection in every teaspoon.</p>
+  <p class="body-copy">Rich yellow colour, earthy aroma, and strong immunity-boosting properties. Our organic turmeric is sourced from premium farms, sun-dried naturally, and ground fresh &#8212; free from any additives, coloring agents, or impurities.</p>
+</div>
+<div class="pg-num">11</div>
+</div></div></div>
+
+<!-- ═══ PAGE 12 — BUFFALO GHEE ═══ -->
+<div class="stf__item" style="--page-bg:url('Buffalo.jpg')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="pg-num">12</div>
+<div class="img-grid img-grid-2" style="flex:1">
+  <div class="img-slot img-slot-fill" style="background-image:url('downloaded_images/u1N2eCu6FGRSBkxloEGiIbvSiig49bY69qELtBFv.png')">
+    <div class="slot-cap">Desi Buffalo Ghee</div>
+  </div>
+  <div class="img-slot img-slot-fill" style="background-image:url('Buffalo.jpg')">
+    <div class="slot-cap">Free-Grazing Buffalo Herd</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('Buffalo.jpg')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Traditional Churning</p>
+  <h2 class="display-h">Desi Buffalo Ghee</h2>
+  <p class="tagline">Rich, golden, and packed with healthy fats from nature.</p>
+  <p class="body-copy">Rich in healthy fats, vitamin A, and antioxidants, our premium Buffalo Ghee is ideal for daily cooking and wholesome recipes. Churned from pure buffalo milk using traditional methods for authentic taste and superior nutrition.</p>
+</div>
+<div class="pg-num">12</div>
+</div></div></div>
+
+<!-- ═══ PAGE 13 — FLOUR COLLECTION ═══ -->
+<div class="stf__item" style="--page-bg:url('atta bg.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="pg-num">13</div>
+<div class="img-grid img-grid-2" style="flex:1">
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/W8cTO3U1SqK1vd3LDLjAvIMiazSVwKwiu1pVhwX4.png')">
+    <div class="slot-cap">Thalipeeth Bhajni</div>
+  </div>
+  <div class="img-slot img-slot-fill" style="background-image:url('atta bg.png')">
+    <div class="slot-cap">Traditional Stone-Ground Flour</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('atta bg.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Traditional Flour Range</p>
+  <h2 class="display-h">Flour Collection</h2>
+  <p class="tagline">Homestyle nutrition inspired by Indian kitchens.</p>
+  <p class="body-copy">Stone-ground tradition meets modern nutrition. Our Thalipeeth Bhajni is crafted for crisp, flavourful thalipith &#8212; made from multigrain goodness to bring authentic Maharashtrian taste to your home.</p>
+</div>
+<div class="pg-num">13</div>
+</div></div></div>
+
+<!-- ═══ PAGE 14 — FLOUR PRODUCTS ═══ -->
+<div class="stf__item" style="--page-bg:url('atta bg.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="pg-num">14</div>
+<div class="img-grid img-grid-3" style="flex:1">
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/W8cTO3U1SqK1vd3LDLjAvIMiazSVwKwiu1pVhwX4.png')">
+    <div class="slot-cap">Thalipeeth Bhajni</div>
+  </div>
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/wHg57lAww5db67vHkWrboMVCPijC5IxTSHnwmzjZ.png')">
+    <div class="slot-cap">Organic Raaghi Flour</div>
+  </div>
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/SnRtS0MNz48gaNSCPjVwVrIykPb0ZusXNueGO1cU.png')">
+    <div class="slot-cap">Organic Daliya</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('atta bg.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Daily Staple Range</p>
+  <h2 class="section-h">Three Atta &amp; Flour Products</h2>
+  <p class="tagline">Made for soft rotis, healthy meals, and everyday cooking.</p>
+  <p class="body-copy">Thalipeeth Bhajni for regional favourites &middot; Organic Raaghi for wholesome rotis &middot; Organic Daliya for nourishing breakfast bowls. Stone-ground to retain fiber, natural vitamins, and authentic taste.</p>
+</div>
+<div class="pg-num">14</div>
+</div></div></div>
+
+<!-- ═══ PAGE 15 — FLOUR DETAILS ═══ -->
+<div class="stf__item" style="--page-bg:url('atta bg.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="img-grid img-grid-1" style="flex:1">
+  <div class="img-slot img-slot-fill" style="background-image:url('atta bg.png');min-height:100%">
+    <div class="slot-cap">Stone-Ground Perfection &middot; Ancient Grain Wisdom</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('atta bg.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="product-quote">
+  <blockquote>Wheat, Ragi, and Daliya prepared with ultimate care &#8212; nourish your family with wholesome ancient grains.</blockquote>
+  <div class="gold-rule"></div>
+  <cite>Kalyaani Organic &mdash; Flour Collection</cite>
+</div>
+<div class="text-panel" style="padding-top:0">
+  <div class="chips-row" style="justify-content:flex-start">
+    <span class="chip">High Fiber</span><span class="chip">No Maida</span>
+    <span class="chip">Stone-Ground</span><span class="chip">100% Organic</span>
+  </div>
+</div>
+<div class="pg-num">15</div>
+</div></div></div>
+
+<!-- ═══ PAGE 16 — FLOUR CLOSING ═══ -->
+<div class="stf__item" style="--page-bg:url('atta bg.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="img-grid img-grid-2" style="flex:1">
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/iVQm17Tc80ToUDNvnfbagk9O8OfCQYaf6OTJdk3y.png')">
+    <div class="slot-cap">Premium Packaging</div>
+  </div>
+  <div class="img-slot img-slot-fill" style="background-image:url('atta bg.png')">
+    <div class="slot-cap">Locally Sourced &middot; Organically Grown</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('atta bg.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Stone-Ground Goodness</p>
+  <h2 class="section-h">Pure Flour &mdash; Pure Nutrition</h2>
+  <p class="body-copy">Slow-ground to retain fiber, natural vitamins, minerals, and healthy nutritional values. Our flour range supports digestion, provides sustained energy, and brings authentic taste to every meal you make for your family.</p>
+</div>
+<div class="pg-num">16</div>
+</div></div></div>
+
+<!-- ═══ PAGE 17 — RICE COLLECTION ═══ -->
+<div class="stf__item" style="--page-bg:url('Rice farming process.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="pg-num">17</div>
+<div class="img-grid img-grid-2" style="flex:1">
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/AdwoHzSnDvULw5vYZp9V11p0SENCKutAeaYEALA2.jpeg')">
+    <div class="slot-cap">Organic Grain Range</div>
+  </div>
+  <div class="img-slot img-slot-fill" style="background-image:url('Rice farming process.png')">
+    <div class="slot-cap">Farm-to-Home Journey</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('Rice farming process.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Rice Collection</p>
+  <h2 class="display-h">Fragrant Organic Rice</h2>
+  <p class="tagline">Aromatic Indrayani and Brown Ambemohar from mineral-rich farms.</p>
+  <p class="body-copy">Grown using traditional eco-farming methods in Maharashtra&#39;s fertile fields, our organic rice maintains excellent stickiness, rich scent, and superior nutritional value. Perfect for everyday meals, biryani, and traditional rice dishes.</p>
+</div>
+</div></div></div>
+
+<!-- ═══ PAGE 18 — RICE PRODUCTS ═══ -->
+<div class="stf__item" style="--page-bg:url('Rice farming process.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="pg-num">18</div>
+<div class="img-grid img-grid-3" style="flex:1">
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/MW5w9Wnn9CStXg7wnrPsNIPPVe1c20HBez1MSNqp.png')">
+    <div class="slot-cap">Brown Ambemohar</div>
+  </div>
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/aiKcN39IqhlenLGMpjVUYsugnVUCuXAnQ0ak2nZf.png')">
+    <div class="slot-cap">Organic Ambemohar</div>
+  </div>
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/aJMx5Kqqm3V9z15u5UVIaLwBzDfBlFiQBiNyOWpl.png')">
+    <div class="slot-cap">Indrayani Tukda Rice</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('Rice farming process.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Three Premium Varieties</p>
+  <h2 class="section-h">Brown &middot; Ambemohar &middot; Indrayani</h2>
+  <p class="body-copy">Brown Ambemohar &#8212; nutrient-rich, fiber-packed, mild sweet scent. Organic Ambemohar &#8212; the beloved fragrant Maharashtrian variety. Indrayani Tukda &#8212; soft, aromatic, ideal for everyday family cooking.</p>
+</div>
+<div class="pg-num">18</div>
+</div></div></div>
+
+<!-- ═══ PAGE 19 — RICE CLOSING ═══ -->
+<div class="stf__item" style="--page-bg:url('Rice farming process.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="img-grid img-grid-1" style="flex:1">
+  <div class="img-slot img-slot-fill" style="background-image:url('Rice farming process.png');min-height:100%">
+    <div class="slot-cap">Eco-Farmed &middot; Maharashtra&#39;s Finest Fields</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('Rice farming process.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="product-quote">
+  <blockquote>Aromatic Indrayani and Brown Ambemohar &#8212; grown in mineral-rich soil, naturally perfumed, and sustainably harvested.</blockquote>
+  <div class="gold-rule"></div>
+  <cite>Kalyaani Organic &mdash; Rice Collection</cite>
+</div>
+<div class="pg-num">19</div>
+</div></div></div>
+
+<!-- ═══ PAGE 20 — PULSE COLLECTION ═══ -->
+<div class="stf__item" style="--page-bg:url('Pulses harvesting.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="pg-num">20</div>
+<div class="img-grid img-grid-2" style="flex:1">
+  <div class="img-slot img-slot-fill" style="background-image:url('Pulses harvesting.png');min-height:100%">
+    <div class="slot-cap">Sun-Dried &middot; Harvest-Fresh Pulses</div>
+  </div>
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/kgtbqB66qApf5LVJEDK7duXmhgst93SCixuZCrXm.jpeg')">
+    <div class="slot-cap">Organic Pulse Range</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('Pulses harvesting.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Pulse Collection</p>
+  <h2 class="display-h">Wholesome Organic Pulses</h2>
+  <p class="tagline">Protein-rich, naturally grown, and full of earthy goodness.</p>
+  <p class="body-copy">Our pulse range is sourced from organic farms across Maharashtra &#8212; hand-cleaned, sun-dried, and packed fresh. High in plant protein, fiber, and essential minerals for a balanced and healthy diet.</p>
+</div>
+</div></div></div>
+
+<!-- ═══ PAGE 21 — PULSE PRODUCTS ═══ -->
+<div class="stf__item" style="--page-bg:url('Pulses harvesting.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="pg-num">21</div>
+<div class="img-grid img-grid-4" style="flex:1">
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/DNpwEWVEyT2ABpggStrZf9gzwJpR5R4IASYzQPWP.png')">
+    <div class="slot-cap">Black Urad Dal</div>
+  </div>
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/SchLsXdlo6dzhdkR6VxVbbTxmBp8ler1qzXxzPnz.png')">
+    <div class="slot-cap">Green Moong Dal</div>
+  </div>
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/yOnuNUsMyoVEblBBIoUVM6iBunp2VFjMHCiv9c0K.png')">
+    <div class="slot-cap">Organic Chana</div>
+  </div>
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/DJwdnnoWDuieghcV9YM8AN2DGJn4WV83y8dDZGiD.png')">
+    <div class="slot-cap">Red Rajma</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('Pulses harvesting.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Four Core Varieties</p>
+  <h2 class="section-h">Urad &middot; Moong &middot; Chana &middot; Rajma</h2>
+  <p class="body-copy">Black Urad &#8212; rich in calcium and iron, essential for bone health. Green Moong &#8212; light, easily digestible, and cooling. Organic Chana &#8212; high protein, excellent for curries. Red Rajma &#8212; slow-cooked classics packed with fiber and nutrients.</p>
+</div>
+<div class="pg-num">21</div>
+</div></div></div>
+
+<!-- ═══ PAGE 22 — PULSE CLOSING ═══ -->
+<div class="stf__item" style="--page-bg:url('Pulses harvesting.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="img-grid img-grid-1" style="flex:1">
+  <div class="img-slot img-slot-fill" style="background-image:url('Pulses harvesting.png');min-height:100%">
+    <div class="slot-cap">Harvest-to-Home &middot; Zero Pesticides</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('Pulses harvesting.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="product-quote">
+  <blockquote>Every pulse we offer is grown without pesticides, hand-cleaned, and packed with the protein your family deserves.</blockquote>
+  <div class="gold-rule"></div>
+  <cite>Kalyaani Organic &mdash; Pulse Collection</cite>
+</div>
+<div class="pg-num">22</div>
+</div></div></div>
+
+<!-- ═══ PAGE 23 — SATVIK RANGE ═══ -->
+<div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="pg-num">23</div>
+<div class="img-grid img-grid-2" style="flex:1">
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/GN3n6zl9pwUzmWjn4qtOF5Brrc1IgwlgAkDZlTcT.png')">
+    <div class="slot-cap">Organic Product Basket</div>
+  </div>
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/pEDKxJHS8mujXZSbf7O3Yx06rALmw3EPhupyOT1c.png')">
+    <div class="slot-cap">Satvik Living Essentials</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Satvik Range</p>
+  <h2 class="display-h">Pure Living Essentials</h2>
+  <p class="tagline">A holistic range for mindful, satvik living.</p>
+  <p class="body-copy">Beyond our core categories, Kalyaani Organic offers a growing range of specialty products &#8212; each crafted to support healthy, mindful living through pure, natural, and organically sourced ingredients.</p>
+</div>
+</div></div></div>
+
+<!-- ═══ PAGE 24 — SPECIAL PRODUCTS ═══ -->
+<div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="pg-num">24</div>
+<div class="img-grid img-grid-4" style="flex:1">
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/4NGwjM6CSio4q4NO9BKLipaEFv95T3xjPmKocSoi.png')">
+    <div class="slot-cap">Special Product</div>
+  </div>
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/54lLJAWUhz08zVTflruSfTyqNdgOrmdQHqB1feXw.png')">
+    <div class="slot-cap">Organic Selection</div>
+  </div>
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/1IGfhU2qoILIRNnRVa6lt7M0LokFQu1wvHmmbmgs.png')">
+    <div class="slot-cap">Wellness Product</div>
+  </div>
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/PjRdfciIEWMKMoDKChFKIO61fwoMf3agv1lzORME.png')">
+    <div class="slot-cap">Natural Essential</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Expanding Range</p>
+  <h2 class="section-h">Special Organic Products</h2>
+  <p class="body-copy">Our product portfolio continues to grow &#8212; driven by customer needs and our commitment to introducing more pure, organic alternatives for everyday Indian kitchens and wellness routines.</p>
+</div>
+<div class="pg-num">24</div>
+</div></div></div>
+
+<!-- ═══ PAGE 25 — FAMILY / BRAND QUOTE ═══ -->
+<div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="img-grid img-grid-1" style="flex:1">
+  <div class="img-slot img-slot-fill" style="background-image:url('Happy Indian family sitting together enjoying a meal.png');min-height:100%">
+    <div class="slot-cap">Pure Food &middot; Healthy Families &middot; Happier Lives</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="product-quote">
+  <blockquote>When families eat pure, natural food &#8212; they nourish not just their bodies, but their roots, their traditions, and their future.</blockquote>
+  <div class="gold-rule"></div>
+  <cite>Kalyaani Organic &mdash; Brand Philosophy</cite>
+</div>
+<div class="pg-num">25</div>
+</div></div></div>
+
+<!-- ═══ PAGE 26 — SOAP COLLECTION ═══ -->
+<div class="stf__item" style="--page-bg:url('Crystal-clear flowing river with greenery.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="pg-num">26</div>
+<div class="img-grid img-grid-3" style="flex:1">
+  <div class="img-slot img-slot-hero" style="background-image:url('Organic Neem Tulsi Soap.png')">
+    <div class="slot-cap">Neem Tulsi Soap</div>
+  </div>
+  <div class="img-slot img-slot-fill" style="background-image:url('Crystal-clear flowing river with greenery.png')">
+    <div class="slot-cap">River-Pure &middot; Nature-Clean</div>
+  </div>
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/x4dI2WKacsAsqFlFrskdiGsYnejcwc8ezmOoNzSH.jpeg')">
+    <div class="slot-cap">Natural Handmade Soap</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('Crystal-clear flowing river with greenery.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Natural Soap Collection</p>
+  <h2 class="display-h">Handmade Organic Soaps</h2>
+  <p class="tagline">Pure botanical ingredients, gentle on skin, kind to nature.</p>
+  <p class="body-copy">Our handmade soaps are crafted from natural botanical ingredients &#8212; Neem, Tulsi, Multani Mitti, Activated Charcoal, and Aloe Vera. Cold-processed to retain all natural properties for a luxurious, healing bath experience.</p>
+</div>
+</div></div></div>
+
+<!-- ═══ PAGE 27 — SOAP VARIETIES ═══ -->
+<div class="stf__item" style="--page-bg:url('Crystal-clear flowing river with greenery.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="pg-num">27</div>
+<div class="img-grid img-grid-3" style="flex:1">
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/tZzrpRoUgTqzbUK7qgjyyvY0v5XqV8lwKdcYgVdc.jpeg')">
+    <div class="slot-cap">Multani Mitti Soap</div>
+  </div>
+  <div class="img-slot img-slot-hero" style="background-image:url('downloaded_images/q1tqQHtgRsRsZtKYBSSl3UusWVAYQLum10ZoIRXO.jpeg')">
+    <div class="slot-cap">Charcoal Soap</div>
+  </div>
+  <div class="img-slot img-slot-hero" style="background-image:url('Organic Neem Tulsi Soap.png')">
+    <div class="slot-cap">Aloe Vera Soap</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('Crystal-clear flowing river with greenery.png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="text-panel">
+  <p class="kicker">Six Premium Varieties</p>
+  <h2 class="section-h">Neem &middot; Tulsi &middot; Multani &middot; Charcoal &middot; Aloe</h2>
+  <p class="body-copy">Each soap is cold-processed to preserve the healing properties of its botanical ingredients. Free from SLS, parabens, and synthetic fragrances &#8212; safe for all skin types, including sensitive skin.</p>
+</div>
+<div class="pg-num">27</div>
+</div></div></div>
+
+<!-- ═══ PAGE 28 — CONTACT + THANK YOU ═══ -->
+<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="pg-num">28</div>
+<div class="contact-block" style="flex:1">
+  <div class="contact-logo-row">
+    <img src="logo.jpeg" alt="Kalyaani Organic Logo">
+    <div>
+      <p class="kicker">Let&#39;s Connect</p>
+      <h2 class="section-h" style="margin-top:2px">Contact Us</h2>
+    </div>
+  </div>
+  <div class="gold-rule" style="margin:8px 0;width:100%;max-width:none"></div>
+  <div class="contact-dl">
+    <div class="contact-dt">Phone &amp; WhatsApp</div><div class="contact-dd">+91 98765 43210</div>
+    <div class="contact-dt">Email</div><div class="contact-dd">info@kalyaaniorganic.com</div>
+    <div class="contact-dt">Website</div><div class="contact-dd">www.kalyaaniorganic.com</div>
+    <div class="contact-dt">Instagram</div><div class="contact-dd">@allrounderkalyaani</div>
+    <div class="contact-dt">Address</div><div class="contact-dd">Maharashtra, India</div>
+  </div>
+</div>
+</div></div></div>
+
+<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')">
+<div class="page catalog-page">
+<div class="page-bg page-bg-split"></div><div class="page-inner-border"></div>
+<div class="page-content">
+<div class="product-quote" style="margin-top:auto">
+  <blockquote>Thank you for choosing Kalyaani Organic &#8212; where every product carries the promise of purity, the warmth of tradition, and the love of nature.</blockquote>
+  <div class="gold-rule"></div>
+  <cite>Astha ki Satvik Duniya</cite>
+</div>
+<div class="thank-bar">
+  <p>Thank You for Choosing Kalyaani Organic</p>
+  <span>Pure &middot; Natural &middot; Authentic &middot; Handcrafted with Love</span>
+</div>
+</div></div></div>
+
+</div><!-- /#pageSources -->
+
+<script>
+const bookEl       = document.getElementById('book');
+const topPageEl    = document.getElementById('topPage');
+const bottomPageEl = document.getElementById('bottomPage');
+const thumbStrip   = document.getElementById('thumbStrip');
+const indicator    = document.getElementById('pageIndicator');
+const progressFill = document.getElementById('progressFill');
+const bookPlatform = document.getElementById('bookPlatform');
+const flipShadow   = document.getElementById('flipShadow');
+
+const sourceItems = Array.from(document.querySelectorAll('#pageSources > .stf__item'));
+const totalPages  = sourceItems.length; // 56 (28 logical × 2 halves)
+
+let spreadStart = 0;
+let activeLeaf  = null;
+let isAnimating = false;
+let dragState   = null;
+let zoom        = 1;
+
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+function normalizeSpread(index) {
+  const maxStart = totalPages % 2 === 0 ? totalPages - 2 : totalPages - 1;
+  const safe = clamp(index, 0, maxStart);
+  return safe % 2 === 0 ? safe : safe - 1;
+}
+
+function pageHTML(index) {
+  const src = sourceItems[index];
+  if (!src) return '<div class="page-render"><div class="page catalog-page"><div class="page-inner-border"></div></div></div>';
+  return '<div class="page-render" style="' + (src.getAttribute('style') || '') + '">' + src.innerHTML + '</div>';
+}
+
+function renderSpread(start) {
+  spreadStart = normalizeSpread(start);
+  topPageEl.innerHTML    = pageHTML(spreadStart);
+  bottomPageEl.innerHTML = pageHTML(spreadStart + 1);
+  updateUI();
+}
+
+function updateUI() {
+  const logicalPage  = Math.floor(spreadStart / 2) + 1;
+  const totalLogical = Math.ceil(totalPages / 2);
+  indicator.textContent = logicalPage + ' / ' + totalLogical;
+  progressFill.style.width = ((logicalPage / totalLogical) * 100) + '%';
+  document.querySelectorAll('.thumb').forEach(function(t, i) {
+    t.classList.toggle('active', i === spreadStart || i === spreadStart + 1);
+  });
+}
+
+function hasNext() { return spreadStart + 2 < totalPages; }
+function hasPrev() { return spreadStart - 2 >= 0; }
+
+function removeLeaf() {
+  if (activeLeaf) { activeLeaf.remove(); activeLeaf = null; }
+  bookEl.classList.remove('is-flipping');
+  flipShadow.className = 'flip-shadow next';
+}
+
+function createLeaf(direction) {
+  removeLeaf();
+  var leaf = document.createElement('div');
+  leaf.className = 'flip-leaf staged-leaf ' + direction;
+  leaf.classList.remove('show-back');
+  leaf.style.setProperty('--curl', '0');
+  leaf.style.setProperty('--shine', '0');
+
+  var frontIndex, backIndex;
+  if (direction === 'next') {
+    frontIndex = spreadStart + 1;
+    backIndex  = spreadStart + 2;
+    bottomPageEl.innerHTML = pageHTML(spreadStart + 3);
+    flipShadow.className = 'flip-shadow next';
+  } else {
+    frontIndex = spreadStart;
+    backIndex  = spreadStart - 1;
+    topPageEl.innerHTML = pageHTML(spreadStart - 2);
+    flipShadow.className = 'flip-shadow prev';
+  }
+
+  leaf.innerHTML =
+    '<div class="page-face front">' + pageHTML(frontIndex) + '</div>' +
+    '<div class="page-face back">'  + pageHTML(backIndex)  + '</div>' +
+    '<div class="leaf-edge"></div>';
+
+  bookEl.appendChild(leaf);
+  bookEl.classList.add('is-flipping');
+  activeLeaf = leaf;
+  setLeafProgress(direction, 0);
+  return leaf;
+}
+
+function setLeafProgress(direction, progress) {
+  if (!activeLeaf) return;
+  var p    = clamp(progress, 0, 1);
+  var bend = Math.sin(p * Math.PI);
+  var front = activeLeaf.querySelector('.page-face.front');
+  var back  = activeLeaf.querySelector('.page-face.back');
+  if (!front || !back) return;
+
+  var firstHalf  = clamp(p * 2, 0, 1);
+  var secondHalf = clamp((p - 0.5) * 2, 0, 1);
+  var eio = function(t) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2; };
+  var f    = eio(firstHalf);
+  var b    = eio(secondHalf);
+  var roll = direction === 'next' ? -0.32 * bend : 0.32 * bend;
+  var lift = direction === 'next' ? -5 * bend    : 5 * bend;
+
+  activeLeaf.style.transform = 'none';
+  activeLeaf.style.webkitTransform = 'none';
+  activeLeaf.style.setProperty('--curl',        String(bend));
+  activeLeaf.style.setProperty('--shine',       String(Math.min(0.58, 0.10 + bend * 0.50)));
+  activeLeaf.style.setProperty('--leaf-shadow', String(Math.min(0.52, 0.08 + bend * 0.48)));
+
+  if (p < 0.5) {
+    front.style.setProperty('visibility', 'visible', 'important');
+    front.style.setProperty('opacity',    '1',       'important');
+    back.style.setProperty('visibility',  'hidden',  'important');
+    back.style.setProperty('opacity',     '0',       'important');
+    var angle = direction === 'next' ? -89.6 * f : 89.6 * f;
+    var xf = 'translateY(' + lift + 'px) rotateX(' + angle + 'deg) rotateZ(' + roll + 'deg)';
+    front.style.setProperty('transform',          xf, 'important');
+    front.style.setProperty('-webkit-transform',  xf, 'important');
+    var waiting = direction === 'next' ? 89.6 : -89.6;
+    var xb = 'rotateX(' + waiting + 'deg)';
+    back.style.setProperty('transform',          xb, 'important');
+    back.style.setProperty('-webkit-transform',  xb, 'important');
+  } else {
+    front.style.setProperty('visibility', 'hidden',  'important');
+    front.style.setProperty('opacity',    '0',       'important');
+    back.style.setProperty('visibility',  'visible', 'important');
+    back.style.setProperty('opacity',     '1',       'important');
+    var angle2 = direction === 'next' ? 89.6 * (1-b) : -89.6 * (1-b);
+    var xb2 = 'translateY(' + lift + 'px) rotateX(' + angle2 + 'deg) rotateZ(' + roll + 'deg)';
+    back.style.setProperty('transform',          xb2, 'important');
+    back.style.setProperty('-webkit-transform',  xb2, 'important');
+    var folded = direction === 'next' ? -89.6 : 89.6;
+    var xf2 = 'rotateX(' + folded + 'deg)';
+    front.style.setProperty('transform',          xf2, 'important');
+    front.style.setProperty('-webkit-transform',  xf2, 'important');
+  }
+}
+
+function finishFlip(direction, completed) {
+  if (completed) spreadStart = direction === 'next' ? spreadStart + 2 : spreadStart - 2;
+  renderSpread(spreadStart);
+  removeLeaf();
+  isAnimating = false;
+}
+
+function animateFlip(direction, complete, startProgress) {
+  startProgress = startProgress || 0;
+  if (!activeLeaf || isAnimating) return;
+  isAnimating = true;
+  var target   = complete ? 1 : 0;
+  var duration = Math.max(260, 980 * Math.abs(target - startProgress));
+  var start    = clamp(startProgress, 0, 1);
+  var startTime = performance.now();
+  activeLeaf.classList.add('animating');
+  activeLeaf.style.transition = 'none';
+
+  function eoc(t) { return 1 - Math.pow(1 - t, 3); }
+  function step(now) {
+    var raw     = clamp((now - startTime) / duration, 0, 1);
+    var current = start + (target - start) * eoc(raw);
+    setLeafProgress(direction, current);
+    if (raw < 1) requestAnimationFrame(step);
+    else finishFlip(direction, complete);
+  }
+  requestAnimationFrame(step);
+}
+
+function flip(direction) {
+  if (isAnimating) return;
+  if (direction === 'next' && !hasNext()) return;
+  if (direction === 'prev' && !hasPrev()) return;
+  createLeaf(direction);
+  animateFlip(direction, true, 0);
+}
+
+function flipToSpread(targetStart) {
+  var normalized = normalizeSpread(targetStart);
+  if (normalized === spreadStart || isAnimating) return;
+  var direction = normalized > spreadStart ? 'next' : 'prev';
+  createLeaf(direction);
+  if (!activeLeaf) return;
+  isAnimating = true;
+  var duration  = 880;
+  var startTime = performance.now();
+  var eoc = function(t) { return 1 - Math.pow(1-t,3); };
+  function step(now) {
+    var raw = clamp((now - startTime) / duration, 0, 1);
+    setLeafProgress(direction, eoc(raw));
+    if (raw < 1) requestAnimationFrame(step);
+    else { removeLeaf(); isAnimating = false; renderSpread(normalized); }
+  }
+  requestAnimationFrame(step);
+}
+
+function startDrag(direction, clientY) {
+  if (isAnimating) return;
+  if (direction === 'next' && !hasNext()) return;
+  if (direction === 'prev' && !hasPrev()) return;
+  createLeaf(direction);
+  dragState = { direction: direction, startY: clientY, progress: 0 };
+}
+
+function updateDrag(clientY) {
+  if (!dragState) return;
+  var rect     = bookEl.getBoundingClientRect();
+  var distance = rect.height * 0.42;
+  var delta    = dragState.direction === 'next' ? dragState.startY - clientY : clientY - dragState.startY;
+  dragState.progress = clamp(delta / distance, 0, 1);
+  setLeafProgress(dragState.direction, dragState.progress);
+}
+
+function endDrag() {
+  if (!dragState) return;
+  var direction = dragState.direction;
+  var progress  = dragState.progress;
+  var complete  = progress > 0.26;
+  dragState = null;
+  animateFlip(direction, complete, progress);
+}
+
+document.getElementById('prevBtn').addEventListener('click', function() { flip('prev'); });
+document.getElementById('nextBtn').addEventListener('click', function() { flip('next'); });
+document.getElementById('mPrev').addEventListener('click',   function() { flip('prev'); });
+document.getElementById('mNext').addEventListener('click',   function() { flip('next'); });
+document.getElementById('firstBtn').addEventListener('click', function() { flipToSpread(0); });
+document.getElementById('lastBtn').addEventListener('click',  function() { flipToSpread(totalPages - 2); });
+
+document.getElementById('topZone').addEventListener('click', function(e) { e.stopPropagation(); flip('prev'); });
+document.getElementById('bottomZone').addEventListener('click', function(e) { e.stopPropagation(); flip('next'); });
+
+bookEl.addEventListener('pointerdown', function(e) {
+  if (e.target.closest('.img-slot') || e.target.closest('.click-zone')) return;
+  var rect = bookEl.getBoundingClientRect();
+  var y    = e.clientY - rect.top;
+  var dir  = y > rect.height / 2 ? 'next' : 'prev';
+  startDrag(dir, e.clientY);
+  if (dragState) {
+    document.body.classList.add('dragging-page');
+    bookEl.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  }
+});
+bookEl.addEventListener('pointermove', function(e) {
+  if (!dragState) return;
+  updateDrag(e.clientY); e.preventDefault();
+});
+bookEl.addEventListener('pointerup', function(e) {
+  if (!dragState) return;
+  document.body.classList.remove('dragging-page');
+  endDrag();
+  try { bookEl.releasePointerCapture(e.pointerId); } catch(err) {}
+});
+bookEl.addEventListener('pointercancel', function() {
+  if (!dragState) return;
+  document.body.classList.remove('dragging-page');
+  var dir = dragState.direction, prog = dragState.progress;
+  dragState = null;
+  animateFlip(dir, false, prog);
+});
+bookEl.addEventListener('wheel', function(e) {
+  if (Math.abs(e.deltaY) < 12) return;
+  e.preventDefault();
+  if (e.deltaY > 0) flip('next'); else flip('prev');
+}, { passive: false });
+
+document.addEventListener('keydown', function(e) {
+  if (['ArrowDown','PageDown',' ','ArrowRight'].includes(e.key)) { e.preventDefault(); flip('next'); }
+  if (['ArrowUp','PageUp','ArrowLeft'].includes(e.key))          { e.preventDefault(); flip('prev'); }
+  if (e.key === 'Home') flipToSpread(0);
+  if (e.key === 'End')  flipToSpread(totalPages - 2);
+});
+
+// Build thumbnail strip
+sourceItems.forEach(function(page, i) {
+  var thumb = document.createElement('div');
+  thumb.className = 'thumb' + (i === 0 || i === 1 ? ' active' : '');
+  var mini = document.createElement('div');
+  mini.className = 'thumb-mini';
+  mini.textContent = Math.floor(i / 2) + 1;
+  thumb.appendChild(mini);
+  thumb.addEventListener('click', function() { flipToSpread(Math.floor(i / 2) * 2); });
+  thumbStrip.appendChild(thumb);
+});
+
+document.getElementById('zoomIn').addEventListener('click', function() {
+  zoom = Math.min(zoom + 0.1, 1.45);
+  bookPlatform.style.transform = 'scale(' + zoom + ')';
+});
+document.getElementById('zoomOut').addEventListener('click', function() {
+  zoom = Math.max(zoom - 0.1, 0.65);
+  bookPlatform.style.transform = 'scale(' + zoom + ')';
+});
+document.getElementById('fullscreenBtn').addEventListener('click', function() {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(function() {});
+  else document.exitFullscreen();
+});
+document.addEventListener('fullscreenchange', function() {
+  document.getElementById('fullscreenBtn').textContent = document.fullscreenElement ? '\u2715' : '\u26F6';
+});
+
+var resizeTimer;
+window.addEventListener('resize', function() {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function() {
+    if (zoom !== 1) { zoom = 1; bookPlatform.style.transform = ''; }
+  }, 200);
+});
+
+renderSpread(0);
+</script>
+</body>
+</html>
