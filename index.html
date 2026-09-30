@@ -7,7 +7,7 @@
 <meta name="description" content="Discover Kalyaani's pure, handcrafted organic foods — Gir Cow Ghee, stone-ground flours, premium spices, and natural soaps."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Outfit:wght@300;400;500;600&family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet"/>
 <style>
 :root {
   --cream:#FBF8F3; --earth:#3D2B1F; --olive:#6B7C4E;
@@ -16,6 +16,7 @@
   --glass:rgba(255,255,255,0.06); --border:rgba(201,150,58,0.22);
   --flip-time:940ms;
   --fd:'Playfair Display',serif; --fs:'Cormorant Garamond',serif; --fn:'Outfit',sans-serif;
+  --fm:'Noto Serif Devanagari','Cormorant Garamond',serif;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 img{display:block;max-width:100%}
@@ -160,12 +161,37 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
 .product-strip .strip-item{min-height:clamp(32px,7vw,48px);border-radius:5px;background-size:contain;background-position:center;background-repeat:no-repeat;background-color:rgba(255,255,255,.92);border:.5px solid rgba(201,150,58,.18)}
 
 /* TOC */
-.toc-list{display:flex;flex-direction:column;gap:5px;list-style:none}
-.toc-item{display:flex;align-items:baseline;gap:5px;padding-bottom:4px;border-bottom:.5px solid rgba(168,67,31,.12)}
+.toc-list{display:flex;flex-direction:column;gap:4px;list-style:none}
+.toc-item{display:flex;align-items:center;gap:6px;padding:3.5px 7px;border-radius:4px;border-bottom:.5px solid rgba(168,67,31,.12);cursor:pointer;transition:all .18s ease;user-select:none;touch-action:manipulation}
+.toc-item:hover{background:rgba(201,150,58,0.15);transform:translateX(3px);border-bottom-color:var(--gold)}
+.toc-item:active{background:rgba(168,67,31,0.22);transform:scale(0.98)}
 .toc-item:last-child{border-bottom:none}
-.toc-name{font-family:var(--fn);font-size:clamp(7.5px,1.5vh,9.5px);font-weight:400;color:#3D2B1F;flex:1}
-.toc-dots{flex:1;border-bottom:1px dotted rgba(168,67,31,.18);margin:0 4px 2px}
-.toc-num{font-family:var(--fs);font-size:clamp(10px,1.9vh,13px);color:var(--rust);font-weight:600;letter-spacing:1px;min-width:22px;text-align:right}
+.toc-name{font-family:var(--fn);font-size:clamp(7.5px,1.5vh,9.5px);font-weight:500;color:#3D2B1F;flex:1}
+.toc-dots{flex:1;border-bottom:1px dotted rgba(168,67,31,.25);margin:0 4px 2px}
+.toc-num{font-family:var(--fs);font-size:clamp(10px,1.9vh,13px);color:var(--rust);font-weight:700;letter-spacing:1px;min-width:22px;text-align:right}
+
+/* CATEGORY MODAL / DRAWER */
+.category-modal{position:fixed;inset:0;z-index:150;display:none;align-items:center;justify-content:center;opacity:0;transition:opacity .25s ease}
+.category-modal.open{display:flex;opacity:1}
+.category-backdrop{position:absolute;inset:0;background:rgba(14,11,9,0.80);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:fadeIn .25s ease}
+.category-drawer{position:relative;z-index:2;width:min(92vw,560px);max-height:min(88vh,720px);background:linear-gradient(165deg,rgba(30,22,17,0.96),rgba(18,13,10,0.98));border:1px solid rgba(201,150,58,0.35);border-radius:14px;box-shadow:0 24px 64px rgba(0,0,0,0.7),0 0 32px rgba(201,150,58,0.15);display:flex;flex-direction:column;overflow:hidden;animation:scaleUp .28s cubic-bezier(0.16,1,0.3,1)}
+.category-drawer-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(201,150,58,0.2);background:rgba(255,255,255,0.03)}
+.category-header-title{display:flex;align-items:center;gap:10px}
+.category-header-title h3{font-family:var(--fs);color:var(--gold-lt);font-size:17px;font-weight:600;letter-spacing:1px;margin:0}
+.category-header-title p{font-size:9.5px;color:var(--sand);opacity:.7;letter-spacing:1.5px;text-transform:uppercase;margin:0}
+.category-close-btn{background:rgba(255,255,255,0.08);border:1px solid rgba(201,150,58,0.3);color:var(--sand);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:13px}
+.category-close-btn:hover{background:rgba(168,67,31,0.4);border-color:var(--rust);color:#fff;transform:scale(1.08)}
+.category-grid{padding:12px 16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;overflow-y:auto;max-height:calc(88vh - 75px);scrollbar-width:thin;scrollbar-color:var(--gold) rgba(201,150,58,.1)}
+.category-card{background:rgba(255,255,255,0.04);border:1px solid rgba(201,150,58,0.18);border-radius:8px;padding:9px 11px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all .2s ease;position:relative;text-align:left;color:inherit;text-decoration:none}
+.category-card:hover{background:rgba(201,150,58,0.14);border-color:var(--gold);transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,0.35)}
+.category-card.active{background:linear-gradient(135deg,rgba(168,67,31,0.32),rgba(201,150,58,0.22));border-color:var(--gold-lt);box-shadow:0 0 16px rgba(201,150,58,0.3)}
+.category-card-icon{font-size:18px;width:32px;height:32px;border-radius:6px;background:rgba(201,150,58,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.category-card-info{flex:1;min-width:0}
+.category-card-title{font-family:var(--fs);font-size:12.5px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.category-card-sub{font-size:9px;color:rgba(212,197,169,0.7);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.category-card-badge{font-family:var(--fs);font-size:10.5px;font-weight:700;color:var(--gold-lt);padding:2px 6px;border-radius:4px;background:rgba(0,0,0,0.35);border:1px solid rgba(201,150,58,0.25);flex-shrink:0}
+@keyframes scaleUp{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
 /* USP GRID */
 .usp-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}
@@ -293,6 +319,9 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
 <button aria-label="Previous page" class="swipe-arrow top" id="mPrev">↑</button>
 <button aria-label="Next page" class="swipe-arrow bottom" id="mNext">↓</button>
 <nav class="toolbar" aria-label="Catalog tools">
+  <button class="tool-btn" data-tip="Categories / Index" id="categoryNavBtn" aria-label="Open category navigation" style="font-size:13px">📑</button>
+  <button class="tool-btn" data-tip="Table of Contents" id="tocQuickBtn" aria-label="Go to Table of Contents" style="font-size:12px">📖</button>
+  <div class="toolbar-divider" aria-hidden="true"></div>
   <button class="tool-btn" data-tip="Zoom In" id="zoomIn" aria-label="Zoom in">+</button>
   <button class="tool-btn" data-tip="Zoom Out" id="zoomOut" aria-label="Zoom out">−</button>
   <div class="toolbar-divider" aria-hidden="true"></div>
@@ -301,6 +330,137 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   <button class="tool-btn" data-tip="First Spread" id="firstBtn" aria-label="First page" style="font-size:10px">⏮</button>
   <button class="tool-btn" data-tip="Last Spread" id="lastBtn" aria-label="Last page" style="font-size:10px">⏭</button>
 </nav>
+
+<!-- CATEGORY NAVIGATION DRAWER / MODAL -->
+<div class="category-modal" id="categoryModal" aria-hidden="true" role="dialog" aria-label="Category Navigation">
+  <div class="category-backdrop" id="categoryBackdrop"></div>
+  <div class="category-drawer">
+    <div class="category-drawer-header">
+      <div class="category-header-title">
+        <span class="category-card-icon" style="font-size:16px">🌿</span>
+        <div>
+          <h3>Category Navigation</h3>
+          <p>Quick Jump to Any Section</p>
+        </div>
+      </div>
+      <button class="category-close-btn" id="categoryCloseBtn" aria-label="Close category navigation">✕</button>
+    </div>
+    <div class="category-grid" id="categoryGrid">
+      <div class="category-card" data-spread="0" onclick="flipToSpread(0); closeCategoryModal();">
+        <div class="category-card-icon">👑</div>
+        <div class="category-card-info">
+          <div class="category-card-title">Cover Page</div>
+          <div class="category-card-sub">Kalyaani Organic Productions</div>
+        </div>
+        <span class="category-card-badge">01</span>
+      </div>
+      <div class="category-card" data-spread="2" onclick="flipToSpread(2); closeCategoryModal();">
+        <div class="category-card-icon">📜</div>
+        <div class="category-card-info">
+          <div class="category-card-title">Philosophy &amp; Vision</div>
+          <div class="category-card-sub">Core Values &amp; 7 Guiding Pillars</div>
+        </div>
+        <span class="category-card-badge">02</span>
+      </div>
+      <div class="category-card" data-spread="4" onclick="flipToSpread(4); closeCategoryModal();">
+        <div class="category-card-icon">📖</div>
+        <div class="category-card-info">
+          <div class="category-card-title">Table of Contents</div>
+          <div class="category-card-sub">अनुक्रमणिका · Catalog Index</div>
+        </div>
+        <span class="category-card-badge">03</span>
+      </div>
+      <div class="category-card" data-spread="6" onclick="flipToSpread(6); closeCategoryModal();">
+        <div class="category-card-icon">🧈</div>
+        <div class="category-card-info">
+          <div class="category-card-title">Gir Cow A2 &amp; Buffalo Ghee</div>
+          <div class="category-card-sub">Hand-churned Vedic Bilona</div>
+        </div>
+        <span class="category-card-badge">04</span>
+      </div>
+      <div class="category-card" data-spread="8" onclick="flipToSpread(8); closeCategoryModal();">
+        <div class="category-card-icon">🌶️</div>
+        <div class="category-card-info">
+          <div class="category-card-title">Masale &amp; Organic Turmeric</div>
+          <div class="category-card-sub">Goda, Kanda Lasoon &amp; Haldi</div>
+        </div>
+        <span class="category-card-badge">05</span>
+      </div>
+      <div class="category-card" data-spread="10" onclick="flipToSpread(10); closeCategoryModal();">
+        <div class="category-card-icon">🌾</div>
+        <div class="category-card-info">
+          <div class="category-card-title">Stone-Ground Flours</div>
+          <div class="category-card-sub">Thalipeeth, Ragi, Daliya &amp; Bajra</div>
+        </div>
+        <span class="category-card-badge">06</span>
+      </div>
+      <div class="category-card" data-spread="12" onclick="flipToSpread(12); closeCategoryModal();">
+        <div class="category-card-icon">🍚</div>
+        <div class="category-card-info">
+          <div class="category-card-title">Aromatic Rice Collection</div>
+          <div class="category-card-sub">Ambemohar &amp; Indrayani Tukda</div>
+        </div>
+        <span class="category-card-badge">07</span>
+      </div>
+      <div class="category-card" data-spread="14" onclick="flipToSpread(14); closeCategoryModal();">
+        <div class="category-card-icon">🫘</div>
+        <div class="category-card-info">
+          <div class="category-card-title">Farm-Fresh Pulses</div>
+          <div class="category-card-sub">Chana, Moong, Urad &amp; Rajma</div>
+        </div>
+        <span class="category-card-badge">08</span>
+      </div>
+      <div class="category-card" data-spread="16" onclick="flipToSpread(16); closeCategoryModal();">
+        <div class="category-card-icon">🛒</div>
+        <div class="category-card-info">
+          <div class="category-card-title">Everyday Organic Grocery</div>
+          <div class="category-card-sub">White Rajma &amp; Satvik Staples</div>
+        </div>
+        <span class="category-card-badge">09</span>
+      </div>
+      <div class="category-card" data-spread="18" onclick="flipToSpread(18); closeCategoryModal();">
+        <div class="category-card-icon">🧼</div>
+        <div class="category-card-info">
+          <div class="category-card-title">Aabha Botanical Soaps</div>
+          <div class="category-card-sub">Neem, Sandalwood &amp; Multani</div>
+        </div>
+        <span class="category-card-badge">10</span>
+      </div>
+      <div class="category-card" data-spread="20" onclick="flipToSpread(20); closeCategoryModal();">
+        <div class="category-card-icon">⭐</div>
+        <div class="category-card-info">
+          <div class="category-card-title">Why Choose Kalyaani</div>
+          <div class="category-card-sub">100% Organic &amp; Women-Empowered</div>
+        </div>
+        <span class="category-card-badge">11</span>
+      </div>
+      <div class="category-card" data-spread="22" onclick="flipToSpread(22); closeCategoryModal();">
+        <div class="category-card-icon">🏭</div>
+        <div class="category-card-info">
+          <div class="category-card-title">Manufacturing Process</div>
+          <div class="category-card-sub">Soil to Shelf Quality Control</div>
+        </div>
+        <span class="category-card-badge">12</span>
+      </div>
+      <div class="category-card" data-spread="24" onclick="flipToSpread(24); closeCategoryModal();">
+        <div class="category-card-icon">📞</div>
+        <div class="category-card-info">
+          <div class="category-card-title">Dealer &amp; Distributor Enquiry</div>
+          <div class="category-card-sub">Pune, Maharashtra · Contact Us</div>
+        </div>
+        <span class="category-card-badge">13</span>
+      </div>
+      <div class="category-card" data-spread="26" onclick="flipToSpread(26); closeCategoryModal();">
+        <div class="category-card-icon">🙏</div>
+        <div class="category-card-info">
+          <div class="category-card-title">With Gratitude</div>
+          <div class="category-card-sub">Thank You &amp; Closing Blessing</div>
+        </div>
+        <span class="category-card-badge">14</span>
+      </div>
+    </div>
+  </div>
+</div>
 <main class="scene" id="scene" role="main">
   <header class="header">
     <div class="header-line" aria-hidden="true"></div>
@@ -350,255 +510,350 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   <div class="page-number">01</div>
 </div></div></div>
 
-<!-- SPREAD 02 — BRAND INTRODUCTION -->
-<div class="stf__item" style="--page-bg:url('Buffalo.jpg')"><div class="page catalog-page page-3">
-<div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
-<div class="page-content" style="justify-content:flex-start;padding-top:clamp(14px,3vw,22px)">
-  <div class="panel">
-    <p class="kicker">Who We Are</p>
-    <h2 style="font-size:clamp(17px,3.5vh,25px)">Born From a Simple Promise</h2>
-    <div class="g-rule-l"></div>
-    <p class="tagline">Food that heals. Food that connects.</p>
-    <p class="body-copy" style="margin-top:4px">Kalyaani was founded by women who believed that the purest ingredients, prepared with ancient wisdom, carry the power to nourish both body and soul.</p>
+<!-- SPREAD 02 — PHILOSOPHY, TAGLINES, VISION & VALUES -->
+<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')"><div class="page catalog-page page-3">
+<div class="page-bg page-bg-split ov-light"></div><div class="page-inner-border"></div>
+<div class="page-content" style="justify-content:flex-start;padding:clamp(8px,1.8vw,14px);gap:clamp(3px,0.6vh,6px)">
+  
+  <!-- Header with Cultural Tone -->
+  <div style="text-align:center;margin-bottom:1px">
+    <p class="kicker" style="letter-spacing:2.5px;color:var(--rust);font-size:clamp(6.5px,1.2vh,8px);margin-bottom:2px">॥ गाय अधिष्ठान देशाचे ॥</p>
+    <h2 style="font-family:var(--fs);font-size:clamp(13px,2.4vh,18px);color:var(--earth);font-weight:600;line-height:1.1;letter-spacing:0.5px"><br></h2>
+    <div class="g-rule" style="margin:2px auto;width:36px;opacity:0.6"></div>
   </div>
-  <div class="page-number" style="margin-top:auto">02</div>
-</div></div></div>
 
-<div class="stf__item" style="--page-bg:url('Buffalo.jpg')"><div class="page catalog-page page-4">
-<div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
-<div class="page-content" style="padding-top:clamp(16px,3vw,22px)">
-  <div class="panel" style="margin-top:auto">
-    <p class="kicker">Our Promise</p>
-    <p class="tagline" style="margin-bottom:6px">"We source only from farms we trust. We prepare only what we'd feed our own children."</p>
-    <div class="g-rule-l"></div>
-    <div class="values-row" style="margin-top:5px">
-      <span class="value-chip">100% Natural</span><span class="value-chip">No Preservatives</span><span class="value-chip">Handcrafted</span><span class="value-chip">Women-Led</span>
+  <!-- Shloka / Abhang Card -->
+  <div class="panel" style="background:rgba(253,249,242,0.95);border:0.5px solid rgba(201,150,58,0.28);border-left:3px solid var(--gold);padding:clamp(4px,1vw,8px) clamp(6px,1.2vw,10px);border-radius:6px;display:flex;flex-direction:column;gap:2px;text-align:center">
+    <p style="font-family:var(--fm);font-size:clamp(8.5px,1.6vh,11.5px);font-weight:600;color:var(--rust);line-height:1.32;margin:0;letter-spacing:0.2px">
+      &ldquo;गाईच्या शरीरात सर्व | कल्पिले जे देवी-देव |<br/>
+      तयाचा हाचि असे भाव | गाय अधिष्ठान देशाचे ||&rdquo;
+    </p>
+    <p style="font-family:var(--fs);font-size:clamp(6.5px,1.15vh,7.8px);font-weight:700;color:var(--gold);margin:1px 0 0 0;letter-spacing:0.8px;text-transform:uppercase">
+      — राष्ट्रसंत तुकडोजी महाराज · Sant Tukdoji Maharaj
+    </p>
+    <p style="font-family:var(--fn);font-size:clamp(5.8px,1.05vh,7px);font-style:italic;line-height:1.22;color:#4a3222;margin:0">
+      &ldquo;All deities reside within the sacred cow, establishing her as the Nation's Foundation.&rdquo;
+    </p>
+  </div>
+
+  <!-- Taglines Showcase -->
+  <div class="panel" style="background:rgba(255,255,255,0.92);border:0.5px solid rgba(201,150,58,0.2);padding:clamp(4px,1vw,8px) clamp(6px,1.2vw,10px);border-radius:6px;display:flex;flex-direction:column;gap:2px">
+    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid rgba(201,150,58,0.2);padding-bottom:1px;margin-bottom:1px">
+      <span class="kicker" style="font-size:clamp(6px,1.1vh,7.2px);letter-spacing:1.5px;color:var(--earth)">Taglines &amp; Identity</span>
+      <span style="font-family:var(--fs);font-size:clamp(7px,1.2vh,8px);color:var(--gold);font-style:italic">Identity &amp; Soul</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;background:rgba(251,247,242,0.85);padding:2px 6px;border-radius:3px">
+        <span style="font-family:var(--fn);font-size:clamp(5.8px,1.05vh,6.8px);font-weight:700;color:var(--rust);text-transform:uppercase;letter-spacing:0.4px">Brand:</span>
+        <span style="font-family:var(--fs);font-size:clamp(8px,1.45vh,10px);font-weight:700;color:var(--earth);font-style:italic">&ldquo;Nation's Establishment&rdquo;</span>
+      </div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;background:rgba(251,247,242,0.85);padding:2px 6px;border-radius:3px">
+        <span style="font-family:var(--fn);font-size:clamp(5.8px,1.05vh,6.8px);font-weight:700;color:var(--rust);text-transform:uppercase;letter-spacing:0.4px">Masale &amp; Thalipith Bhajani Tagline :</span>
+        <span style="font-family:var(--fs);font-size:clamp(8px,1.45vh,10px);font-weight:700;color:var(--earth);font-style:italic">&ldquo;One Blend, Endless Possibilities..!&rdquo;</span>
+      </div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;background:rgba(251,247,242,0.85);padding:2px 6px;border-radius:3px">
+        <span style="font-family:var(--fn);font-size:clamp(5.8px,1.05vh,6.8px);font-weight:700;color:var(--rust);text-transform:uppercase;letter-spacing:0.4px">Kalyaani's Aabha collection Tagline :</span>
+        <span style="font-family:var(--fs);font-size:clamp(8px,1.45vh,10px);font-weight:700;color:var(--earth);font-style:italic">&ldquo;Rooted Radiance&rdquo;</span>
+      </div>
     </div>
   </div>
+
+  <div class="page-number" style="margin-top:auto">02</div>
+</div></div></div> 
+
+<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')"><div class="page catalog-page page-4">
+<div class="page-bg page-bg-split ov-light"></div><div class="page-inner-border"></div>
+<div class="page-content" style="justify-content:flex-start;padding:clamp(8px,1.8vw,14px);gap:clamp(3px,0.6vh,6px)">
+  <br>
+  <!-- Vision & Mission Twin Cards -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+    <div class="panel" style="background:rgba(253,249,242,0.95);border-top:2.5px solid var(--gold);padding:clamp(4px,1vw,6px) clamp(5px,1.2vw,8px);border-radius:5px;display:flex;flex-direction:column;gap:1px">
+      <div style="display:flex;align-items:center;gap:3px">
+        <span style="font-size:8px">✨</span>
+        <p class="kicker" style="color:var(--rust);margin:0;font-size:clamp(6px,1.1vh,7.2px);letter-spacing:1px">Vision</p>
+      </div>
+      <p class="body-copy" style="font-size:clamp(5.8px,1.05vh,7px);line-height:1.28;color:rgba(36,22,17,0.92);margin:0">
+        To establish Kalyaani as the world's most trusted Indian organic lifestyle brand, bringing nature's purity, traditional wisdom, and India's excellence into every home.
+      </p>
+    </div>
+    <div class="panel" style="background:rgba(253,249,242,0.95);border-top:2.5px solid var(--rust);padding:clamp(4px,1vw,6px) clamp(5px,1.2vw,8px);border-radius:5px;display:flex;flex-direction:column;gap:1px">
+      <div style="display:flex;align-items:center;gap:3px">
+        <span style="font-size:8px">🌿</span>
+        <p class="kicker" style="color:var(--earth);margin:0;font-size:clamp(6px,1.1vh,7.2px);letter-spacing:1px">Mission</p>
+      </div>
+      <p class="body-copy" style="font-size:clamp(5.8px,1.05vh,7px);line-height:1.28;color:rgba(36,22,17,0.92);margin:0">
+        We craft authentic organic essentials using natural ingredients, traditional heritage, and uncompromising quality to make healthy living simple and respected.
+      </p>
+    </div>
+  </div>
+
+  <!-- 7 Guiding Pillars Grid -->
+  <div class="panel" style="background:rgba(255,255,255,0.95);border:0.5px solid rgba(201,150,58,0.25);border-radius:6px;padding:clamp(4px,1vw,6px) clamp(5px,1.2vw,8px);display:flex;flex-direction:column;gap:2px">
+    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid rgba(201,150,58,0.2);padding-bottom:1px">
+      <p class="kicker" style="font-size:clamp(6px,1.1vh,7.2px);letter-spacing:1.5px;color:var(--earth);margin:0">Our 7 Guiding Pillars</p>
+      <span style="font-family:var(--fs);font-size:clamp(6.8px,1.2vh,8px);color:var(--gold);font-style:italic">Core Values</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 4px">
+      <div style="display:flex;align-items:center;gap:3px;font-size:clamp(5.8px,1.05vh,6.8px);color:var(--earth);font-family:var(--fn);background:rgba(251,247,242,0.8);padding:1.5px 4px;border-radius:3px"><span>🇮🇳</span><span style="font-weight:500">Proudly Indian</span></div>
+      <div style="display:flex;align-items:center;gap:3px;font-size:clamp(5.8px,1.05vh,6.8px);color:var(--earth);font-family:var(--fn);background:rgba(251,247,242,0.8);padding:1.5px 4px;border-radius:3px"><span>🌿</span><span style="font-weight:500">Purity Before Profit</span></div>
+      <div style="display:flex;align-items:center;gap:3px;font-size:clamp(5.8px,1.05vh,6.8px);color:var(--earth);font-family:var(--fn);background:rgba(251,247,242,0.8);padding:1.5px 4px;border-radius:3px"><span>🤝</span><span style="font-weight:500">Trust Above Everything</span></div>
+      <div style="display:flex;align-items:center;gap:3px;font-size:clamp(5.8px,1.05vh,6.8px);color:var(--earth);font-family:var(--fn);background:rgba(251,247,242,0.8);padding:1.5px 4px;border-radius:3px"><span>🌱</span><span style="font-weight:500">Sustainability in Step</span></div>
+      <div style="display:flex;align-items:center;gap:3px;font-size:clamp(5.8px,1.05vh,6.8px);color:var(--earth);font-family:var(--fn);background:rgba(251,247,242,0.8);padding:1.5px 4px;border-radius:3px"><span>⭐</span><span style="font-weight:500">Excellence Always</span></div>
+      <div style="display:flex;align-items:center;gap:3px;font-size:clamp(5.8px,1.05vh,6.8px);color:var(--earth);font-family:var(--fn);background:rgba(251,247,242,0.8);padding:1.5px 4px;border-radius:3px"><span>👨‍👩‍👧</span><span style="font-weight:500">Caring Every Family</span></div>
+      <div style="display:flex;align-items:center;gap:3px;font-size:clamp(5.8px,1.05vh,6.8px);color:var(--earth);font-family:var(--fn);background:rgba(251,247,242,0.8);padding:1.5px 4px;border-radius:3px;grid-column:span 2;justify-content:center"><span>🌅</span><span style="font-weight:500">Building a Better Tomorrow</span></div>
+    </div>
+  </div>
+
+  <!-- Warm Human Touch Blessing -->
+  <p style="font-family:var(--fs);font-size:clamp(6.5px,1.2vh,7.8px);font-style:italic;color:#5a3e2b;text-align:center;margin:1px 0 0 0">
+    &ldquo;From our hands to your home — crafted with motherly care &amp; ancient wisdom.&rdquo;
+  </p>
+
 </div></div></div>
 
-<!-- SPREAD 03 — FOUNDER STORY -->
-<div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')"><div class="page catalog-page page-5">
-<div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
-<div class="page-content" style="justify-content:flex-start;padding-top:clamp(14px,3vw,22px)">
-  <div class="panel">
-    <p class="kicker">Founder's Journey</p>
-    <h2 style="font-size:clamp(16px,3.4vh,24px)">From Our Hands to Every Indian Home</h2>
-    <div class="g-rule-l"></div>
-    <p class="body-copy" style="margin-top:4px">Our journey began in a small kitchen, where women of the community gathered to share recipes and earn dignity through meaningful work. Today, that kitchen feeds thousands.</p>
+<!-- SPREAD 03 — NAVIGATION · TABLE OF CONTENTS -->
+<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')"><div class="page catalog-page page-5">
+<div class="page-bg page-bg-split ov-light"></div><div class="page-inner-border"></div>
+<div class="page-content" style="justify-content:flex-start;padding:clamp(8px,1.8vw,14px);gap:clamp(3px,0.6vh,6px)">
+  
+  <!-- Header -->
+  <div style="text-align:center;margin-bottom:1px">
+    <p class="kicker" style="letter-spacing:2.5px;color:var(--rust);font-size:clamp(6.5px,1.2vh,8px);margin-bottom:2px">॥ अनुक्रमणिका ॥ · Table of Contents</p>
+    <h2 style="font-family:var(--fs);font-size:clamp(13px,2.4vh,18px);color:var(--earth);font-weight:600;line-height:1.1;letter-spacing:0.5px">Catalog Navigation</h2>
+    <div class="g-rule" style="margin:2px auto;width:36px;opacity:0.6"></div>
   </div>
+
+  <!-- TOC Part 1 -->
+  <div class="panel" style="background:rgba(255,255,255,0.95);border:0.5px solid rgba(201,150,58,0.25);border-radius:6px;padding:clamp(4px,1vw,8px) clamp(6px,1.2vw,10px);display:flex;flex-direction:column;gap:3px">
+    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid rgba(201,150,58,0.2);padding-bottom:2px">
+      <span class="kicker" style="font-size:clamp(6px,1.1vh,7.2px);letter-spacing:1.5px;color:var(--earth)">Heritage &amp; Staples</span>
+      <span style="font-family:var(--fs);font-size:clamp(7px,1.2vh,8px);color:var(--gold);font-style:italic">Section I</span>
+    </div>
+    <ul class="toc-list" style="margin-top:2px;gap:3px">
+      <li class="toc-item" onclick="flipToSpread(2)" style="cursor:pointer"><span class="toc-name" style="font-size:clamp(6.5px,1.2vh,8px)">01. Philosophy, Vision &amp; Core Values</span><span class="toc-dots"></span><span class="toc-num" style="font-size:clamp(8px,1.4vh,10px)">02</span></li>
+      <li class="toc-item" onclick="flipToSpread(6)" style="cursor:pointer"><span class="toc-name" style="font-size:clamp(6.5px,1.2vh,8px)">02. Pure Gir Cow A2 &amp; Buffalo Ghee</span><span class="toc-dots"></span><span class="toc-num" style="font-size:clamp(8px,1.4vh,10px)">04</span></li>
+      <li class="toc-item" onclick="flipToSpread(8)" style="cursor:pointer"><span class="toc-name" style="font-size:clamp(6.5px,1.2vh,8px)">03. Authentic Masale &amp; Organic Turmeric</span><span class="toc-dots"></span><span class="toc-num" style="font-size:clamp(8px,1.4vh,10px)">05</span></li>
+      <li class="toc-item" onclick="flipToSpread(10)" style="cursor:pointer"><span class="toc-name" style="font-size:clamp(6.5px,1.2vh,8px)">04. Traditional Stone-Ground Flours</span><span class="toc-dots"></span><span class="toc-num" style="font-size:clamp(8px,1.4vh,10px)">06</span></li>
+      <li class="toc-item" onclick="flipToSpread(12)" style="cursor:pointer"><span class="toc-name" style="font-size:clamp(6.5px,1.2vh,8px)">05. Aromatic Rice &amp; Sticky Tukda</span><span class="toc-dots"></span><span class="toc-num" style="font-size:clamp(8px,1.4vh,10px)">07</span></li>
+    </ul>
+  </div>
+
   <div class="page-number" style="margin-top:auto">03</div>
 </div></div></div>
 
-<div class="stf__item" style="--page-bg:url('Happy Indian family sitting together enjoying a meal.png')"><div class="page catalog-page page-6">
+<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')"><div class="page catalog-page page-6">
+<div class="page-bg page-bg-split ov-light"></div><div class="page-inner-border"></div>
+<div class="page-content" style="justify-content:flex-start;padding:clamp(8px,1.8vw,14px);gap:clamp(3px,0.6vh,6px)">
+  
+  <!-- TOC Part 2 -->
+  <div class="panel" style="background:rgba(255,255,255,0.95);border:0.5px solid rgba(201,150,58,0.25);border-radius:6px;padding:clamp(4px,1vw,8px) clamp(6px,1.2vw,10px);display:flex;flex-direction:column;gap:3px">
+    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid rgba(201,150,58,0.2);padding-bottom:2px">
+      <span class="kicker" style="font-size:clamp(6px,1.1vh,7.2px);letter-spacing:1.5px;color:var(--earth)">Harvests &amp; Wellness</span>
+      <span style="font-family:var(--fs);font-size:clamp(7px,1.2vh,8px);color:var(--gold);font-style:italic">Section II</span>
+    </div>
+    <ul class="toc-list" style="margin-top:2px;gap:3px">
+      <li class="toc-item" onclick="flipToSpread(14)" style="cursor:pointer"><span class="toc-name" style="font-size:clamp(6.5px,1.2vh,8px)">06. Farm-Fresh Pulses &amp; Ancient Grains</span><span class="toc-dots"></span><span class="toc-num" style="font-size:clamp(8px,1.4vh,10px)">08</span></li>
+      <li class="toc-item" onclick="flipToSpread(16)" style="cursor:pointer"><span class="toc-name" style="font-size:clamp(6.5px,1.2vh,8px)">07. Everyday Organic Grocery</span><span class="toc-dots"></span><span class="toc-num" style="font-size:clamp(8px,1.4vh,10px)">09</span></li>
+      <li class="toc-item" onclick="flipToSpread(18)" style="cursor:pointer"><span class="toc-name" style="font-size:clamp(6.5px,1.2vh,8px)">08. Aabha Botanical Soaps &amp; Skincare</span><span class="toc-dots"></span><span class="toc-num" style="font-size:clamp(8px,1.4vh,10px)">10</span></li>
+      <li class="toc-item" onclick="flipToSpread(20)" style="cursor:pointer"><span class="toc-name" style="font-size:clamp(6.5px,1.2vh,8px)">09. Why Choose Kalyaani &amp; Process</span><span class="toc-dots"></span><span class="toc-num" style="font-size:clamp(8px,1.4vh,10px)">11</span></li>
+      <li class="toc-item" onclick="flipToSpread(24)" style="cursor:pointer"><span class="toc-name" style="font-size:clamp(6.5px,1.2vh,8px)">10. Community, Partnerships &amp; Contact</span><span class="toc-dots"></span><span class="toc-num" style="font-size:clamp(8px,1.4vh,10px)">13</span></li>
+    </ul>
+  </div>
+
+  <!-- Quality Assurance Promise -->
+  <div class="panel" style="background:rgba(253,249,242,0.95);border:0.5px solid rgba(201,150,58,0.22);border-radius:6px;padding:clamp(4px,1vw,6px) clamp(5px,1.2vw,8px);display:flex;flex-direction:column;gap:2px">
+    <p class="kicker" style="font-size:clamp(5.8px,1.05vh,6.8px);letter-spacing:1.5px;color:var(--rust);text-align:center">Our Satvik Promise</p>
+    <p class="body-copy" style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25;text-align:center;color:#4a3222">
+      Every product is 100% natural, free from chemicals and preservatives, handcrafted with traditional wisdom for your family's health.
+    </p>
+  </div>
+
+  <div class="page-number" style="margin-top:auto">03</div>
+</div></div></div>
+
+<!-- SPREAD 04 — GIR COW A2 GHEE & BUFFALO GHEE -->
+<div class="stf__item" style="--page-bg:url('gir cow bg.png')"><div class="page catalog-page page-7">
 <div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
-<div class="page-content">
-  <div class="panel" style="margin-top:auto">
-    <p class="kicker">Our Story</p>
-    <p class="tagline" style="margin-bottom:6px">"Purity of food is the foundation of a pure mind."</p>
-    <p class="founder-role" style="margin-bottom:4px">— Founder, Kalyaani Organic Productions</p>
-    <p class="body-copy">Every product carries the fingerprints of the women who crafted it — honest, unhurried, and full of intention.</p>
-    <div class="g-rule-l" style="margin-top:6px"></div>
-    <div class="values-row" style="margin-top:5px">
-      <span class="value-chip">Est. 2018</span><span class="value-chip">Maharashtra</span><span class="value-chip">Satvik Heritage</span>
+<div class="page-content" style="justify-content:flex-start;padding:clamp(8px,1.8vw,14px);gap:clamp(3px,0.6vh,6px)">
+  
+  <!-- Header -->
+  <div style="text-align:center">
+    <p class="kicker" style="color:var(--gold-lt);letter-spacing:2.5px;font-size:clamp(6.5px,1.2vh,8px);text-shadow:0 1px 4px rgba(0,0,0,0.6);margin-bottom:2px">॥ शुद्ध सात्त्विक तूप ॥ · Pure Vedic Ghee</p>
+    <h2 style="font-family:var(--fs);font-size:clamp(13px,2.4vh,18px);color:#fff;font-weight:600;line-height:1.1;letter-spacing:0.5px;text-shadow:0 2px 12px rgba(0,0,0,0.7)">Gir Cow A2 Ghee &amp; Desi Buffalo Ghee</h2>
+    <div class="g-rule" style="margin:2px auto;width:40px;background:linear-gradient(90deg,transparent,var(--gold-lt),transparent)"></div>
+  </div>
+
+  <!-- Product Image Showcase (Dual Grid) -->
+  <div class="image-grid" style="grid-template-columns:1fr 1fr;gap:6px;flex:1;align-items:stretch">
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/gir gay ghee.png');min-height:clamp(55px,11vw,82px);border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.92)">
+      <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Gir Cow A2 Ghee (Bilona)</div>
+    </div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/DESI BUFFALO GHEE.png');min-height:clamp(55px,11vw,82px);border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.92)">
+      <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Desi Buffalo Ghee</div>
     </div>
   </div>
+
+  <div class="page-number" style="color:rgba(232,201,122,0.6);margin-top:auto">04</div>
 </div></div></div>
 
-<!-- SPREAD 04 — MISSION · VISION · VALUES -->
-<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')"><div class="page catalog-page page-7">
-<div class="page-bg page-bg-split ov-light"></div><div class="page-inner-border"></div>
-<div class="page-content" style="justify-content:space-between">
-  <div>
-    <p class="kicker">Our Purpose</p>
-    <h2>Mission &amp; Vision</h2>
-    <div class="g-rule-l"></div>
-  </div>
-  <div class="panel" style="flex:1;margin:8px 0;display:flex;flex-direction:column;gap:10px;justify-content:center">
-    <div style="border-left:3px solid var(--gold);padding-left:10px">
-      <p class="kicker" style="margin-bottom:4px">🌿 Mission</p>
-      <p class="body-copy" style="font-size:clamp(8.5px,1.7vh,11px);line-height:1.55">Deliver pure, organic food crafted with care — from farm and kitchen to every Indian home.</p>
+<div class="stf__item" style="--page-bg:url('gir cow bg.png')"><div class="page catalog-page page-8">
+<div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
+<div class="page-content" style="justify-content:flex-start;padding:clamp(8px,1.8vw,14px);gap:clamp(3px,0.6vh,6px)">
+  
+  <!-- Twin Product Details Card -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+    
+    <!-- Gir Cow Ghee Info -->
+    <div class="panel" style="background:rgba(253,249,242,0.95);border-top:2.5px solid var(--gold);padding:clamp(4px,1vw,6px) clamp(5px,1.2vw,8px);border-radius:5px;display:flex;flex-direction:column;gap:2px">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <p class="kicker" style="color:var(--rust);margin:0;font-size:clamp(6px,1.1vh,7.2px);letter-spacing:1px">Gir Cow A2 Ghee</p>
+        <span style="font-family:var(--fs);font-size:clamp(6.5px,1.1vh,7.5px);color:var(--gold);font-weight:700">A2 Vedic</span>
+      </div>
+      <p style="font-family:var(--fs);font-size:clamp(6.8px,1.2vh,8px);font-style:italic;color:#4a3222;line-height:1.2;margin:0">
+        &ldquo;Hand-churned via ancient Bilona method from curd.&rdquo;
+      </p>
+      <ul class="feat-list" style="margin-top:1px">
+        <li style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25">A2 milk from free-grazing Gir cows</li>
+        <li style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25">Rich in CLA, Omega-3 &amp; vitamins</li>
+        <li style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25">Golden granular texture &amp; aroma</li>
+        <li style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25">Available:500ml</li>
+      </ul>
     </div>
-    <div class="g-rule-l"></div>
-    <div style="border-left:3px solid var(--rust);padding-left:10px">
-      <p class="kicker" style="color:var(--earth);margin-bottom:4px">✨ Vision</p>
-      <p class="body-copy" style="font-size:clamp(8.5px,1.7vh,11px);line-height:1.55">Become India's most trusted satvik food brand, empowering women and enriching communities.</p>
+
+    <!-- Buffalo Ghee Info -->
+    <div class="panel" style="background:rgba(253,249,242,0.95);border-top:2.5px solid var(--rust);padding:clamp(4px,1vw,6px) clamp(5px,1.2vw,8px);border-radius:5px;display:flex;flex-direction:column;gap:2px">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <p class="kicker" style="color:var(--earth);margin:0;font-size:clamp(6px,1.1vh,7.2px);letter-spacing:1px">Desi Buffalo Ghee</p>
+        <span style="font-family:var(--fs);font-size:clamp(6.5px,1.1vh,7.5px);color:var(--rust);font-weight:700">Traditional</span>
+      </div>
+      <p style="font-family:var(--fs);font-size:clamp(6.8px,1.2vh,8px);font-style:italic;color:#4a3222;line-height:1.2;margin:0">
+        &ldquo;Rich, wholesome aroma for authentic Indian cooking.&rdquo;
+      </p>
+      <ul class="feat-list" style="margin-top:1px">
+        <li style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25">100% pure desi buffalo milk</li>
+        <li style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25">High smoke point, ideal for sweets</li>
+        <li style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25">Slow-simmered rich granular grain</li>
+        <li style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25">Available: 500ml</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Purity & Quality Promise Card -->
+  <div class="panel" style="background:rgba(255,255,255,0.95);border:0.5px solid rgba(201,150,58,0.25);border-radius:6px;padding:clamp(4px,1vw,6px) clamp(5px,1.2vw,8px);display:flex;flex-direction:column;gap:2px">
+    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid rgba(201,150,58,0.2);padding-bottom:1px">
+      <p class="kicker" style="font-size:clamp(6px,1.1vh,7.2px);letter-spacing:1.5px;color:var(--earth);margin:0">Quality &amp; Purity Assurance</p>
+      <span style="font-family:var(--fs);font-size:clamp(6.8px,1.2vh,8px);color:var(--gold);font-style:italic">100% Natural</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:2px 5px;justify-content:center;margin-top:1px">
+      <span class="value-chip" style="font-size:clamp(5.8px,1.05vh,6.8px);padding:1.5px 5px">🌿 No Preservatives</span>
+      <span class="value-chip" style="font-size:clamp(5.8px,1.05vh,6.8px);padding:1.5px 5px">🏺 Wooden Bilona Churned</span>
+      <span class="value-chip" style="font-size:clamp(5.8px,1.05vh,6.8px);padding:1.5px 5px">🔬 Lab-Tested Pure</span>
+      <span class="value-chip" style="font-size:clamp(5.8px,1.05vh,6.8px);padding:1.5px 5px">✨ Glass Bottle Pack</span>
     </div>
   </div>
-  <div class="page-number">04</div>
-</div></div></div>
 
-<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')"><div class="page catalog-page page-8">
-<div class="page-bg page-bg-split ov-light"></div><div class="page-inner-border"></div>
-<div class="page-content" style="justify-content:center;gap:6px">
-  <p class="kicker" style="text-align:center;letter-spacing:4px">Core Values</p>
-  <div class="g-rule" style="margin:2px auto"></div>
-  <div class="usp-grid" style="margin-top:4px">
-    <div class="usp-item"><span class="usp-icon">🌾</span><div><p class="usp-label">Purity</p><p class="usp-desc">No additives, no shortcuts — ever.</p></div></div>
-    <div class="usp-item"><span class="usp-icon">🤝</span><div><p class="usp-label">Community</p><p class="usp-desc">Every purchase empowers a woman.</p></div></div>
-    <div class="usp-item"><span class="usp-icon">🌱</span><div><p class="usp-label">Sustainability</p><p class="usp-desc">Earth-first farming, always.</p></div></div>
-    <div class="usp-item"><span class="usp-icon">🏺</span><div><p class="usp-label">Tradition</p><p class="usp-desc">Ancient methods, modern care.</p></div></div>
-  </div>
-  <div class="g-rule" style="margin:4px auto"></div>
-  <p class="body-copy" style="text-align:center;font-style:italic;color:#4e3221">&ldquo;Food made with intention nourishes the soul.&rdquo;</p>
-</div></div></div>
+  <!-- Warm Human Touch Quote -->
+  <p style="font-family:var(--fs);font-size:clamp(6.5px,1.2vh,7.8px);font-style:italic;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.8);text-align:center;margin:1px 0 0 0">
+    &ldquo;Handcrafted with Vedic purity to nourish your family's strength and wellness.&rdquo;
+  </p>
 
-<!-- SPREAD 05 — TABLE OF CONTENTS -->
-<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')"><div class="page catalog-page page-9">
-<div class="page-bg page-bg-split ov-text"></div><div class="page-inner-border"></div>
-<div class="page-content" style="justify-content:flex-start;padding-top:clamp(14px,3vw,22px)">
-  <p class="kicker">Navigation</p><h2>Contents</h2><div class="g-rule-l"></div>
-  <div class="panel" style="margin-top:4px">
-    <ul class="toc-list">
-      <li class="toc-item"><span class="toc-name">Brand Introduction</span><span class="toc-dots"></span><span class="toc-num">02</span></li>
-      <li class="toc-item"><span class="toc-name">Founder's Story</span><span class="toc-dots"></span><span class="toc-num">03</span></li>
-      <li class="toc-item"><span class="toc-name">Gir Cow Ghee</span><span class="toc-dots"></span><span class="toc-num">06</span></li>
-      <li class="toc-item"><span class="toc-name">Buffalo Ghee</span><span class="toc-dots"></span><span class="toc-num">07</span></li>
-      <li class="toc-item"><span class="toc-name">Masala Collection</span><span class="toc-dots"></span><span class="toc-num">08</span></li>
-    </ul>
-  </div>
-  <div class="page-number" style="margin-top:auto">05</div>
 </div></div></div>
-
-<div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')"><div class="page catalog-page page-10">
-<div class="page-bg page-bg-split ov-text"></div><div class="page-inner-border"></div>
-<div class="page-content" style="justify-content:flex-start;padding-top:clamp(14px,3vw,22px)">
-  <div class="panel">
-    <ul class="toc-list">
-      <li class="toc-item"><span class="toc-name">Organic Turmeric</span><span class="toc-dots"></span><span class="toc-num">09</span></li>
-      <li class="toc-item"><span class="toc-name">Flour Collection</span><span class="toc-dots"></span><span class="toc-num">10</span></li>
-      <li class="toc-item"><span class="toc-name">Rice Collection</span><span class="toc-dots"></span><span class="toc-num">11</span></li>
-      <li class="toc-item"><span class="toc-name">Pulses Collection</span><span class="toc-dots"></span><span class="toc-num">12</span></li>
-      <li class="toc-item"><span class="toc-name">Soap Collection</span><span class="toc-dots"></span><span class="toc-num">14</span></li>
-      <li class="toc-item"><span class="toc-name">Why Kalyaani · Contact</span><span class="toc-dots"></span><span class="toc-num">15</span></li>
-    </ul>
-  </div>
-</div></div></div>
-
-<!-- SPREAD 06 — GIR COW GHEE -->
-<div class="stf__item" style="--page-bg:url('gir cow bg.png')"><div class="page catalog-page page-11">
+<!-- SPREAD 05 — MASALA & TURMERIC COLLECTION -->
+<div class="stf__item" style="--page-bg:url('kitchen.jpg')"><div class="page catalog-page page-9">
 <div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
-<div class="page-content">
-  <p class="kicker" style="color:var(--gold-lt)">Premium Dairy</p>
-  <h2 style="color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.45)">Pure Gir Cow A2 Ghee</h2>
-  <div class="g-rule-l" style="border-color:var(--gold-lt)"></div>
-  <div class="image-grid" style="flex:1;margin-top:4px">
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/gir cow ghee.png');min-height:clamp(55px,11vw,85px)"><div class="slot-label">Gir Cow A2 Ghee</div></div>
-    <div class="image-slot is-product-fill" style="background-image:url('downloaded_images/KZlHlSkizxKlrMEWJ3FQUZvEzmUoo5rDEFGEDeG2.jpeg')"><div class="slot-label">Bilona Method Pack</div></div>
+<div class="page-content" style="justify-content:flex-start;padding:clamp(8px,1.8vw,14px);gap:clamp(3px,0.6vh,6px)">
+  
+  <!-- Header -->
+  <div style="text-align:center;margin-bottom:1px">
+    <p class="kicker" style="color:var(--gold-lt);letter-spacing:2.5px;font-size:clamp(6.5px,1.2vh,8px);text-shadow:0 1px 4px rgba(0,0,0,0.6);margin-bottom:1px">॥ स्वादाचे रहस्य ॥ · Authentic Spices</p>
+    <h2 style="font-family:var(--fs);font-size:clamp(13px,2.4vh,18px);color:#fff;font-weight:600;line-height:1.1;letter-spacing:0.5px;text-shadow:0 2px 12px rgba(0,0,0,0.7)">Masala &amp; Organic Turmeric Collection</h2>
+    <p style="font-family:var(--fs);font-size:clamp(7.5px,1.35vh,9.5px);color:var(--gold-lt);font-style:italic;margin-top:1px;text-shadow:0 1px 3px rgba(0,0,0,0.6)">&ldquo;One Blend, Endless Possibilities..!&rdquo;</p>
+    <div class="g-rule" style="margin:2px auto;width:36px;background:linear-gradient(90deg,transparent,var(--gold-lt),transparent)"></div>
   </div>
-  <div class="page-number" style="color:rgba(232,201,122,.5)">06</div>
+
+  <!-- 4 Product Image Showcase (3 Masalas + Turmeric) -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;flex:1;align-items:stretch">
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/goda masala.png');min-height:clamp(48px,10vw,72px);border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.92)">
+      <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Goda Masala</div>
+    </div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/kanda lasoon.png');min-height:clamp(48px,10vw,72px);border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.92)">
+      <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Kanda Lasoon</div>
+    </div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/all rounder kitchen masala.png');min-height:clamp(48px,10vw,72px);border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.92)">
+      <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Kitchen Masala</div>
+    </div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/haldi.png');min-height:clamp(48px,10vw,72px);border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.92)">
+      <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Organic Haldi</div>
+    </div>
+  </div>
+
+  <div class="page-number" style="color:rgba(232,201,122,0.6);margin-top:auto">05</div>
 </div></div></div>
 
-<div class="stf__item" style="--page-bg:url('gir cow bg.png')"><div class="page catalog-page page-12">
+<div class="stf__item" style="--page-bg:url('kitchen.jpg')"><div class="page catalog-page page-10">
 <div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
-<div class="page-content">
-  <div class="panel" style="margin-top:auto">
-    <p class="kicker">A2 Bilona Ghee</p>
-    <p class="tagline" style="margin-bottom:6px">"Made the way our grandmothers made it — slow, patient, and with love."</p>
-    <ul class="feat-list">
-      <li>Hand-churned using traditional bilona method</li>
-      <li>A2 milk from free-grazing Gir cows</li>
-      <li>Rich in CLA, Omega-3 &amp; fat-soluble vitamins</li>
-      <li>Zero preservatives or artificial colour</li>
-      <li>Available: 250g · 500g · 1kg</li>
-    </ul>
+<div class="page-content" style="justify-content:flex-start;padding:clamp(8px,1.8vw,14px);gap:clamp(3px,0.6vh,6px)">
+  
+  <!-- 4 Spice Description Grid -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
+    
+    <!-- Goda Masala -->
+    <div class="panel" style="background:rgba(253,249,242,0.95);border-top:2px solid var(--gold);padding:clamp(3px,0.8vw,5px) clamp(4px,1vw,6px);border-radius:4px;display:flex;flex-direction:column;gap:1px">
+      <p class="kicker" style="color:var(--rust);margin:0;font-size:clamp(5.8px,1.05vh,6.8px);letter-spacing:0.8px">Goda Masala (गोडा)</p>
+      <p class="body-copy" style="font-size:clamp(5.5px,1vh,6.5px);line-height:1.22;color:rgba(36,22,17,0.92);margin:0">
+        Signature Maharashtrian aromatic stone-ground whole spices, dagadphool, dry coconut &amp; sesame. Ideal for Amti, Dal &amp; Pulao.
+      </p>
+    </div>
+
+    <!-- Kanda Lasoon Masala -->
+    <div class="panel" style="background:rgba(253,249,242,0.95);border-top:2px solid var(--rust);padding:clamp(3px,0.8vw,5px) clamp(4px,1vw,6px);border-radius:4px;display:flex;flex-direction:column;gap:1px">
+      <p class="kicker" style="color:var(--earth);margin:0;font-size:clamp(5.8px,1.05vh,6.8px);letter-spacing:0.8px">Kanda Lasoon (कांदा लसूण)</p>
+      <p class="body-copy" style="font-size:clamp(5.5px,1vh,6.5px);line-height:1.22;color:rgba(36,22,17,0.92);margin:0">
+        Authentic bold roasted onion-garlic spicy zest blend. Perfect punch for Misal, Usal, Sukka &amp; spicy curries.
+      </p>
+    </div>
+
+    <!-- All-Rounder Kitchen Masala -->
+    <div class="panel" style="background:rgba(253,249,242,0.95);border-top:2px solid var(--gold);padding:clamp(3px,0.8vw,5px) clamp(4px,1vw,6px);border-radius:4px;display:flex;flex-direction:column;gap:1px">
+      <p class="kicker" style="color:var(--rust);margin:0;font-size:clamp(5.8px,1.05vh,6.8px);letter-spacing:0.8px">Kitchen Masala (ऑल-राउंडर)</p>
+      <p class="body-copy" style="font-size:clamp(5.5px,1vh,6.5px);line-height:1.22;color:rgba(36,22,17,0.92);margin:0">
+        Everyday master blend crafted with 15+ satvik spices. Adds fragrant depth and richness to daily gravies and dry sabzis.
+      </p>
+    </div>
+
+    <!-- Organic Turmeric -->
+    <div class="panel" style="background:rgba(253,249,242,0.95);border-top:2px solid var(--rust);padding:clamp(3px,0.8vw,5px) clamp(4px,1vw,6px);border-radius:4px;display:flex;flex-direction:column;gap:1px">
+      <p class="kicker" style="color:var(--earth);margin:0;font-size:clamp(5.8px,1.05vh,6.8px);letter-spacing:0.8px">Organic Haldi (सेंद्रिय हळद)</p>
+      <p class="body-copy" style="font-size:clamp(5.5px,1vh,6.5px);line-height:1.22;color:rgba(36,22,17,0.92);margin:0">
+        High curcumin content (>5%), sun-dried &amp; cold-pounded. Pure golden radiance, natural immunity &amp; vitality booster.
+      </p>
+    </div>
+
   </div>
+
+  <!-- Quality Assurance & Packaging Badge -->
+  <div class="panel" style="background:rgba(255,255,255,0.95);border:0.5px solid rgba(201,150,58,0.25);border-radius:6px;padding:clamp(3px,0.8vw,5px) clamp(4px,1vw,6px);display:flex;flex-direction:column;gap:2px">
+    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid rgba(201,150,58,0.2);padding-bottom:1px">
+      <p class="kicker" style="font-size:clamp(5.8px,1.05vh,6.8px);letter-spacing:1.5px;color:var(--earth);margin:0">Purity &amp; Freshness Lock</p>
+      <span style="font-family:var(--fs);font-size:clamp(6.5px,1.1vh,7.5px);color:var(--gold);font-style:italic">Front &amp; Back Seal</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:2px 4px;justify-content:center;margin-top:1px">
+      <span class="value-chip" style="font-size:clamp(5.5px,1vh,6.5px);padding:1px 4px">🌿 Stone-Pounded</span>
+      <span class="value-chip" style="font-size:clamp(5.5px,1vh,6.5px);padding:1px 4px">🚫 No Additives</span>
+      <span class="value-chip" style="font-size:clamp(5.5px,1vh,6.5px);padding:1px 4px">✨ Rich Essential Oils</span>
+      <span class="value-chip" style="font-size:clamp(5.5px,1vh,6.5px);padding:1px 4px">📦 100g · 250g · 500g</span>
+    </div>
+  </div>
+
+  <!-- Warm Human Touch Quote -->
+  <p style="font-family:var(--fs);font-size:clamp(6.5px,1.2vh,7.8px);font-style:italic;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.8);text-align:center;margin:1px 0 0 0">
+    &ldquo;Every pinch brings the authentic warmth and aroma of grandmother's kitchen.&rdquo;
+  </p>
+
 </div></div></div>
 
-<!-- SPREAD 07 — BUFFALO GHEE -->
-<div class="stf__item" style="--page-bg:url('Buffalo.jpg')"><div class="page catalog-page page-13">
-<div class="page-bg page-bg-split ov-light"></div><div class="page-inner-border"></div>
-<div class="page-content">
-  <p class="kicker" style="color:var(--gold-lt)">Premium Dairy</p>
-  <h2 style="color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.45)">Desi Buffalo Ghee</h2>
-  <div class="g-rule-l"></div>
-  <div class="image-grid" style="flex:1;margin-top:4px">
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/DESI BUFFALO GHEE.png');min-height:clamp(55px,11vw,85px)"><div class="slot-label">Desi Buffalo Ghee</div></div>
-    <div class="image-slot is-lifestyle" style="background-image:url('downloaded_images/tZzrpRoUgTqzbUK7qgjyyvY0v5XqV8lwKdcYgVdc.jpeg');background-position:center 30%"><div class="slot-label">Traditional Pack</div></div>
-  </div>
-  <div class="page-number" style="color:rgba(232,201,122,.5)">07</div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('Buffalo.jpg')"><div class="page catalog-page page-14">
-<div class="page-bg page-bg-split ov-light"></div><div class="page-inner-border"></div>
-<div class="page-content">
-  <div class="panel" style="margin-top:auto">
-    <p class="kicker">Traditional Churning</p>
-    <p class="tagline" style="margin-bottom:6px">"Nourish your body. Calm your soul."</p>
-    <ul class="feat-list">
-      <li>Rich in healthy fats, Vitamins A &amp; D</li>
-      <li>Ideal for deep cooking and traditional sweets</li>
-      <li>Wooden churner, traditional method</li>
-      <li>Sourced from free-grazing desi buffalo</li>
-      <li>Available: 250g · 500g · 1kg</li>
-    </ul>
-    <div class="g-rule-l" style="margin-top:6px"></div>
-    <p class="body-copy" style="margin-top:4px">Perfect for daily rotis, rice dishes, and traditional Indian cooking.</p>
-  </div>
-</div></div></div>
-
-<!-- SPREAD 08 — MASALA COLLECTION -->
-<div class="stf__item" style="--page-bg:url('kitchen.jpg')"><div class="page catalog-page page-15">
-<div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
-<div class="page-content">
-  <p class="kicker" style="color:var(--gold-lt)">Spice Collection</p>
-  <h2 style="color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.48)">Masala Collection</h2>
-  <div class="g-rule-l"></div>
-  <div class="image-grid c3" style="flex:1;margin-top:4px">
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/goda masala.png');min-height:clamp(55px,11vw,85px)"><div class="slot-label">Goda Masala</div></div>
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/kanda lasoon.png')"><div class="slot-label">Kanda Lasoon</div></div>
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/all rounder kitchen masala.png')"><div class="slot-label">Kitchen Masala</div></div>
-  </div>
-  <div class="page-number" style="color:rgba(232,201,122,.5)">08</div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('kitchen.jpg')"><div class="page catalog-page page-16">
-<div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
-<div class="page-content">
-  <div class="panel" style="margin-top:auto">
-    <p class="kicker">Flavor &amp; Goodness</p>
-    <p class="tagline" style="margin-bottom:6px">"Hand-pounded spices from generation-old recipes."</p>
-    <ul class="feat-list">
-      <li>No preservatives or artificial colouring</li>
-      <li>Stone-ground using cold-press method</li>
-      <li>Goda Masala — Maharashtra's signature blend</li>
-      <li>Kanda Lasoon — rich onion-garlic mastery</li>
-      <li>Kitchen Masala — everyday all-purpose blend</li>
-    </ul>
-  </div>
-</div></div></div>
-
-<!-- SPREAD 09 — ORGANIC TURMERIC -->
-<div class="stf__item" style="--page-bg:url('kitchen.jpg')"><div class="page catalog-page page-17">
-<div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
-<div class="page-content">
-  <p class="kicker" style="color:var(--gold-lt)">Immunity &amp; Vitality</p>
-  <h2 style="color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.48)">Organic Turmeric</h2>
-  <div class="g-rule-l"></div>
-  <div class="image-grid" style="flex:1;margin-top:4px">
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/11.png');min-height:clamp(58px,12vw,88px)"><div class="slot-label">Organic Turmeric</div></div>
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/PIExlPe7UID0BSLGibdDj9MAolhqCRsM4ZZzql7a.jpeg')"><div class="slot-label">Masala Range</div></div>
-  </div>
-  <div class="page-number" style="color:rgba(232,201,122,.5)">09</div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('kitchen.jpg')"><div class="page catalog-page page-18">
-<div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
-<div class="page-content">
-  <div class="panel" style="margin-top:auto">
-    <p class="kicker">Pure Spices</p>
-    <p class="tagline" style="margin-bottom:6px">"Pure spices. Healthier lives."</p>
-    <ul class="feat-list">
-      <li>High curcumin — natural anti-inflammatory</li>
-      <li>Organically grown &amp; sun-dried</li>
-      <li>Vibrant colour without artificial dye</li>
-      <li>Lab-tested for purity before packaging</li>
-      <li>Available: 100g · 200g · 500g</li>
-    </ul>
-  </div>
-</div></div></div>
-
-<!-- SPREAD 10 — FLOUR COLLECTION -->
+<!-- SPREAD 06 — FLOUR COLLECTION -->
 <div class="stf__item" style="--page-bg:url('atta bg.png')"><div class="page catalog-page page-19">
 <div class="page-bg page-bg-split ov-light"></div><div class="page-inner-border"></div>
 <div class="page-content">
@@ -611,7 +866,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
     <div class="image-slot is-product" style="background-image:url('downloaded_images/Organic Daliya.png')"><div class="slot-label">Organic Daliya</div></div>
     <div class="image-slot is-product" style="background-image:url('downloaded_images/Bajra.png')"><div class="slot-label">Organic Bajra</div></div>
   </div>
-  <div class="page-number" style="color:rgba(232,201,122,.5)">10</div>
+  <div class="page-number" style="color:rgba(232,201,122,.5)">06</div>
 </div></div></div>
 
 <div class="stf__item" style="--page-bg:url('atta bg.png')"><div class="page catalog-page page-20">
@@ -630,7 +885,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   </div>
 </div></div></div>
 
-<!-- SPREAD 11 — RICE COLLECTION -->
+<!-- SPREAD 07 — RICE COLLECTION -->
 <div class="stf__item" style="--page-bg:url('Rice farming process.png')"><div class="page catalog-page page-21">
 <div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
 <div class="page-content">
@@ -642,7 +897,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
     <div class="image-slot is-product" style="background-image:url('downloaded_images/Organic Ambemohar Rice.png')"><div class="slot-label">Organic Ambemohar</div></div>
     <div class="image-slot is-product" style="background-image:url('downloaded_images/Indrayani Tukda Rice.png')"><div class="slot-label">Indrayani Tukda</div></div>
   </div>
-  <div class="page-number" style="color:rgba(232,201,122,.5)">11</div>
+  <div class="page-number" style="color:rgba(232,201,122,.5)">07</div>
 </div></div></div>
 
 <div class="stf__item" style="--page-bg:url('Rice farming process.png')"><div class="page catalog-page page-22">
@@ -661,7 +916,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   </div>
 </div></div></div>
 
-<!-- SPREAD 12 — PULSES COLLECTION -->
+<!-- SPREAD 08 — PULSES COLLECTION -->
 <div class="stf__item" style="--page-bg:url('Pulses harvesting.png')"><div class="page catalog-page page-23">
 <div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
 <div class="page-content">
@@ -674,7 +929,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
     <div class="image-slot is-product" style="background-image:url('downloaded_images/Black Urad Daal.png')"><div class="slot-label">Urad Dal</div></div>
     <div class="image-slot is-product" style="background-image:url('downloaded_images/Red Rajma.png')"><div class="slot-label">Red Rajma</div></div>
   </div>
-  <div class="page-number" style="color:rgba(232,201,122,.5)">12</div>
+  <div class="page-number" style="color:rgba(232,201,122,.5)">08</div>
 </div></div></div>
 
 <div class="stf__item" style="--page-bg:url('Pulses harvesting.png')"><div class="page catalog-page page-24">
@@ -693,7 +948,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   </div>
 </div></div></div>
 
-<!-- SPREAD 13 — GROCERY -->
+<!-- SPREAD 09 — GROCERY -->
 <div class="stf__item" style="--page-bg:url('Pulses harvesting.png')"><div class="page catalog-page page-25">
 <div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
 <div class="page-content">
@@ -704,7 +959,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
     <div class="image-slot is-product" style="background-image:url('downloaded_images/White Rajma.png');min-height:clamp(55px,11vw,85px)"><div class="slot-label">White Rajma</div></div>
     <div class="image-slot is-product" style="background-image:url('downloaded_images/pEDKxJHS8mujXZSbf7O3Yx06rALmw3EPhupyOT1c.png')"><div class="slot-label">Satvik Grocery Pack</div></div>
   </div>
-  <div class="page-number" style="color:rgba(232,201,122,.5)">13</div>
+  <div class="page-number" style="color:rgba(232,201,122,.5)">09</div>
 </div></div></div>
 
 <div class="stf__item" style="--page-bg:url('Pulses harvesting.png')"><div class="page catalog-page page-26">
@@ -723,7 +978,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   </div>
 </div></div></div>
 
-<!-- SPREAD 14 — SOAP COLLECTION -->
+<!-- SPREAD 10 — SOAP COLLECTION -->
 <div class="stf__item" style="--page-bg:url('Organic Neem Tulsi Soap.png')"><div class="page catalog-page page-27">
 <div class="page-bg page-bg-split ov-light"></div><div class="page-inner-border"></div>
 <div class="page-content">
@@ -736,7 +991,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
     <div class="image-slot is-product" style="background-image:url('downloaded_images/Organic Multani Soap.png')"><div class="slot-label">Multani Mitti</div></div>
     <div class="image-slot is-product" style="background-image:url('downloaded_images/aloe vera soap.png')"><div class="slot-label">Aloe Vera</div></div>
   </div>
-  <div class="page-number" style="color:rgba(232,201,122,.5)">14</div>
+  <div class="page-number" style="color:rgba(232,201,122,.5)">10</div>
 </div></div></div>
 
 <div class="stf__item" style="--page-bg:url('Organic Neem Tulsi Soap.png')"><div class="page catalog-page page-28">
@@ -757,7 +1012,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   </div>
 </div></div></div>
 
-<!-- SPREAD 15 — WHY CHOOSE KALYAANI -->
+<!-- SPREAD 11 — WHY CHOOSE KALYAANI -->
 <div class="stf__item" style="--page-bg:url('Crystal-clear flowing river with greenery.png')"><div class="page catalog-page page-29">
 <div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
 <div class="page-content">
@@ -770,7 +1025,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
     <div class="usp-item"><span class="usp-icon">🏺</span><div><p class="usp-label">Traditional</p><p class="usp-desc">Ancient methods, modern hygiene.</p></div></div>
     <div class="usp-item"><span class="usp-icon">🔬</span><div><p class="usp-label">Lab-Tested</p><p class="usp-desc">Third-party purity verified.</p></div></div>
   </div>
-  <div class="page-number" style="color:rgba(232,201,122,.5)">15</div>
+  <div class="page-number" style="color:rgba(232,201,122,.5)">11</div>
 </div></div></div>
 
 <div class="stf__item" style="--page-bg:url('Crystal-clear flowing river with greenery.png')"><div class="page catalog-page page-30">
@@ -785,7 +1040,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   </div>
 </div></div></div>
 
-<!-- SPREAD 16 — MANUFACTURING PROCESS -->
+<!-- SPREAD 12 — MANUFACTURING PROCESS -->
 <div class="stf__item" style="--page-bg:url('Crystal-clear flowing river with greenery.png')"><div class="page catalog-page page-31">
 <div class="page-bg page-bg-split ov-text"></div><div class="page-inner-border"></div>
 <div class="page-content">
@@ -797,7 +1052,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
     <div class="process-step"><span class="step-num">02</span><div><p class="step-title">Careful Processing</p><p class="step-desc">Traditional bilona churning, stone grinding, and cold-pressing methods.</p></div></div>
     <div class="process-step"><span class="step-num">03</span><div><p class="step-title">Quality Control</p><p class="step-desc">Every batch tasted, lab-tested, and approved before packaging.</p></div></div>
   </div>
-  <div class="page-number" style="color:rgba(232,201,122,.5)">16</div>
+  <div class="page-number" style="color:rgba(232,201,122,.5)">12</div>
 </div></div></div>
 
 <div class="stf__item" style="--page-bg:url('Crystal-clear flowing river with greenery.png')"><div class="page catalog-page page-32">
@@ -812,7 +1067,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   </div>
 </div></div></div>
 
-<!-- SPREAD 17 — CONTACT -->
+<!-- SPREAD 13 — CONTACT -->
 <div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')"><div class="page catalog-page page-33">
 <div class="page-bg page-bg-split ov-text"></div><div class="page-inner-border"></div>
 <div class="page-content" style="justify-content:flex-start;padding-top:clamp(14px,3vw,22px)">
@@ -824,7 +1079,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
     <div class="enquiry-box"><h3>Dealer Enquiry</h3><p>Looking to stock our products? We welcome retail partners across India. Competitive margins and marketing support provided.</p></div>
     <div class="enquiry-box"><h3>Distributor Enquiry</h3><p>Interested in wholesale distribution? Exclusive territory rights in select regions. Contact us for minimum order details.</p></div>
   </div>
-  <div class="page-number" style="margin-top:auto">17</div>
+  <div class="page-number" style="margin-top:auto">13</div>
 </div></div></div>
 
 <div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')"><div class="page catalog-page page-34">
@@ -845,7 +1100,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   </div>
 </div></div></div>
 
-<!-- SPREAD 18 — THANK YOU -->
+<!-- SPREAD 14 — THANK YOU -->
 <div class="stf__item" style="--page-bg:url('front.png')"><div class="page catalog-page page-35 page-opening">
 <div class="page-bg page-bg-split ov-cover"></div><div class="page-inner-border"></div>
 <div class="page-content" style="justify-content:flex-end;padding-bottom:clamp(18px,3.5vw,28px)">
@@ -867,7 +1122,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
     <p class="tagline" style="text-align:center;font-size:clamp(9px,1.8vh,12px)">Kalyaani Organic Productions · Pune, Maharashtra</p>
     <p style="font-family:var(--fs);font-size:clamp(8px,1.5vh,10px);color:var(--rust);letter-spacing:2px;text-transform:uppercase;margin-top:4px">Pure · Honest · Handcrafted</p>
   </div>
-  <div class="page-number">18</div>
+  <div class="page-number">14</div>
 </div></div></div>
 
 </div><!-- end #pageSources -->
@@ -924,6 +1179,31 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
             progressFill.style.width = `${(bottomNum / totalPages) * 100}%`;
             document.querySelectorAll('.thumb').forEach((thumb, i) => {
                 thumb.classList.toggle('active', i === spreadStart || i === spreadStart + 1);
+            });
+            updateActiveCategory();
+        }
+
+        function openCategoryModal() {
+            const modal = document.getElementById('categoryModal');
+            if (modal) {
+                modal.classList.add('open');
+                modal.setAttribute('aria-hidden', 'false');
+                updateActiveCategory();
+            }
+        }
+
+        function closeCategoryModal() {
+            const modal = document.getElementById('categoryModal');
+            if (modal) {
+                modal.classList.remove('open');
+                modal.setAttribute('aria-hidden', 'true');
+            }
+        }
+
+        function updateActiveCategory() {
+            document.querySelectorAll('.category-card').forEach(card => {
+                const spread = parseInt(card.getAttribute('data-spread'), 10);
+                card.classList.toggle('active', spread === spreadStart);
             });
         }
 
@@ -1095,8 +1375,20 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
         document.getElementById('topZone').addEventListener('click', e => { e.stopPropagation(); flip('prev'); });
         document.getElementById('bottomZone').addEventListener('click', e => { e.stopPropagation(); flip('next'); });
 
+        const catBtn = document.getElementById('categoryNavBtn');
+        if (catBtn) catBtn.addEventListener('click', openCategoryModal);
+
+        const tocQuick = document.getElementById('tocQuickBtn');
+        if (tocQuick) tocQuick.addEventListener('click', () => flipToSpread(4));
+
+        const closeBtn = document.getElementById('categoryCloseBtn');
+        if (closeBtn) closeBtn.addEventListener('click', closeCategoryModal);
+
+        const backdrop = document.getElementById('categoryBackdrop');
+        if (backdrop) backdrop.addEventListener('click', closeCategoryModal);
+
         bookEl.addEventListener('pointerdown', e => {
-            if (e.target.closest('.image-slot') || e.target.closest('.click-zone')) return;
+            if (e.target.closest('.image-slot') || e.target.closest('.click-zone') || e.target.closest('.toc-item') || e.target.closest('button') || e.target.closest('a') || e.target.closest('[onclick]')) return;
             const rect = bookEl.getBoundingClientRect();
             const y = e.clientY - rect.top;
             const direction = y > rect.height / 2 ? 'next' : 'prev';
@@ -1109,6 +1401,17 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
         bookEl.addEventListener('wheel', e => { if (Math.abs(e.deltaY) < 12) return; e.preventDefault(); if (e.deltaY > 0) flip('next'); else flip('prev'); }, { passive: false });
 
         document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') { closeCategoryModal(); return; }
+            if ((e.key === 'c' || e.key === 'C') && !e.target.matches('input, textarea')) {
+                const modal = document.getElementById('categoryModal');
+                if (modal && modal.classList.contains('open')) closeCategoryModal();
+                else openCategoryModal();
+                return;
+            }
+            if ((e.key === 't' || e.key === 'T') && !e.target.matches('input, textarea')) {
+                flipToSpread(4);
+                return;
+            }
             if (['ArrowDown', 'PageDown', ' ', 'ArrowRight'].includes(e.key)) { e.preventDefault(); flip('next'); }
             if (['ArrowUp', 'PageUp', 'ArrowLeft'].includes(e.key)) { e.preventDefault(); flip('prev'); }
             if (e.key === 'Home') flipToSpread(0);
@@ -1136,7 +1439,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
 
         bookEl.addEventListener('pointerenter', () => document.body.classList.add('book-hover'));
         bookEl.addEventListener('pointerleave', () => { document.body.classList.remove('book-hover'); document.body.classList.remove('dragging-page'); });
-        document.querySelectorAll('.btn, .tool-btn, .thumb, .image-slot, .click-zone').forEach(el => {
+        document.querySelectorAll('.btn, .tool-btn, .thumb, .image-slot, .click-zone, .toc-item, .category-card, .category-close-btn').forEach(el => {
             el.addEventListener('pointerenter', () => document.body.classList.add('hovering-control'));
             el.addEventListener('pointerleave', () => document.body.classList.remove('hovering-control'));
         });
