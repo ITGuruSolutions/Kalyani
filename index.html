@@ -154,6 +154,8 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
 .image-slot.is-product-fill,.image-slot.is-lifestyle{background-size:cover;background-position:center;border:.5px solid rgba(201,150,58,.18)}
 .image-slot .slot-label{position:absolute;left:0;bottom:0;right:0;z-index:2;color:#1e130c!important;font-family:var(--fn);font-weight:500;font-size:clamp(6.2px,1.25vh,7.8px);line-height:1.2;padding:2px 1px;text-align:center;letter-spacing:.3px;text-transform:uppercase;text-shadow:none!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .image-slot .slot-file{display:none!important}
+.image-slot .slot-price{position:absolute;top:4px;right:4px;z-index:3;background:rgba(14,11,9,.84);color:var(--gold-lt);border:.5px solid rgba(201,150,58,.5);border-radius:3px;padding:1.5px 5px;font-family:var(--fn);font-size:clamp(5.2px,1vh,6.8px);font-weight:600;line-height:1.2;letter-spacing:.2px;white-space:nowrap;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.25);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.dist-rate-tag{font-family:var(--fn);font-size:clamp(5.4px,1vh,6.8px);font-weight:600;color:var(--rust);background:rgba(201,150,58,.14);border:.5px solid rgba(201,150,58,.38);border-radius:3px;padding:1px 5px;letter-spacing:.3px;white-space:nowrap}
 .image-slot:hover{transform:translateY(-2px)}
 
 /* PRODUCT STRIP */
@@ -411,52 +413,44 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
         <span class="category-card-badge">08</span>
       </div>
       <div class="category-card" data-spread="16" onclick="flipToSpread(16); closeCategoryModal();">
-        <div class="category-card-icon">🛒</div>
-        <div class="category-card-info">
-          <div class="category-card-title">Everyday Organic Grocery</div>
-          <div class="category-card-sub">White Rajma &amp; Satvik Staples</div>
-        </div>
-        <span class="category-card-badge">09</span>
-      </div>
-      <div class="category-card" data-spread="18" onclick="flipToSpread(18); closeCategoryModal();">
         <div class="category-card-icon">🧼</div>
         <div class="category-card-info">
           <div class="category-card-title">Aabha Botanical Soaps</div>
           <div class="category-card-sub">Neem, Sandalwood &amp; Multani</div>
         </div>
-        <span class="category-card-badge">10</span>
+        <span class="category-card-badge">09</span>
       </div>
-      <div class="category-card" data-spread="20" onclick="flipToSpread(20); closeCategoryModal();">
+      <div class="category-card" data-spread="18" onclick="flipToSpread(18); closeCategoryModal();">
         <div class="category-card-icon">⭐</div>
         <div class="category-card-info">
           <div class="category-card-title">Why Choose Kalyaani</div>
           <div class="category-card-sub">100% Organic &amp; Women-Empowered</div>
         </div>
-        <span class="category-card-badge">11</span>
+        <span class="category-card-badge">10</span>
       </div>
-      <div class="category-card" data-spread="22" onclick="flipToSpread(22); closeCategoryModal();">
+      <div class="category-card" data-spread="20" onclick="flipToSpread(20); closeCategoryModal();">
         <div class="category-card-icon">🏭</div>
         <div class="category-card-info">
           <div class="category-card-title">Manufacturing Process</div>
           <div class="category-card-sub">Soil to Shelf Quality Control</div>
         </div>
-        <span class="category-card-badge">12</span>
+        <span class="category-card-badge">11</span>
       </div>
-      <div class="category-card" data-spread="24" onclick="flipToSpread(24); closeCategoryModal();">
+      <div class="category-card" data-spread="22" onclick="flipToSpread(22); closeCategoryModal();">
         <div class="category-card-icon">📞</div>
         <div class="category-card-info">
           <div class="category-card-title">Dealer &amp; Distributor Enquiry</div>
           <div class="category-card-sub">Pune, Maharashtra · Contact Us</div>
         </div>
-        <span class="category-card-badge">13</span>
+        <span class="category-card-badge">12</span>
       </div>
-      <div class="category-card" data-spread="26" onclick="flipToSpread(26); closeCategoryModal();">
+      <div class="category-card" data-spread="24" onclick="flipToSpread(24); closeCategoryModal();">
         <div class="category-card-icon">🙏</div>
         <div class="category-card-info">
           <div class="category-card-title">With Gratitude</div>
           <div class="category-card-sub">Thank You &amp; Closing Blessing</div>
         </div>
-        <span class="category-card-badge">14</span>
+        <span class="category-card-badge">13</span>
       </div>
     </div>
   </div>
@@ -487,7 +481,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
     <button aria-label="Previous page" class="btn" id="prevBtn">↑</button>
     <div class="thumbnails" id="thumbStrip" role="list" aria-label="Page thumbnails"></div>
     <div class="progress-track" role="progressbar" aria-label="Reading progress"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="page-indicator" id="pageIndicator" aria-live="polite">1-2 / 36</div>
+    <div class="page-indicator" id="pageIndicator" aria-live="polite">1-2 / 26</div>
     <button aria-label="Next page" class="btn" id="nextBtn">↓</button>
   </nav>
   <p class="hint" aria-hidden="true">Drag · Swipe · Arrow keys · Scroll</p>
@@ -653,10 +647,9 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
     </div>
     <ul class="toc-list" style="margin-top:2px;gap:3px">
       <li class="toc-item" onclick="flipToSpread(14)" style="cursor:pointer"><span class="toc-name" style="font-size:clamp(6.5px,1.2vh,8px)">06. Farm-Fresh Pulses &amp; Ancient Grains</span><span class="toc-dots"></span><span class="toc-num" style="font-size:clamp(8px,1.4vh,10px)">08</span></li>
-      <li class="toc-item" onclick="flipToSpread(16)" style="cursor:pointer"><span class="toc-name" style="font-size:clamp(6.5px,1.2vh,8px)">07. Everyday Organic Grocery</span><span class="toc-dots"></span><span class="toc-num" style="font-size:clamp(8px,1.4vh,10px)">09</span></li>
-      <li class="toc-item" onclick="flipToSpread(18)" style="cursor:pointer"><span class="toc-name" style="font-size:clamp(6.5px,1.2vh,8px)">08. Aabha Botanical Soaps &amp; Skincare</span><span class="toc-dots"></span><span class="toc-num" style="font-size:clamp(8px,1.4vh,10px)">10</span></li>
-      <li class="toc-item" onclick="flipToSpread(20)" style="cursor:pointer"><span class="toc-name" style="font-size:clamp(6.5px,1.2vh,8px)">09. Why Choose Kalyaani &amp; Process</span><span class="toc-dots"></span><span class="toc-num" style="font-size:clamp(8px,1.4vh,10px)">11</span></li>
-      <li class="toc-item" onclick="flipToSpread(24)" style="cursor:pointer"><span class="toc-name" style="font-size:clamp(6.5px,1.2vh,8px)">10. Community, Partnerships &amp; Contact</span><span class="toc-dots"></span><span class="toc-num" style="font-size:clamp(8px,1.4vh,10px)">13</span></li>
+      <li class="toc-item" onclick="flipToSpread(16)" style="cursor:pointer"><span class="toc-name" style="font-size:clamp(6.5px,1.2vh,8px)">07. Aabha Botanical Soaps &amp; Skincare</span><span class="toc-dots"></span><span class="toc-num" style="font-size:clamp(8px,1.4vh,10px)">09</span></li>
+      <li class="toc-item" onclick="flipToSpread(18)" style="cursor:pointer"><span class="toc-name" style="font-size:clamp(6.5px,1.2vh,8px)">08. Why Choose Kalyaani &amp; Process</span><span class="toc-dots"></span><span class="toc-num" style="font-size:clamp(8px,1.4vh,10px)">10</span></li>
+      <li class="toc-item" onclick="flipToSpread(22)" style="cursor:pointer"><span class="toc-name" style="font-size:clamp(6.5px,1.2vh,8px)">09. Community, Partnerships &amp; Contact</span><span class="toc-dots"></span><span class="toc-num" style="font-size:clamp(8px,1.4vh,10px)">12</span></li>
     </ul>
   </div>
 
@@ -686,9 +679,11 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   <!-- Product Image Showcase (Dual Grid) -->
   <div class="image-grid" style="grid-template-columns:1fr 1fr;gap:6px;flex:1;align-items:stretch">
     <div class="image-slot is-product" style="background-image:url('downloaded_images/gir gay ghee.png');min-height:clamp(55px,11vw,82px);border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.92)">
+      <span class="slot-price">₹1,215 · 500 ml</span>
       <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Gir Cow A2 Ghee (Bilona)</div>
     </div>
     <div class="image-slot is-product" style="background-image:url('downloaded_images/DESI BUFFALO GHEE.png');min-height:clamp(55px,11vw,82px);border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.92)">
+      <span class="slot-price">₹1,125 · 500 ml</span>
       <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Desi Buffalo Ghee</div>
     </div>
   </div>
@@ -716,7 +711,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
         <li style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25">A2 milk from free-grazing Gir cows</li>
         <li style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25">Rich in CLA, Omega-3 &amp; vitamins</li>
         <li style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25">Golden granular texture &amp; aroma</li>
-        <li style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25">Available:500ml</li>
+        <li style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25">Available: 500ml · <strong style="color:var(--rust)">Dist. ₹1,215</strong></li>
       </ul>
     </div>
 
@@ -733,7 +728,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
         <li style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25">100% pure desi buffalo milk</li>
         <li style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25">High smoke point, ideal for sweets</li>
         <li style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25">Slow-simmered rich granular grain</li>
-        <li style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25">Available: 500ml</li>
+        <li style="font-size:clamp(5.8px,1.05vh,6.8px);line-height:1.25">Available: 500ml · <strong style="color:var(--rust)">Dist. ₹1,125</strong></li>
       </ul>
     </div>
 
@@ -775,15 +770,19 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   <!-- 4 Product Image Showcase (3 Masalas + Turmeric) -->
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;flex:1;align-items:stretch">
     <div class="image-slot is-product" style="background-image:url('downloaded_images/goda masala.png');min-height:clamp(48px,10vw,72px);border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.92)">
+      <span class="slot-price">₹427.50</span>
       <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Goda Masala</div>
     </div>
     <div class="image-slot is-product" style="background-image:url('downloaded_images/kanda lasoon.png');min-height:clamp(48px,10vw,72px);border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.92)">
+      <span class="slot-price">₹360</span>
       <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Kanda Lasoon</div>
     </div>
     <div class="image-slot is-product" style="background-image:url('downloaded_images/all rounder kitchen masala.png');min-height:clamp(48px,10vw,72px);border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.92)">
+      <span class="slot-price">₹405</span>
       <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Kitchen Masala</div>
     </div>
     <div class="image-slot is-product" style="background-image:url('downloaded_images/haldi.png');min-height:clamp(48px,10vw,72px);border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.92)">
+      <span class="slot-price">₹216</span>
       <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Organic Haldi</div>
     </div>
   </div>
@@ -800,7 +799,10 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
     
     <!-- Goda Masala -->
     <div class="panel" style="background:rgba(253,249,242,0.95);border-top:2px solid var(--gold);padding:clamp(3px,0.8vw,5px) clamp(4px,1vw,6px);border-radius:4px;display:flex;flex-direction:column;gap:1px">
-      <p class="kicker" style="color:var(--rust);margin:0;font-size:clamp(5.8px,1.05vh,6.8px);letter-spacing:0.8px">Goda Masala (गोडा)</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:2px;flex-wrap:wrap">
+        <p class="kicker" style="color:var(--rust);margin:0;font-size:clamp(5.8px,1.05vh,6.8px);letter-spacing:0.8px">Goda Masala (गोडा)</p>
+        <span class="dist-rate-tag">Dist. ₹427.50 / 250g</span>
+      </div>
       <p class="body-copy" style="font-size:clamp(5.5px,1vh,6.5px);line-height:1.22;color:rgba(36,22,17,0.92);margin:0">
         Signature Maharashtrian aromatic stone-ground whole spices, dagadphool, dry coconut &amp; sesame. Ideal for Amti, Dal &amp; Pulao.
       </p>
@@ -808,7 +810,10 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
 
     <!-- Kanda Lasoon Masala -->
     <div class="panel" style="background:rgba(253,249,242,0.95);border-top:2px solid var(--rust);padding:clamp(3px,0.8vw,5px) clamp(4px,1vw,6px);border-radius:4px;display:flex;flex-direction:column;gap:1px">
-      <p class="kicker" style="color:var(--earth);margin:0;font-size:clamp(5.8px,1.05vh,6.8px);letter-spacing:0.8px">Kanda Lasoon (कांदा लसूण)</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:2px;flex-wrap:wrap">
+        <p class="kicker" style="color:var(--earth);margin:0;font-size:clamp(5.8px,1.05vh,6.8px);letter-spacing:0.8px">Kanda Lasoon (कांदा लसूण)</p>
+        <span class="dist-rate-tag">Dist. ₹360 / 250g</span>
+      </div>
       <p class="body-copy" style="font-size:clamp(5.5px,1vh,6.5px);line-height:1.22;color:rgba(36,22,17,0.92);margin:0">
         Authentic bold roasted onion-garlic spicy zest blend. Perfect punch for Misal, Usal, Sukka &amp; spicy curries.
       </p>
@@ -816,7 +821,10 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
 
     <!-- All-Rounder Kitchen Masala -->
     <div class="panel" style="background:rgba(253,249,242,0.95);border-top:2px solid var(--gold);padding:clamp(3px,0.8vw,5px) clamp(4px,1vw,6px);border-radius:4px;display:flex;flex-direction:column;gap:1px">
-      <p class="kicker" style="color:var(--rust);margin:0;font-size:clamp(5.8px,1.05vh,6.8px);letter-spacing:0.8px">Kitchen Masala (ऑल-राउंडर)</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:2px;flex-wrap:wrap">
+        <p class="kicker" style="color:var(--rust);margin:0;font-size:clamp(5.8px,1.05vh,6.8px);letter-spacing:0.8px">Kitchen Masala (ऑल-राउंडर)</p>
+        <span class="dist-rate-tag">Dist. ₹405 / 250g</span>
+      </div>
       <p class="body-copy" style="font-size:clamp(5.5px,1vh,6.5px);line-height:1.22;color:rgba(36,22,17,0.92);margin:0">
         Everyday master blend crafted with 15+ satvik spices. Adds fragrant depth and richness to daily gravies and dry sabzis.
       </p>
@@ -824,9 +832,12 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
 
     <!-- Organic Turmeric -->
     <div class="panel" style="background:rgba(253,249,242,0.95);border-top:2px solid var(--rust);padding:clamp(3px,0.8vw,5px) clamp(4px,1vw,6px);border-radius:4px;display:flex;flex-direction:column;gap:1px">
-      <p class="kicker" style="color:var(--earth);margin:0;font-size:clamp(5.8px,1.05vh,6.8px);letter-spacing:0.8px">Organic Haldi (सेंद्रिय हळद)</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:2px;flex-wrap:wrap">
+        <p class="kicker" style="color:var(--earth);margin:0;font-size:clamp(5.8px,1.05vh,6.8px);letter-spacing:0.8px">Organic Haldi (सेंद्रिय हळद)</p>
+        <span class="dist-rate-tag">Dist. ₹216 / 250g</span>
+      </div>
       <p class="body-copy" style="font-size:clamp(5.5px,1vh,6.5px);line-height:1.22;color:rgba(36,22,17,0.92);margin:0">
-        High curcumin content (>5%), sun-dried &amp; cold-pounded. Pure golden radiance, natural immunity &amp; vitality booster.
+        High curcumin content (&gt;5%), sun-dried &amp; cold-pounded. Pure golden radiance, natural immunity &amp; vitality booster.
       </p>
     </div>
 
@@ -861,10 +872,10 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   <h2 style="color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.42)">Flour Collection</h2>
   <div class="g-rule-l"></div>
   <div class="image-grid c4 scrollable" style="flex:1;margin-top:4px">
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/Thalipeeth bhajani.png');min-height:clamp(55px,11vw,85px)"><div class="slot-label">Thalipeeth Bhajni</div></div>
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/Organic Raaghi Flour.png')"><div class="slot-label">Organic Ragi</div></div>
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/Organic Daliya.png')"><div class="slot-label">Organic Daliya</div></div>
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/Bajra.png')"><div class="slot-label">Organic Bajra</div></div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/Thalipeeth bhajani.png');min-height:clamp(55px,11vw,85px)"><span class="slot-price">₹405 / 1Kg</span><div class="slot-label">Thalipeeth Bhajni</div></div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/Organic Raaghi Flour.png')"><span class="slot-price">₹342 / 1Kg</span><div class="slot-label">Organic Ragi</div></div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/Organic Daliya.png')"><span class="slot-price">₹351 / 1Kg</span><div class="slot-label">Organic Daliya</div></div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/Bajra.png')"><span class="slot-price">₹117 / 1Kg</span><div class="slot-label">Organic Bajra</div></div>
   </div>
   <div class="page-number" style="color:rgba(232,201,122,.5)">06</div>
 </div></div></div>
@@ -873,7 +884,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
 <div class="page-bg page-bg-split ov-light"></div><div class="page-inner-border"></div>
 <div class="page-content">
   <div class="panel" style="margin-top:auto">
-    <p class="kicker">The Daily Bread</p>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:6px"><p class="kicker">The Daily Bread</p><span class="dist-rate-tag">Distributor Rates (1 Kg)</span></div>
     <p class="tagline" style="margin-bottom:6px">"Nourish your family with wholesome ancient grains."</p>
     <ul class="feat-list">
       <li>Slow stone-ground to retain fibre &amp; minerals</li>
@@ -893,9 +904,9 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   <h2 style="color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.42)">Rice Collection</h2>
   <div class="g-rule-l"></div>
   <div class="image-grid c3" style="flex:1;margin-top:4px">
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/Brown Ambemohar Rice.png');min-height:clamp(55px,11vw,85px)"><div class="slot-label">Brown Ambemohar</div></div>
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/Organic Ambemohar Rice.png')"><div class="slot-label">Organic Ambemohar</div></div>
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/Indrayani Tukda Rice.png')"><div class="slot-label">Indrayani Tukda</div></div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/Brown Ambemohar Rice.png');min-height:clamp(55px,11vw,85px)"><span class="slot-price">₹342 / 1Kg</span><div class="slot-label">Brown Ambemohar</div></div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/Organic Ambemohar Rice.png')"><span class="slot-price">₹288 / 1Kg</span><div class="slot-label">Organic Ambemohar</div></div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/Indrayani Tukda Rice.png')"><span class="slot-price">₹135 / 1Kg</span><div class="slot-label">Indrayani Tukda</div></div>
   </div>
   <div class="page-number" style="color:rgba(232,201,122,.5)">07</div>
 </div></div></div>
@@ -904,7 +915,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
 <div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
 <div class="page-content">
   <div class="panel" style="margin-top:auto">
-    <p class="kicker">Aromatic &amp; Pure</p>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:6px"><p class="kicker">Aromatic &amp; Pure</p><span class="dist-rate-tag">Distributor Rates (1 Kg)</span></div>
     <p class="tagline" style="margin-bottom:6px">"Ambemohar and Indrayani — the pride of Pune's farms."</p>
     <ul class="feat-list">
       <li>Grown in mineral-rich soil via eco-farming</li>
@@ -924,10 +935,11 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   <h2 style="color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.45)">Pulses Collection</h2>
   <div class="g-rule-l"></div>
   <div class="image-grid c4 scrollable" style="flex:1;margin-top:4px">
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/Chana.png');min-height:clamp(55px,11vw,85px)"><div class="slot-label">Organic Chana</div></div>
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/Green Moon Dal.png')"><div class="slot-label">Moong Dal</div></div>
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/Black Urad Daal.png')"><div class="slot-label">Urad Dal</div></div>
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/Red Rajma.png')"><div class="slot-label">Red Rajma</div></div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/Chana.png');min-height:clamp(55px,11vw,85px)"><span class="slot-price">₹297 / 1Kg</span><div class="slot-label">Organic Chana</div></div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/Green Moon Dal.png')"><span class="slot-price">₹260.10 / 1Kg</span><div class="slot-label">Moong Dal</div></div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/Black Urad Daal.png')"><span class="slot-price">₹359.10 / 1Kg</span><div class="slot-label">Urad Dal</div></div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/Red Rajma.png')"><span class="slot-price">₹342 / 1Kg</span><div class="slot-label">Red Rajma</div></div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/White Rajma.png')"><span class="slot-price">₹287.10 / 1Kg</span><div class="slot-label">White Rajma</div></div>
   </div>
   <div class="page-number" style="color:rgba(232,201,122,.5)">08</div>
 </div></div></div>
@@ -936,49 +948,19 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
 <div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
 <div class="page-content">
   <div class="panel" style="margin-top:auto">
-    <p class="kicker">Farm to Table</p>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:6px"><p class="kicker">Farm to Table</p><span class="dist-rate-tag">Distributor Rates (1 Kg)</span></div>
     <p class="tagline" style="margin-bottom:6px">"Clean pulses, sourced directly from trusted organic farmers."</p>
     <ul class="feat-list">
       <li>No chemical pesticides or fertilisers</li>
       <li>Direct farm partnership — no middlemen</li>
       <li>High protein, fibre-rich varieties</li>
       <li>Cleaned, sorted, hygienically packed</li>
-      <li>Moong · Chana · Masoor · Tur · Urad</li>
+      <li>Moong · Chana · Urad · Red &amp; White Rajma</li>
     </ul>
   </div>
 </div></div></div>
 
-<!-- SPREAD 09 — GROCERY -->
-<div class="stf__item" style="--page-bg:url('har.jpeg')"><div class="page catalog-page page-25">
-<div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
-<div class="page-content">
-  <p class="kicker" style="color:var(--gold-lt)">Satvik Grocery</p>
-  <h2 style="color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.45)">Everyday Organic Grocery</h2>
-  <div class="g-rule-l"></div>
-  <div class="image-grid" style="flex:1;margin-top:4px">
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/White Rajma.png');min-height:clamp(55px,11vw,85px)"><div class="slot-label">White Rajma</div></div>
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/pEDKxJHS8mujXZSbf7O3Yx06rALmw3EPhupyOT1c.png')"><div class="slot-label">Satvik Grocery Pack</div></div>
-  </div>
-  <div class="page-number" style="color:rgba(232,201,122,.5)">09</div>
-</div></div></div>
-
-<div class="stf__item" style="--page-bg:url('har.jpeg')"><div class="page catalog-page page-26">
-<div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
-<div class="page-content">
-  <div class="panel" style="margin-top:auto">
-    <p class="kicker">Complete Kitchen</p>
-    <p class="tagline" style="margin-bottom:6px">"Everything your kitchen needs, from a brand you trust."</p>
-    <ul class="feat-list">
-      <li>Organic jaggery powder &amp; raw sugar</li>
-      <li>Cold-pressed sesame &amp; groundnut oils</li>
-      <li>Sun-dried tamarind &amp; kokum</li>
-      <li>Organic dry fruits &amp; seeds</li>
-      <li>Monthly grocery boxes — home delivery</li>
-    </ul>
-  </div>
-</div></div></div>
-
-<!-- SPREAD 10 — SOAP COLLECTION -->
+<!-- SPREAD 09 — SOAP COLLECTION -->
 <div class="stf__item" style="--page-bg:url('Organic Neem Tulsi Soap.png')"><div class="page catalog-page page-27">
 <div class="page-bg page-bg-split ov-light"></div><div class="page-inner-border"></div>
 <div class="page-content">
@@ -986,19 +968,19 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   <h2 style="color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.42)">Soap Collection</h2>
   <div class="g-rule-l"></div>
   <div class="image-grid c4 scrollable" style="flex:1;margin-top:4px">
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/Organic Neem Tulsi Soap.png');min-height:clamp(55px,11vw,85px)"><div class="slot-label">Neem Tulsi</div></div>
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/Organic Sandal Wood Soap.png')"><div class="slot-label">Sandalwood</div></div>
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/Organic Multani Soap.png')"><div class="slot-label">Multani Mitti</div></div>
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/aloe vera soap.png')"><div class="slot-label">Aloe Vera</div></div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/Organic Neem Tulsi Soap.png');min-height:clamp(55px,11vw,85px)"><span class="slot-price">₹135 / 100g</span><div class="slot-label">Neem Tulsi</div></div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/Organic Sandal Wood Soap.png')"><span class="slot-price">₹135 / 100g</span><div class="slot-label">Sandalwood</div></div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/Organic Multani Soap.png')"><span class="slot-price">₹135 / 100g</span><div class="slot-label">Multani Mitti</div></div>
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/aloe vera soap.png')"><span class="slot-price">₹135 / 100g</span><div class="slot-label">Aloe Vera</div></div>
   </div>
-  <div class="page-number" style="color:rgba(232,201,122,.5)">10</div>
+  <div class="page-number" style="color:rgba(232,201,122,.5)">09</div>
 </div></div></div>
 
 <div class="stf__item" style="--page-bg:url('Organic Neem Tulsi Soap.png')"><div class="page catalog-page page-28">
 <div class="page-bg page-bg-split ov-light"></div><div class="page-inner-border"></div>
 <div class="page-content">
   <div class="panel" style="margin-top:auto">
-    <p class="kicker">Pure Botanicals</p>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:6px"><p class="kicker">Pure Botanicals</p><span class="dist-rate-tag">Distributor Rates (100 Gm)</span></div>
     <p class="tagline" style="margin-bottom:6px">"Soap made the old way — with plants, purpose, and patience."</p>
     <ul class="feat-list">
       <li>Neem — deep cleanse, anti-bacterial</li>
@@ -1012,7 +994,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   </div>
 </div></div></div>
 
-<!-- SPREAD 11 — WHY CHOOSE KALYAANI -->
+<!-- SPREAD 10 — WHY CHOOSE KALYAANI -->
 <div class="stf__item" style="--page-bg:url('jungle.jpeg')"><div class="page catalog-page page-29">
 <div class="page-bg page-bg-split ov-med"></div><div class="page-inner-border"></div>
 <div class="page-content">
@@ -1025,7 +1007,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
     <div class="usp-item"><span class="usp-icon">🏺</span><div><p class="usp-label">Traditional</p><p class="usp-desc">Ancient methods, modern hygiene.</p></div></div>
     <div class="usp-item"><span class="usp-icon">🔬</span><div><p class="usp-label">Lab-Tested</p><p class="usp-desc">Third-party purity verified.</p></div></div>
   </div>
-  <div class="page-number" style="color:rgba(232,201,122,.5)">11</div>
+  <div class="page-number" style="color:rgba(232,201,122,.5)">10</div>
 </div></div></div>
 
 <div class="stf__item" style="--page-bg:url('jungle.jpeg')"><div class="page catalog-page page-30">
@@ -1040,7 +1022,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   </div>
 </div></div></div>
 
-<!-- SPREAD 12 — MANUFACTURING PROCESS -->
+<!-- SPREAD 11 — MANUFACTURING PROCESS -->
 <div class="stf__item" style="--page-bg:url('Crystal-clear flowing river with greenery.png')"><div class="page catalog-page page-31">
 <div class="page-bg page-bg-split ov-text"></div><div class="page-inner-border"></div>
 <div class="page-content">
@@ -1052,7 +1034,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
     <div class="process-step"><span class="step-num">02</span><div><p class="step-title">Careful Processing</p><p class="step-desc">Traditional bilona churning, stone grinding, and cold-pressing methods.</p></div></div>
     <div class="process-step"><span class="step-num">03</span><div><p class="step-title">Quality Control</p><p class="step-desc">Every batch tasted, lab-tested, and approved before packaging.</p></div></div>
   </div>
-  <div class="page-number" style="color:rgba(232,201,122,.5)">12</div>
+  <div class="page-number" style="color:rgba(232,201,122,.5)">11</div>
 </div></div></div>
 
 <div class="stf__item" style="--page-bg:url('Crystal-clear flowing river with greenery.png')"><div class="page catalog-page page-32">
@@ -1067,7 +1049,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   </div>
 </div></div></div>
 
-<!-- SPREAD 13 — CONTACT -->
+<!-- SPREAD 12 — CONTACT -->
 <div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')"><div class="page catalog-page page-33">
 <div class="page-bg page-bg-split ov-text"></div><div class="page-inner-border"></div>
 <div class="page-content" style="justify-content:flex-start;padding-top:clamp(14px,3vw,22px)">
@@ -1079,7 +1061,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
     <div class="enquiry-box"><h3>Dealer Enquiry</h3><p>Looking to stock our products? We welcome retail partners across India. Competitive margins and marketing support provided.</p></div>
     <div class="enquiry-box"><h3>Distributor Enquiry</h3><p>Interested in wholesale distribution? Exclusive territory rights in select regions. Contact us for minimum order details.</p></div>
   </div>
-  <div class="page-number" style="margin-top:auto">13</div>
+  <div class="page-number" style="margin-top:auto">12</div>
 </div></div></div>
 
 <div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')"><div class="page catalog-page page-34">
@@ -1089,9 +1071,9 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
     <p class="kicker" style="margin-bottom:6px">Contact Details</p>
     <dl class="contact-details">
       <dt>Website</dt><dd>www.kalyaaniorganic.com</dd>
-      <dt>Email</dt><dd>hello@kalyaaniorganic.com</dd>
-      <dt>Phone</dt><dd>+91 98765 43210</dd>
-      <dt>Location</dt><dd>Pune, Maharashtra, India</dd>
+      <dt>Email</dt><dd>kalyaaniorganicpro@gmail.com</dd>
+      <dt>Phone</dt><dd>+919372356034</dd>
+      <dt>Location</dt><dd>Plot 380A, At-Vadval post Donvat, Khalapur, Near Godrej Factory, Raigad Maharashtra 410203</dd>
     </dl>
     <div class="g-rule" style="margin-top:8px"></div>
     <div class="values-row" style="margin-top:6px">
@@ -1100,7 +1082,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
   </div>
 </div></div></div>
 
-<!-- SPREAD 14 — THANK YOU -->
+<!-- SPREAD 13 — THANK YOU -->
 <div class="stf__item" style="--page-bg:url('front.png')"><div class="page catalog-page page-35 page-opening">
 <div class="page-bg page-bg-split ov-cover"></div><div class="page-inner-border"></div>
 <div class="page-content" style="justify-content:flex-end;align-items:center;padding:clamp(12px,2.5vw,20px);padding-bottom:clamp(10px,2vw,16px)">
@@ -1128,7 +1110,7 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
       <span style="font-family:var(--fs);font-size:clamp(7.5px,1.3vh,9.5px);color:var(--rust);letter-spacing:2px;font-weight:700;text-transform:uppercase">Pure · Honest · Handcrafted</span>
     </div>
   </div>
-  <div class="page-number" style="align-self:flex-end;margin-top:auto;color:rgba(232,201,122,0.6)">14</div>
+  <div class="page-number" style="align-self:flex-end;margin-top:auto;color:rgba(232,201,122,0.6)">13</div>
 </div></div></div>
 
 </div><!-- end #pageSources -->
