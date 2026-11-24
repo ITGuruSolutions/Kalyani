@@ -148,16 +148,13 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
 .image-grid.scrollable::-webkit-scrollbar{height:3px}
 .image-grid.scrollable::-webkit-scrollbar-track{background:rgba(201,150,58,.1);border-radius:2px}
 .image-grid.scrollable::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
-.image-grid.scrollable .image-slot{flex:0 0 clamp(96px,23vw,122px);height:clamp(118px,24vh,172px);min-height:0;scroll-snap-align:start}
-.image-slot{height:clamp(118px,24vh,172px);min-height:0;position:relative;overflow:visible;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:18px;transition:transform .2s ease}
+.image-grid.scrollable .image-slot{flex:0 0 clamp(108px,24vw,138px);height:clamp(118px,24vh,168px);min-height:0;scroll-snap-align:start}
+.image-slot{height:clamp(118px,24vh,168px);min-height:0;position:relative;overflow:visible;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:18px;transition:transform .2s ease}
 .image-slot.is-product{background-size:contain;background-origin:content-box;background-color:rgba(255,255,255,0.96);background-position:center center;background-repeat:no-repeat;padding:6px 4px 18px;border:.5px solid rgba(201,150,58,.24);border-radius:6px;box-shadow:0 4px 14px rgba(0,0,0,.14)}
 .image-slot.is-product-fill,.image-slot.is-lifestyle{background-size:cover;background-position:center;border:.5px solid rgba(201,150,58,.18)}
 .image-slot .slot-label{position:absolute;left:0;bottom:0;right:0;z-index:2;background:rgba(14,11,9,0.85);color:var(--gold-lt)!important;font-family:var(--fn);font-weight:600;font-size:clamp(4.8px,0.96vh,6.4px);line-height:1.2;padding:2.5px 2px;text-align:center;letter-spacing:.1px;text-transform:uppercase;text-shadow:none!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:0 0 5px 5px}
 .image-slot .slot-file{display:none!important}
 .image-slot .slot-price{display:none!important}
-.image-slot.is-square-1080{aspect-ratio:1/1!important;height:auto!important;min-height:0!important;max-height:none!important}
-.masala-product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(6px,1.2vh,10px);margin:auto 0;align-items:center;width:100%;max-width:clamp(220px,44vh,320px);align-self:center}
-.masala-product-grid .image-slot .slot-label{font-size:clamp(5.6px,1.1vh,7.5px);padding:3px 2px}
 .dist-rate-tag{font-family:var(--fn);font-size:clamp(5.4px,1vh,6.8px);font-weight:600;color:var(--rust);background:rgba(201,150,58,.14);border:.5px solid rgba(201,150,58,.38);border-radius:3px;padding:1px 5px;letter-spacing:.3px;white-space:nowrap}
 .image-slot:hover{transform:translateY(-2px)}
 
@@ -770,18 +767,18 @@ This belief defines the cow as the Nation's Establishment
     <div class="g-rule" style="margin:2px auto;width:36px;background:linear-gradient(90deg,transparent,var(--gold-lt),transparent)"></div>
   </div>
 
-  <!-- 4 Product Image Showcase (3 Masalas + Turmeric) — 1080x1080 Square 2x2 Grid -->
-  <div class="masala-product-grid">
-    <div class="image-slot is-product is-square-1080" style="background-image:url('downloaded_images/goda masala.png');border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.95)">
+  <!-- 4 Product Image Showcase (3 Masalas + Turmeric) — Horizontal Slider -->
+  <div class="image-grid c4 scrollable" style="margin:auto 0">
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/goda masala.png');border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.95)">
       <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Goda Masala</div>
     </div>
-    <div class="image-slot is-product is-square-1080" style="background-image:url('downloaded_images/kanda lasoon.png');border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.95)">
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/kanda lasoon.png');border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.95)">
       <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Kanda Lasoon</div>
     </div>
-    <div class="image-slot is-product is-square-1080" style="background-image:url('downloaded_images/all rounder kitchen masala.png');border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.95)">
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/all rounder kitchen masala.png');border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.95)">
       <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Kitchen Masala</div>
     </div>
-    <div class="image-slot is-product is-square-1080" style="background-image:url('downloaded_images/haldi.png');border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.95)">
+    <div class="image-slot is-product" style="background-image:url('downloaded_images/haldi.png');border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.95)">
       <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Organic Haldi</div>
     </div>
   </div>
@@ -1376,7 +1373,7 @@ This belief defines the cow as the Nation's Establishment
         if (backdrop) backdrop.addEventListener('click', closeCategoryModal);
 
         bookEl.addEventListener('pointerdown', e => {
-            if (e.target.closest('.image-slot') || e.target.closest('.click-zone') || e.target.closest('.toc-item') || e.target.closest('button') || e.target.closest('a') || e.target.closest('[onclick]')) return;
+            if (e.target.closest('.image-slot') || e.target.closest('.scrollable') || e.target.closest('.image-grid') || e.target.closest('.click-zone') || e.target.closest('.toc-item') || e.target.closest('button') || e.target.closest('a') || e.target.closest('[onclick]')) return;
             const rect = bookEl.getBoundingClientRect();
             const y = e.clientY - rect.top;
             const direction = y > rect.height / 2 ? 'next' : 'prev';
