@@ -155,6 +155,9 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
 .image-slot .slot-label{position:absolute;left:0;bottom:0;right:0;z-index:2;background:rgba(14,11,9,0.85);color:var(--gold-lt)!important;font-family:var(--fn);font-weight:600;font-size:clamp(4.8px,0.96vh,6.4px);line-height:1.2;padding:2.5px 2px;text-align:center;letter-spacing:.1px;text-transform:uppercase;text-shadow:none!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:0 0 5px 5px}
 .image-slot .slot-file{display:none!important}
 .image-slot .slot-price{display:none!important}
+.image-slot.is-square-1080{aspect-ratio:1/1!important;height:auto!important;min-height:0!important;max-height:none!important}
+.masala-product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(6px,1.2vh,10px);margin:auto 0;align-items:center;width:100%;max-width:clamp(220px,44vh,320px);align-self:center}
+.masala-product-grid .image-slot .slot-label{font-size:clamp(5.6px,1.1vh,7.5px);padding:3px 2px}
 .dist-rate-tag{font-family:var(--fn);font-size:clamp(5.4px,1vh,6.8px);font-weight:600;color:var(--rust);background:rgba(201,150,58,.14);border:.5px solid rgba(201,150,58,.38);border-radius:3px;padding:1px 5px;letter-spacing:.3px;white-space:nowrap}
 .image-slot:hover{transform:translateY(-2px)}
 
@@ -767,18 +770,18 @@ This belief defines the cow as the Nation's Establishment
     <div class="g-rule" style="margin:2px auto;width:36px;background:linear-gradient(90deg,transparent,var(--gold-lt),transparent)"></div>
   </div>
 
-  <!-- 4 Product Image Showcase (3 Masalas + Turmeric) -->
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin:auto 0;align-items:center">
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/goda masala.png');border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.95)">
+  <!-- 4 Product Image Showcase (3 Masalas + Turmeric) — 1080x1080 Square 2x2 Grid -->
+  <div class="masala-product-grid">
+    <div class="image-slot is-product is-square-1080" style="background-image:url('downloaded_images/goda masala.png');border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.95)">
       <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Goda Masala</div>
     </div>
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/kanda lasoon.png');border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.95)">
+    <div class="image-slot is-product is-square-1080" style="background-image:url('downloaded_images/kanda lasoon.png');border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.95)">
       <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Kanda Lasoon</div>
     </div>
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/all rounder kitchen masala.png');border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.95)">
+    <div class="image-slot is-product is-square-1080" style="background-image:url('downloaded_images/all rounder kitchen masala.png');border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.95)">
       <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Kitchen Masala</div>
     </div>
-    <div class="image-slot is-product" style="background-image:url('downloaded_images/haldi.png');border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.95)">
+    <div class="image-slot is-product is-square-1080" style="background-image:url('downloaded_images/haldi.png');border:0.5px solid rgba(232,201,122,0.4);background-color:rgba(255,255,255,0.95)">
       <div class="slot-label" style="background:rgba(14,11,9,0.85);color:var(--gold-lt)!important">Organic Haldi</div>
     </div>
   </div>
