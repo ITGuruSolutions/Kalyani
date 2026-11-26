@@ -218,17 +218,59 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
 .feat-list li{display:flex;align-items:center;gap:6px;font-size:clamp(7.5px,1.5vh,9.5px);color:rgba(36,22,17,.85);font-family:var(--fn);font-weight:300}
 .feat-list li::before{content:'—';color:var(--gold);flex-shrink:0;font-weight:600}
 
-/* PRODUCT RATE LIST TABLE */
+/* PRODUCT RATE LIST & IMAGES */
 .rate-table-container{width:100%;overflow-x:auto;flex:1;display:flex;flex-direction:column}
-.rate-table{width:100%;border-collapse:collapse;font-family:var(--fn);font-size:clamp(4.8px,0.92vh,6.4px);line-height:1.15;color:#241611;background:rgba(255,255,255,0.96);border-radius:4px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);border:0.5px solid rgba(201,150,58,0.35)}
-.rate-table th{background:linear-gradient(135deg,#2c1a14 0%,#3e271a 100%);color:var(--gold-lt);font-weight:600;text-align:left;padding:clamp(1.8px,0.35vh,3px) clamp(3px,0.6vw,5px);font-size:clamp(5px,0.95vh,6.8px);letter-spacing:0.3px;border-bottom:1px solid rgba(201,150,58,0.6);white-space:nowrap}
+.rate-table{width:100%;border-collapse:collapse;font-family:var(--fn);font-size:clamp(5.5px,1.05vh,7.5px);line-height:1.25;color:#241611;background:rgba(255,255,255,0.98);border-radius:6px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);border:0.5px solid rgba(201,150,58,0.35)}
+.rate-table th{background:linear-gradient(135deg,#2c1a14 0%,#3e271a 100%);color:var(--gold-lt);font-weight:600;text-align:left;padding:clamp(3px,0.55vh,5px) clamp(5px,0.8vw,8px);font-size:clamp(6px,1.1vh,8px);letter-spacing:0.3px;border-bottom:1px solid rgba(201,150,58,0.6);white-space:nowrap}
 .rate-table th.num,.rate-table td.num{text-align:right;font-variant-numeric:tabular-nums}
 .rate-table th.center,.rate-table td.center{text-align:center}
-.rate-table td{padding:clamp(1.4px,0.28vh,2.5px) clamp(3px,0.6vw,5px);border-bottom:0.5px solid rgba(201,150,58,0.15)}
+.rate-table td{padding:clamp(2.5px,0.45vh,4px) clamp(5px,0.8vw,8px);border-bottom:0.5px solid rgba(201,150,58,0.15)}
 .rate-table tr:nth-child(even) td{background:rgba(253,249,242,0.65)}
 .rate-table tr:hover td{background:rgba(201,150,58,0.12)}
 .rate-table .dist-price{font-weight:700;color:var(--rust)}
 .rate-table .mrp-price{color:#6b5d54}
+
+/* RATE IMAGES & CARDS */
+.rate-img-card{width:100%;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;background:#fff;border-radius:6px;padding:3px;border:1px solid rgba(201,150,58,0.38);box-shadow:0 4px 14px rgba(0,0,0,0.09);overflow:hidden;transition:transform 0.2s ease,box-shadow 0.2s ease,border-color 0.2s ease}
+.rate-img-card:hover{transform:translateY(-1px);border-color:var(--gold);box-shadow:0 6px 20px rgba(201,150,58,0.25)}
+.rate-img-card img{width:100%;height:100%;object-fit:contain;border-radius:4px;display:block}
+.rate-img-overlay{position:absolute;bottom:6px;right:6px;background:rgba(36,22,17,0.88);color:var(--gold-lt);font-family:var(--fn);font-size:clamp(5.5px,0.95vh,7.5px);font-weight:600;padding:2px 7px;border-radius:12px;border:0.5px solid rgba(201,150,58,0.5);backdrop-filter:blur(4px);pointer-events:none;transition:opacity 0.2s ease;box-shadow:0 2px 6px rgba(0,0,0,0.3)}
+.rate-hint-bar{display:flex;justify-content:space-between;align-items:center;font-family:var(--fn);font-size:clamp(5px,0.9vh,6.5px);color:#6b5d54;padding:1px 4px;width:100%}
+.rate-action-bar{display:flex;justify-content:space-between;align-items:center;gap:6px;width:100%;padding:1px 2px}
+.rate-btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:3px;padding:clamp(3px,0.6vh,5px) 4px;font-family:var(--fn);font-size:clamp(5.2px,0.95vh,6.8px);font-weight:600;border-radius:4px;text-decoration:none;border:none;cursor:pointer;transition:all 0.2s ease;white-space:nowrap}
+.rate-btn.zoom{background:linear-gradient(135deg,#2c1a14 0%,#3e271a 100%);color:var(--gold-lt);border:0.5px solid rgba(201,150,58,0.4)}
+.rate-btn.zoom:hover{background:#3e271a;border-color:var(--gold)}
+.rate-btn.dl{background:rgba(253,249,242,0.95);color:var(--earth);border:0.5px solid rgba(201,150,58,0.4)}
+.rate-btn.dl:hover{background:#fff;border-color:var(--gold);color:var(--rust)}
+.rate-btn.wa{background:#25d366;color:#fff;font-weight:700}
+.rate-btn.wa:hover{background:#20bd5a}
+
+/* RATE SHEET MODAL */
+.rate-modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:clamp(8px,2vw,16px);opacity:0;transition:opacity 0.25s ease}
+.rate-modal.open{display:flex;opacity:1}
+.rate-modal-backdrop{position:absolute;inset:0;background:rgba(14,8,5,0.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.rate-modal-container{position:relative;z-index:2;width:min(960px,96vw);max-height:92vh;background:#fdfbf7;border:1px solid rgba(201,150,58,0.45);border-radius:12px;box-shadow:0 16px 48px rgba(0,0,0,0.5);display:flex;flex-direction:column;overflow:hidden}
+.rate-modal-header{display:flex;justify-content:space-between;align-items:center;padding:clamp(8px,1.5vh,12px) clamp(10px,2vw,18px);background:linear-gradient(135deg,#241611 0%,#362017 100%);color:#fff;border-bottom:1px solid rgba(201,150,58,0.3);flex-wrap:wrap;gap:8px}
+.rate-modal-title-group{display:flex;align-items:center;gap:10px}
+.rate-modal-tabs{display:flex;gap:6px}
+.rate-modal-tab{padding:5px 12px;font-family:var(--fn);font-size:clamp(10px,1.4vw,12px);font-weight:600;color:var(--gold-lt);background:rgba(255,255,255,0.08);border:0.5px solid rgba(201,150,58,0.3);border-radius:6px;cursor:pointer;transition:all 0.2s ease}
+.rate-modal-tab.active{background:var(--gold);color:#241611;border-color:var(--gold)}
+.rate-modal-actions{display:flex;align-items:center;gap:8px}
+.rate-modal-btn{padding:5px 12px;font-family:var(--fn);font-size:clamp(9.5px,1.3vw,11.5px);font-weight:600;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:all 0.2s ease}
+.rate-modal-btn.download{background:rgba(255,255,255,0.12);color:#fff;border:0.5px solid rgba(255,255,255,0.3)}
+.rate-modal-btn.download:hover{background:rgba(255,255,255,0.22);color:var(--gold-lt)}
+.rate-modal-btn.whatsapp{background:#25d366;color:#fff}
+.rate-modal-btn.whatsapp:hover{background:#20bd5a}
+.rate-modal-close{background:rgba(255,255,255,0.1);border:none;color:var(--gold-lt);font-size:18px;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1;transition:background 0.2s ease}
+.rate-modal-close:hover{background:rgba(201,150,58,0.3);color:#fff}
+.rate-modal-body{flex:1;overflow-y:auto;padding:clamp(10px,2vw,16px);display:flex;justify-content:center;align-items:flex-start;background:#f8f5ee}
+.rate-tab-pane{width:100%;display:none;justify-content:center}
+.rate-tab-pane.active{display:flex}
+.rate-modal-img{max-width:100%;height:auto;max-height:74vh;object-fit:contain;border-radius:6px;box-shadow:0 4px 20px rgba(0,0,0,0.15);border:1px solid rgba(201,150,58,0.25)}
+.rate-search-wrap{margin-bottom:10px;width:100%}
+.rate-search-wrap input{width:100%;padding:8px 14px;border:1px solid rgba(201,150,58,0.4);border-radius:6px;font-family:var(--fn);font-size:12px;background:#fff;outline:none}
+.rate-search-wrap input:focus{border-color:var(--rust);box-shadow:0 0 0 2px rgba(184,61,39,0.15)}
+.rate-table-scroll{max-height:64vh;overflow-y:auto;width:100%;border-radius:6px;border:1px solid rgba(201,150,58,0.3)}
 
 /* CONTACT */
 .contact-layout{display:flex;flex-direction:column;gap:clamp(4px,.9vh,7px);height:100%}
@@ -475,6 +517,438 @@ h2,.t-section{font-family:var(--fs);font-size:clamp(18px,3.8vh,28px);font-weight
     </div>
   </div>
 </div>
+
+<!-- PRODUCT RATE LIST MODAL (FULL SHEET & SEARCHABLE TABLE) -->
+<div class="rate-modal" id="rateSheetModal" aria-hidden="true" role="dialog" aria-label="Official Product Rate List">
+  <div class="rate-modal-backdrop" onclick="closeRateSheetModal()"></div>
+  <div class="rate-modal-container">
+    <div class="rate-modal-header">
+      <div class="rate-modal-title-group">
+        <span style="font-size:20px">📋</span>
+        <div>
+          <h3 style="font-family:var(--fs);font-size:clamp(13px,2.2vh,17px);color:#fff;margin:0;font-weight:600;line-height:1.2">Official Product Rate List</h3>
+          <p style="font-family:var(--fn);font-size:clamp(9.5px,1.3vh,11px);color:var(--gold-lt);margin:1px 0 0 0;font-weight:300">54 Essential Products · MRP &amp; Authorized Distributor Rates</p>
+        </div>
+      </div>
+      <div class="rate-modal-tabs">
+        <button type="button" class="rate-modal-tab active" id="rateTabBtnSheet" onclick="switchRateTab('sheet')">🖼️ Official Graphic Sheet</button>
+        <button type="button" class="rate-modal-tab" id="rateTabBtnTable" onclick="switchRateTab('table')">📋 Searchable Table</button>
+      </div>
+      <div class="rate-modal-actions">
+        <a href="downloaded_images/product_rate_list.png" download="Kalyaani_Official_Product_Rate_List.png" class="rate-modal-btn download">📥 Download</a>
+        <a href="https://wa.me/919422880055?text=Hello%20Kalyaani%20Team%2C%20I%20want%20to%20place%20a%20distributor%20order%20from%20the%20Product%20Rate%20List." target="_blank" class="rate-modal-btn whatsapp">💬 WhatsApp Order</a>
+        <button type="button" class="rate-modal-close" onclick="closeRateSheetModal()" aria-label="Close modal">✕</button>
+      </div>
+    </div>
+    <div class="rate-modal-body">
+      <!-- Tab 1: Full Graphic Image -->
+      <div class="rate-tab-pane active" id="rateTabSheet">
+        <img src="downloaded_images/product_rate_list.png" alt="Kalyaani Official Product Rate List" class="rate-modal-img" />
+      </div>
+      <!-- Tab 2: Searchable Interactive Table -->
+      <div class="rate-tab-pane" id="rateTabTable" style="flex-direction:column;align-items:stretch">
+        <div class="rate-search-wrap">
+          <input type="text" id="rateSearchInput" placeholder="🔍 Search by product name, category, or code (e.g., Ghee, Indrayani, Soap, Haldi)..." onkeyup="filterRateTable()" />
+        </div>
+        <div class="rate-table-scroll">
+          <table class="rate-table" id="fullRateTable">
+            <thead>
+              <tr>
+                <th class="center" style="width:6%">#</th>
+                <th style="width:48%">Product Description</th>
+                <th class="center" style="width:14%">Unit</th>
+                <th class="num" style="width:16%">MRP (₹)</th>
+                <th class="num" style="width:16%">Dist. (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+<tr>
+          <td class="center">1</td>
+          <td style="font-weight:500">Kalyaani Gir Cow A2 Ghee</td>
+          <td class="center">500 ml</td>
+          <td class="num mrp-price">1,350</td>
+          <td class="num dist-price">1,215.00</td>
+        </tr>
+<tr>
+          <td class="center">2</td>
+          <td style="font-weight:500">Buffalo Ghee</td>
+          <td class="center">500 ml</td>
+          <td class="num mrp-price">1,250</td>
+          <td class="num dist-price">1,125.00</td>
+        </tr>
+<tr>
+          <td class="center">3</td>
+          <td style="font-weight:500">Kalyaani All Rounder Kitchen Masala</td>
+          <td class="center">250 Gm</td>
+          <td class="num mrp-price">450</td>
+          <td class="num dist-price">405.00</td>
+        </tr>
+<tr>
+          <td class="center">4</td>
+          <td style="font-weight:500">Kalyaani All Rounder Kanda Lasoon Masala</td>
+          <td class="center">250 Gm</td>
+          <td class="num mrp-price">400</td>
+          <td class="num dist-price">360.00</td>
+        </tr>
+<tr>
+          <td class="center">5</td>
+          <td style="font-weight:500">Kalyaani All Rounder Goda Masala</td>
+          <td class="center">250 Gm</td>
+          <td class="num mrp-price">475</td>
+          <td class="num dist-price">427.50</td>
+        </tr>
+<tr>
+          <td class="center">6</td>
+          <td style="font-weight:500">Turmeric Powder</td>
+          <td class="center">250 Gm</td>
+          <td class="num mrp-price">240</td>
+          <td class="num dist-price">216.00</td>
+        </tr>
+<tr>
+          <td class="center">7</td>
+          <td style="font-weight:500">Kalyaani All Rounder Thalipeeth Bhajni</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">450</td>
+          <td class="num dist-price">405.00</td>
+        </tr>
+<tr>
+          <td class="center">8</td>
+          <td style="font-weight:500">Raaghi Flour</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">380</td>
+          <td class="num dist-price">342.00</td>
+        </tr>
+<tr>
+          <td class="center">9</td>
+          <td style="font-weight:500">Khapali Wheat Atta</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">390</td>
+          <td class="num dist-price">351.00</td>
+        </tr>
+<tr>
+          <td class="center">10</td>
+          <td style="font-weight:500">Organic Aloe Vera Soap</td>
+          <td class="center">100 Gm</td>
+          <td class="num mrp-price">150</td>
+          <td class="num dist-price">135.00</td>
+        </tr>
+<tr>
+          <td class="center">11</td>
+          <td style="font-weight:500">Organic Lemon Crush Soap</td>
+          <td class="center">100 Gm</td>
+          <td class="num mrp-price">150</td>
+          <td class="num dist-price">135.00</td>
+        </tr>
+<tr>
+          <td class="center">12</td>
+          <td style="font-weight:500">Organic Neem Tulsi Soap</td>
+          <td class="center">100 Gm</td>
+          <td class="num mrp-price">150</td>
+          <td class="num dist-price">135.00</td>
+        </tr>
+<tr>
+          <td class="center">13</td>
+          <td style="font-weight:500">Organic Sandal Wood Soap</td>
+          <td class="center">100 Gm</td>
+          <td class="num mrp-price">150</td>
+          <td class="num dist-price">135.00</td>
+        </tr>
+<tr>
+          <td class="center">14</td>
+          <td style="font-weight:500">Organic Charcoal Soap</td>
+          <td class="center">100 Gm</td>
+          <td class="num mrp-price">150</td>
+          <td class="num dist-price">135.00</td>
+        </tr>
+<tr>
+          <td class="center">15</td>
+          <td style="font-weight:500">Organic Multani Saop</td>
+          <td class="center">100 Gm</td>
+          <td class="num mrp-price">150</td>
+          <td class="num dist-price">135.00</td>
+        </tr>
+<tr>
+          <td class="center">16</td>
+          <td style="font-weight:500">Shatdoutghrut Ayurvedic Moisturiser</td>
+          <td class="center">50 ml</td>
+          <td class="num mrp-price">900</td>
+          <td class="num dist-price">810.00</td>
+        </tr>
+<tr>
+          <td class="center">17</td>
+          <td style="font-weight:500">Unpolished Indrayani Rice</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">210</td>
+          <td class="num dist-price">189.00</td>
+        </tr>
+<tr>
+          <td class="center">18</td>
+          <td style="font-weight:500">Semi Polished Indrayani Rice</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">180</td>
+          <td class="num dist-price">162.00</td>
+        </tr>
+<tr>
+          <td class="center">19</td>
+          <td style="font-weight:500">Brown Ambemohar Rice</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">380</td>
+          <td class="num dist-price">342.00</td>
+        </tr>
+<tr>
+          <td class="center">20</td>
+          <td style="font-weight:500">Ambemohar Rice</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">320</td>
+          <td class="num dist-price">288.00</td>
+        </tr>
+<tr>
+          <td class="center">21</td>
+          <td style="font-weight:500">Indrayani Tukda Rice</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">150</td>
+          <td class="num dist-price">135.00</td>
+        </tr>
+<tr>
+          <td class="center">22</td>
+          <td style="font-weight:500">Idli Rice</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">210</td>
+          <td class="num dist-price">189.00</td>
+        </tr>
+<tr>
+          <td class="center">23</td>
+          <td style="font-weight:500">Brown Indrayani Rice</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">250</td>
+          <td class="num dist-price">225.00</td>
+        </tr>
+<tr>
+          <td class="center">24</td>
+          <td style="font-weight:500">Baasmati Rice</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">250</td>
+          <td class="num dist-price">225.00</td>
+        </tr>
+<tr>
+          <td class="center">25</td>
+          <td style="font-weight:500">Brown Wada Kolam Rice</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">230</td>
+          <td class="num dist-price">207.00</td>
+        </tr>
+<tr>
+          <td class="center">26</td>
+          <td style="font-weight:500">Wada Kolam Rice</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">160</td>
+          <td class="num dist-price">144.00</td>
+        </tr>
+<tr>
+          <td class="center">27</td>
+          <td style="font-weight:500">Basmati Tukda Mogra Rice</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">170</td>
+          <td class="num dist-price">153.00</td>
+        </tr>
+<tr>
+          <td class="center">28</td>
+          <td style="font-weight:500">Lokvan Wheat</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">140</td>
+          <td class="num dist-price">126.00</td>
+        </tr>
+<tr>
+          <td class="center">29</td>
+          <td style="font-weight:500">Khapali Gahu / Wheat</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">239</td>
+          <td class="num dist-price">215.10</td>
+        </tr>
+<tr>
+          <td class="center">30</td>
+          <td style="font-weight:500">Sona Moti Wheat</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">249</td>
+          <td class="num dist-price">224.10</td>
+        </tr>
+<tr>
+          <td class="center">31</td>
+          <td style="font-weight:500">Jowar</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">180</td>
+          <td class="num dist-price">162.00</td>
+        </tr>
+<tr>
+          <td class="center">32</td>
+          <td style="font-weight:500">Naachani / Raaghi</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">210</td>
+          <td class="num dist-price">189.00</td>
+        </tr>
+<tr>
+          <td class="center">33</td>
+          <td style="font-weight:500">Bajra</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">130</td>
+          <td class="num dist-price">117.00</td>
+        </tr>
+<tr>
+          <td class="center">34</td>
+          <td style="font-weight:500">Peanut</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">360</td>
+          <td class="num dist-price">324.00</td>
+        </tr>
+<tr>
+          <td class="center">35</td>
+          <td style="font-weight:500">Matki</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">510</td>
+          <td class="num dist-price">459.00</td>
+        </tr>
+<tr>
+          <td class="center">36</td>
+          <td style="font-weight:500">Chavali</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">380</td>
+          <td class="num dist-price">342.00</td>
+        </tr>
+<tr>
+          <td class="center">37</td>
+          <td style="font-weight:500">Jawas</td>
+          <td class="center">250 Gm</td>
+          <td class="num mrp-price">390</td>
+          <td class="num dist-price">351.00</td>
+        </tr>
+<tr>
+          <td class="center">38</td>
+          <td style="font-weight:500">Kadave Vaal</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">720</td>
+          <td class="num dist-price">648.00</td>
+        </tr>
+<tr>
+          <td class="center">39</td>
+          <td style="font-weight:500">Dry Green Peas</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">349</td>
+          <td class="num dist-price">314.10</td>
+        </tr>
+<tr>
+          <td class="center">40</td>
+          <td style="font-weight:500">Unpolished Chana Daal</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">359</td>
+          <td class="num dist-price">323.10</td>
+        </tr>
+<tr>
+          <td class="center">41</td>
+          <td style="font-weight:500">Unpolished Udid Daal</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">399</td>
+          <td class="num dist-price">359.10</td>
+        </tr>
+<tr>
+          <td class="center">42</td>
+          <td style="font-weight:500">Unpolished Moong Daal</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">399</td>
+          <td class="num dist-price">359.10</td>
+        </tr>
+<tr>
+          <td class="center">43</td>
+          <td style="font-weight:500">Unpolished Toor Daal</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">399</td>
+          <td class="num dist-price">359.10</td>
+        </tr>
+<tr>
+          <td class="center">44</td>
+          <td style="font-weight:500">Black Udid Daal</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">399</td>
+          <td class="num dist-price">359.10</td>
+        </tr>
+<tr>
+          <td class="center">45</td>
+          <td style="font-weight:500">Green Moong Daal</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">289</td>
+          <td class="num dist-price">260.10</td>
+        </tr>
+<tr>
+          <td class="center">46</td>
+          <td style="font-weight:500">Roasted Bengal Daal</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">279</td>
+          <td class="num dist-price">251.10</td>
+        </tr>
+<tr>
+          <td class="center">47</td>
+          <td style="font-weight:500">Matki Daal</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">399</td>
+          <td class="num dist-price">359.10</td>
+        </tr>
+<tr>
+          <td class="center">48</td>
+          <td style="font-weight:500">White Rajma</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">319</td>
+          <td class="num dist-price">287.10</td>
+        </tr>
+<tr>
+          <td class="center">49</td>
+          <td style="font-weight:500">Red Rajma</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">380</td>
+          <td class="num dist-price">342.00</td>
+        </tr>
+<tr>
+          <td class="center">50</td>
+          <td style="font-weight:500">Chana</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">330</td>
+          <td class="num dist-price">297.00</td>
+        </tr>
+<tr>
+          <td class="center">51</td>
+          <td style="font-weight:500">Black Udid</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">450</td>
+          <td class="num dist-price">405.00</td>
+        </tr>
+<tr>
+          <td class="center">52</td>
+          <td style="font-weight:500">Green Moong</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">320</td>
+          <td class="num dist-price">288.00</td>
+        </tr>
+<tr>
+          <td class="center">53</td>
+          <td style="font-weight:500">Kabuli Chana</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">320</td>
+          <td class="num dist-price">288.00</td>
+        </tr>
+<tr>
+          <td class="center">54</td>
+          <td style="font-weight:500">Daliya</td>
+          <td class="center">1 Kg</td>
+          <td class="num mrp-price">390</td>
+          <td class="num dist-price">351.00</td>
+        </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:10.5px;color:#6b5d54;margin:6px 0 0 0;font-family:var(--fn);text-align:right">* All prices subject to wholesale MOQ &amp; applicable GST/freight terms.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <main class="scene" id="scene" role="main">
   <header class="header">
     <div class="header-line" aria-hidden="true"></div>
@@ -1070,451 +1544,63 @@ This belief defines the cow as the Nation's Establishment
 <!-- SPREAD 12 — PRODUCT RATE LIST -->
 <div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')"><div class="page catalog-page page-33">
 <div class="page-bg page-bg-split ov-light"></div><div class="page-inner-border"></div>
-<div class="page-content" style="justify-content:flex-start;padding:clamp(6px,1.4vw,12px);gap:clamp(2px,0.4vh,4px)">
+<div class="page-content" style="justify-content:flex-start;padding:clamp(6px,1.4vw,12px);gap:clamp(3px,0.5vh,5px)">
   
   <!-- Header -->
   <div style="text-align:center;margin-bottom:1px">
     <p class="kicker" style="letter-spacing:2px;color:var(--rust);font-size:clamp(6px,1.1vh,7.5px);margin-bottom:1px">॥ अधिकृत दर पत्रक ॥ · Official Rate List</p>
-    <h2 style="font-family:var(--fs);font-size:clamp(12px,2.2vh,16px);color:var(--earth);font-weight:600;line-height:1.1">Product Rate List</h2>
-    <p style="font-family:var(--fs);font-size:clamp(6px,1.05vh,7.2px);color:var(--gold);font-style:italic;margin-top:1px">Pure Ghee · Spices · Flours · Soaps · Aromatic Rice</p>
+    <h2 style="font-family:var(--fs);font-size:clamp(12px,2.2vh,16px);color:var(--earth);font-weight:600;line-height:1.1">Product Rate List · Part I</h2>
+    <p style="font-family:var(--fs);font-size:clamp(6px,1.05vh,7.2px);color:var(--gold);font-style:italic;margin-top:1px">Sr. 01 – 27 · Pure Ghee, Spices, Flours, Soaps &amp; Rice</p>
     <div class="g-rule" style="margin:2px auto 3px auto;width:36px;opacity:0.6"></div>
   </div>
 
-  <!-- Table Part 1 -->
-  <div class="rate-table-container">
-    <table class="rate-table">
-      <thead>
-        <tr>
-          <th class="center" style="width:6%">#</th>
-          <th style="width:48%">Product Description</th>
-          <th class="center" style="width:14%">Unit</th>
-          <th class="num" style="width:16%">MRP (₹)</th>
-          <th class="num" style="width:16%">Dist. (₹)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="center">1</td>
-          <td style="font-weight:500">Kalyaani Gir Cow A2 Ghee</td>
-          <td class="center">500 ml</td>
-          <td class="num mrp-price">1,350</td>
-          <td class="num dist-price">1,215.00</td>
-        </tr>
-        <tr>
-          <td class="center">2</td>
-          <td style="font-weight:500">Buffalo Ghee</td>
-          <td class="center">500 ml</td>
-          <td class="num mrp-price">1,250</td>
-          <td class="num dist-price">1,125.00</td>
-        </tr>
-        <tr>
-          <td class="center">3</td>
-          <td style="font-weight:500">Kalyaani All Rounder Kitchen Masala</td>
-          <td class="center">250 Gm</td>
-          <td class="num mrp-price">450</td>
-          <td class="num dist-price">405.00</td>
-        </tr>
-        <tr>
-          <td class="center">4</td>
-          <td style="font-weight:500">Kalyaani All Rounder Kanda Lasoon Masala</td>
-          <td class="center">250 Gm</td>
-          <td class="num mrp-price">400</td>
-          <td class="num dist-price">360.00</td>
-        </tr>
-        <tr>
-          <td class="center">5</td>
-          <td style="font-weight:500">Kalyaani All Rounder Goda Masala</td>
-          <td class="center">250 Gm</td>
-          <td class="num mrp-price">475</td>
-          <td class="num dist-price">427.50</td>
-        </tr>
-        <tr>
-          <td class="center">6</td>
-          <td style="font-weight:500">Turmeric Powder</td>
-          <td class="center">250 Gm</td>
-          <td class="num mrp-price">240</td>
-          <td class="num dist-price">216.00</td>
-        </tr>
-        <tr>
-          <td class="center">7</td>
-          <td style="font-weight:500">Kalyaani All Rounder Thalipeeth Bhajni</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">450</td>
-          <td class="num dist-price">405.00</td>
-        </tr>
-        <tr>
-          <td class="center">8</td>
-          <td style="font-weight:500">Raaghi Flour</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">380</td>
-          <td class="num dist-price">342.00</td>
-        </tr>
-        <tr>
-          <td class="center">9</td>
-          <td style="font-weight:500">Khapali Wheat Atta</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">390</td>
-          <td class="num dist-price">351.00</td>
-        </tr>
-        <tr>
-          <td class="center">10</td>
-          <td style="font-weight:500">Organic Aloe Vera Soap</td>
-          <td class="center">100 Gm</td>
-          <td class="num mrp-price">150</td>
-          <td class="num dist-price">135.00</td>
-        </tr>
-        <tr>
-          <td class="center">11</td>
-          <td style="font-weight:500">Organic Lemon Crush Soap</td>
-          <td class="center">100 Gm</td>
-          <td class="num mrp-price">150</td>
-          <td class="num dist-price">135.00</td>
-        </tr>
-        <tr>
-          <td class="center">12</td>
-          <td style="font-weight:500">Organic Neem Tulsi Soap</td>
-          <td class="center">100 Gm</td>
-          <td class="num mrp-price">150</td>
-          <td class="num dist-price">135.00</td>
-        </tr>
-        <tr>
-          <td class="center">13</td>
-          <td style="font-weight:500">Organic Sandal Wood Soap</td>
-          <td class="center">100 Gm</td>
-          <td class="num mrp-price">150</td>
-          <td class="num dist-price">135.00</td>
-        </tr>
-        <tr>
-          <td class="center">14</td>
-          <td style="font-weight:500">Organic Charcoal Soap</td>
-          <td class="center">100 Gm</td>
-          <td class="num mrp-price">150</td>
-          <td class="num dist-price">135.00</td>
-        </tr>
-        <tr>
-          <td class="center">15</td>
-          <td style="font-weight:500">Organic Multani Saop</td>
-          <td class="center">100 Gm</td>
-          <td class="num mrp-price">150</td>
-          <td class="num dist-price">135.00</td>
-        </tr>
-        <tr>
-          <td class="center">16</td>
-          <td style="font-weight:500">Shatdoutghrut Ayurvedic Moisturiser</td>
-          <td class="center">50 ml</td>
-          <td class="num mrp-price">900</td>
-          <td class="num dist-price">810.00</td>
-        </tr>
-        <tr>
-          <td class="center">17</td>
-          <td style="font-weight:500">Unpolished Indrayani Rice</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">210</td>
-          <td class="num dist-price">189.00</td>
-        </tr>
-        <tr>
-          <td class="center">18</td>
-          <td style="font-weight:500">Semi Polished Indrayani Rice</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">180</td>
-          <td class="num dist-price">162.00</td>
-        </tr>
-        <tr>
-          <td class="center">19</td>
-          <td style="font-weight:500">Brown Ambemohar Rice</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">380</td>
-          <td class="num dist-price">342.00</td>
-        </tr>
-        <tr>
-          <td class="center">20</td>
-          <td style="font-weight:500">Ambemohar Rice</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">320</td>
-          <td class="num dist-price">288.00</td>
-        </tr>
-        <tr>
-          <td class="center">21</td>
-          <td style="font-weight:500">Indrayani Tukda Rice</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">150</td>
-          <td class="num dist-price">135.00</td>
-        </tr>
-        <tr>
-          <td class="center">22</td>
-          <td style="font-weight:500">Idli Rice</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">210</td>
-          <td class="num dist-price">189.00</td>
-        </tr>
-        <tr>
-          <td class="center">23</td>
-          <td style="font-weight:500">Brown Indrayani Rice</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">250</td>
-          <td class="num dist-price">225.00</td>
-        </tr>
-        <tr>
-          <td class="center">24</td>
-          <td style="font-weight:500">Baasmati Rice</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">250</td>
-          <td class="num dist-price">225.00</td>
-        </tr>
-        <tr>
-          <td class="center">25</td>
-          <td style="font-weight:500">Brown Wada Kolam Rice</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">230</td>
-          <td class="num dist-price">207.00</td>
-        </tr>
-        <tr>
-          <td class="center">26</td>
-          <td style="font-weight:500">Wada Kolam Rice</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">160</td>
-          <td class="num dist-price">144.00</td>
-        </tr>
-        <tr>
-          <td class="center">27</td>
-          <td style="font-weight:500">Basmati Tukda Mogra Rice</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">170</td>
-          <td class="num dist-price">153.00</td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Rate Table Image Part 1 -->
+  <div class="rate-img-card" onclick="openRateSheetModal('sheet')" title="Click to view full high-resolution sheet">
+    <img src="downloaded_images/rate_table_part1.png" alt="Kalyaani Product Rate List Part 1 (Items 1-27)" loading="lazy" />
+    <div class="rate-img-overlay">
+      <span>🔍 Click to View Full Sheet</span>
+    </div>
+  </div>
+
+  <!-- Hint Bar -->
+  <div class="rate-hint-bar">
+    <span>Items 1 to 27 · MRP &amp; Authorized Distributor Rates</span>
+    <span onclick="openRateSheetModal('sheet')" style="color:var(--rust);font-weight:600;cursor:pointer">🔍 Zoom HD</span>
   </div>
 
   <div class="page-number" style="margin-top:auto">12</div>
 </div></div></div>
+
 
 <div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')"><div class="page catalog-page page-34">
 <div class="page-bg page-bg-split ov-light"></div><div class="page-inner-border"></div>
-<div class="page-content" style="justify-content:flex-start;padding:clamp(6px,1.4vw,12px);gap:clamp(2px,0.4vh,4px)">
-  
+<div class="page-content" style="justify-content:flex-start;padding:clamp(6px,1.4vw,12px);gap:clamp(3px,0.5vh,5px)">
+
   <!-- Header -->
   <div style="text-align:center;margin-bottom:1px">
-    <p class="kicker" style="letter-spacing:2px;color:var(--rust);font-size:clamp(6px,1.1vh,7.5px);margin-bottom:1px">॥ अधिकृत दर पत्रक ॥ · Official Rate List</p>
-    <h2 style="font-family:var(--fs);font-size:clamp(12px,2.2vh,16px);color:var(--earth);font-weight:600;line-height:1.1">Product Rate List (Contd.)</h2>
-    <p style="font-family:var(--fs);font-size:clamp(6px,1.05vh,7.2px);color:var(--gold);font-style:italic;margin-top:1px">Grains · Wheats · Pulses · Dals · Staples</p>
+    <p class="kicker" style="letter-spacing:2px;color:var(--rust);font-size:clamp(6px,1.1vh,7.5px);margin-bottom:1px">॥ अधिकृत दर पत्रक ॥ · Continued</p>
+    <h2 style="font-family:var(--fs);font-size:clamp(12px,2.2vh,16px);color:var(--earth);font-weight:600;line-height:1.1">Product Rate List · Part II</h2>
+    <p style="font-family:var(--fs);font-size:clamp(6px,1.05vh,7.2px);color:var(--gold);font-style:italic;margin-top:1px">Sr. 28 – 54 · Heritage Rice, Ancient Grains &amp; Pulses</p>
     <div class="g-rule" style="margin:2px auto 3px auto;width:36px;opacity:0.6"></div>
   </div>
 
-  <!-- Table Part 2 -->
-  <div class="rate-table-container">
-    <table class="rate-table">
-      <thead>
-        <tr>
-          <th class="center" style="width:6%">#</th>
-          <th style="width:48%">Product Description</th>
-          <th class="center" style="width:14%">Unit</th>
-          <th class="num" style="width:16%">MRP (₹)</th>
-          <th class="num" style="width:16%">Dist. (₹)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="center">28</td>
-          <td style="font-weight:500">Lokvan Wheat</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">140</td>
-          <td class="num dist-price">126.00</td>
-        </tr>
-        <tr>
-          <td class="center">29</td>
-          <td style="font-weight:500">Khapali Gahu / Wheat</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">239</td>
-          <td class="num dist-price">215.10</td>
-        </tr>
-        <tr>
-          <td class="center">30</td>
-          <td style="font-weight:500">Sona Moti Wheat</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">249</td>
-          <td class="num dist-price">224.10</td>
-        </tr>
-        <tr>
-          <td class="center">31</td>
-          <td style="font-weight:500">Jowar</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">180</td>
-          <td class="num dist-price">162.00</td>
-        </tr>
-        <tr>
-          <td class="center">32</td>
-          <td style="font-weight:500">Naachani / Raaghi</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">210</td>
-          <td class="num dist-price">189.00</td>
-        </tr>
-        <tr>
-          <td class="center">33</td>
-          <td style="font-weight:500">Bajra</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">130</td>
-          <td class="num dist-price">117.00</td>
-        </tr>
-        <tr>
-          <td class="center">34</td>
-          <td style="font-weight:500">Peanut</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">360</td>
-          <td class="num dist-price">324.00</td>
-        </tr>
-        <tr>
-          <td class="center">35</td>
-          <td style="font-weight:500">Matki</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">510</td>
-          <td class="num dist-price">459.00</td>
-        </tr>
-        <tr>
-          <td class="center">36</td>
-          <td style="font-weight:500">Chavali</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">380</td>
-          <td class="num dist-price">342.00</td>
-        </tr>
-        <tr>
-          <td class="center">37</td>
-          <td style="font-weight:500">Jawas</td>
-          <td class="center">250 Gm</td>
-          <td class="num mrp-price">390</td>
-          <td class="num dist-price">351.00</td>
-        </tr>
-        <tr>
-          <td class="center">38</td>
-          <td style="font-weight:500">Kadave Vaal</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">720</td>
-          <td class="num dist-price">648.00</td>
-        </tr>
-        <tr>
-          <td class="center">39</td>
-          <td style="font-weight:500">Dry Green Peas</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">349</td>
-          <td class="num dist-price">314.10</td>
-        </tr>
-        <tr>
-          <td class="center">40</td>
-          <td style="font-weight:500">Unpolished Chana Daal</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">359</td>
-          <td class="num dist-price">323.10</td>
-        </tr>
-        <tr>
-          <td class="center">41</td>
-          <td style="font-weight:500">Unpolished Udid Daal</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">399</td>
-          <td class="num dist-price">359.10</td>
-        </tr>
-        <tr>
-          <td class="center">42</td>
-          <td style="font-weight:500">Unpolished Moong Daal</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">399</td>
-          <td class="num dist-price">359.10</td>
-        </tr>
-        <tr>
-          <td class="center">43</td>
-          <td style="font-weight:500">Unpolished Toor Daal</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">399</td>
-          <td class="num dist-price">359.10</td>
-        </tr>
-        <tr>
-          <td class="center">44</td>
-          <td style="font-weight:500">Black Udid Daal</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">399</td>
-          <td class="num dist-price">359.10</td>
-        </tr>
-        <tr>
-          <td class="center">45</td>
-          <td style="font-weight:500">Green Moong Daal</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">289</td>
-          <td class="num dist-price">260.10</td>
-        </tr>
-        <tr>
-          <td class="center">46</td>
-          <td style="font-weight:500">Roasted Bengal Daal</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">279</td>
-          <td class="num dist-price">251.10</td>
-        </tr>
-        <tr>
-          <td class="center">47</td>
-          <td style="font-weight:500">Matki Daal</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">399</td>
-          <td class="num dist-price">359.10</td>
-        </tr>
-        <tr>
-          <td class="center">48</td>
-          <td style="font-weight:500">White Rajma</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">319</td>
-          <td class="num dist-price">287.10</td>
-        </tr>
-        <tr>
-          <td class="center">49</td>
-          <td style="font-weight:500">Red Rajma</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">380</td>
-          <td class="num dist-price">342.00</td>
-        </tr>
-        <tr>
-          <td class="center">50</td>
-          <td style="font-weight:500">Chana</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">330</td>
-          <td class="num dist-price">297.00</td>
-        </tr>
-        <tr>
-          <td class="center">51</td>
-          <td style="font-weight:500">Black Udid</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">450</td>
-          <td class="num dist-price">405.00</td>
-        </tr>
-        <tr>
-          <td class="center">52</td>
-          <td style="font-weight:500">Green Moong</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">320</td>
-          <td class="num dist-price">288.00</td>
-        </tr>
-        <tr>
-          <td class="center">53</td>
-          <td style="font-weight:500">Kabuli Chana</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">320</td>
-          <td class="num dist-price">288.00</td>
-        </tr>
-        <tr>
-          <td class="center">54</td>
-          <td style="font-weight:500">Daliya</td>
-          <td class="center">1 Kg</td>
-          <td class="num mrp-price">390</td>
-          <td class="num dist-price">351.00</td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Rate Table Image Part 2 -->
+  <div class="rate-img-card" onclick="openRateSheetModal('sheet')" title="Click to view full high-resolution sheet">
+    <img src="downloaded_images/rate_table_part2.png" alt="Kalyaani Product Rate List Part 2 (Items 28-54)" loading="lazy" />
+    <div class="rate-img-overlay">
+      <span>🔍 Click to View Full Sheet</span>
+    </div>
   </div>
 
-  <div class="panel" style="margin-top:2px;padding:3px 6px;background:rgba(253,249,242,0.92);border:0.5px solid rgba(201,150,58,0.25);border-radius:4px;display:flex;justify-content:space-between;align-items:center">
-    <span style="font-size:clamp(5px,0.9vh,6.2px);color:#5d4037;font-family:var(--fn)">* GST &amp; Freight as applicable. Subject to wholesale MOQ terms.</span>
-    <a href="downloaded_images/product%20rate%20list.jpg" target="_blank" style="font-size:clamp(5px,0.9vh,6.2px);color:var(--rust);font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:2px">🔍 View Full Sheet</a>
+  <!-- Action Bar -->
+  <div class="rate-action-bar">
+    <button type="button" class="rate-btn zoom" onclick="openRateSheetModal('sheet')">🔍 Full Sheet</button>
+    <a href="downloaded_images/product_rate_list.png" download="Kalyaani_Official_Product_Rate_List.png" class="rate-btn dl">📥 Download</a>
+    <a href="https://wa.me/919422880055?text=Hello%20Kalyaani%20Team%2C%20I%20want%20to%20place%20an%20order%20from%20the%20Product%20Rate%20List." target="_blank" class="rate-btn wa">💬 Order</a>
   </div>
 
   <div class="page-number" style="margin-top:auto">12</div>
 </div></div></div>
-
 
 <!-- SPREAD 13 — CONTACT -->
 <div class="stf__item" style="--page-bg:url('Minimal luxury corporate background (cream, gold, subtle texture).png')"><div class="page catalog-page page-35">
@@ -1636,6 +1722,52 @@ This belief defines the cow as the Nation's Establishment
                 thumb.classList.toggle('active', i === spreadStart || i === spreadStart + 1);
             });
             updateActiveCategory();
+        }
+
+        
+        function openRateSheetModal(tab = 'sheet') {
+            const modal = document.getElementById('rateSheetModal');
+            if (modal) {
+                modal.classList.add('open');
+                modal.setAttribute('aria-hidden', 'false');
+                switchRateTab(tab);
+            }
+        }
+
+        function closeRateSheetModal() {
+            const modal = document.getElementById('rateSheetModal');
+            if (modal) {
+                modal.classList.remove('open');
+                modal.setAttribute('aria-hidden', 'true');
+            }
+        }
+
+        function switchRateTab(tabName) {
+            const sheetPane = document.getElementById('rateTabSheet');
+            const tablePane = document.getElementById('rateTabTable');
+            const sheetBtn = document.getElementById('rateTabBtnSheet');
+            const tableBtn = document.getElementById('rateTabBtnTable');
+            if (tabName === 'sheet') {
+                if (sheetPane) sheetPane.classList.add('active');
+                if (tablePane) { tablePane.classList.remove('active'); tablePane.style.display = 'none'; }
+                if (sheetBtn) sheetBtn.classList.add('active');
+                if (tableBtn) tableBtn.classList.remove('active');
+            } else {
+                if (sheetPane) sheetPane.classList.remove('active');
+                if (tablePane) { tablePane.classList.add('active'); tablePane.style.display = 'flex'; }
+                if (sheetBtn) sheetBtn.classList.remove('active');
+                if (tableBtn) tableBtn.classList.add('active');
+            }
+        }
+
+        function filterRateTable() {
+            const input = document.getElementById('rateSearchInput');
+            const filter = (input ? input.value : '').toLowerCase();
+            const rows = document.querySelectorAll('#fullRateTable tbody tr');
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(filter) ? '' : 'none';
+            });
         }
 
         function openCategoryModal() {
@@ -1856,7 +1988,7 @@ This belief defines the cow as the Nation's Establishment
         bookEl.addEventListener('wheel', e => { if (Math.abs(e.deltaY) < 12) return; e.preventDefault(); if (e.deltaY > 0) flip('next'); else flip('prev'); }, { passive: false });
 
         document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') { closeCategoryModal(); return; }
+            if (e.key === 'Escape') { closeCategoryModal(); closeRateSheetModal(); return; }
             if ((e.key === 'c' || e.key === 'C') && !e.target.matches('input, textarea')) {
                 const modal = document.getElementById('categoryModal');
                 if (modal && modal.classList.contains('open')) closeCategoryModal();
